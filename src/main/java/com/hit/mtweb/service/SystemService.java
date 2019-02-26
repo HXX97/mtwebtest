@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 public class SystemService {
 
-   @Autowired
-   SystemDao systemDao;
+    @Autowired
+    SystemDao systemDao;
 
     public boolean saveNewSystem(MTSystem system) {
         return systemDao.saveNewSystem(system);
@@ -19,5 +19,17 @@ public class SystemService {
 
     public List<MTSystem> queryByOwner(String username) {
         return systemDao.queryByOwner(username);
+    }
+
+    public MTSystem queryById(String systemid) {
+        return systemDao.queryById(systemid);
+    }
+
+    public boolean deleteById(String systemid) {
+        return systemDao.deleteById(systemid);
+    }
+
+    public boolean updateById(MTSystem mtSystem) {
+        return systemDao.updateById(mtSystem);
     }
 }

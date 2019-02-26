@@ -30,9 +30,15 @@
     </ul>
 </div>
 <div>
-    <h2>System List</h2>
+    <div style="width: 90%">
+        <h2 >System List</h2>
+        <a style="color: red;font-size: small" >${msg}</a>
+    </div>
+
     <div align="center">
-        <table class="gridtable" style="margin-top: 50px">
+
+        <table class="gridtable" style="margin-top: 20px">
+
             <tr>
                 <th>Systemid</th>
                 <th>Name</th>
@@ -45,11 +51,12 @@
                 <th>Constraint System</th>
                 <th>Primary System</th>
                 <th>Owner</th>
+                <th colspan="3">Option</th>
             </tr>
             <c:forEach items="${requestScope.systemList}" var="system">
                 <tr>
                     <td>${system.systemid}</td>
-                    <td>${system.name}</td>
+                    <td><a href="/system/detail/${system.systemid}">${system.name}</a></td>
                     <td>${system.software}</td>
                     <td>${system.sourcelang}</td>
                     <td>${system.targetlang}</td>
@@ -59,11 +66,20 @@
                     <td>${system.isConstraint}</td>
                     <td>${system.isPrimary}</td>
                     <td>${system.owner}</td>
+                    <td><a href="/system/detail/${system.systemid}">Detail</a></td>
+                    <td><a href="/system/edit/${system.systemid}">Edit</a></td>
+                    <td><a href="/system/destroy/${system.systemid}">Destory</a></td>
                 </tr>
             </c:forEach>
         </table>
+        <div style="margin-top: 10px">
+
+            <a href="/system/new">Create</a>
+            <a href="/user/status">Back</a>
+        </div>
     </div>
 </div>
-<a style="color: red;font-size: small">${msg}</a>
+
+
 </body>
 </html>

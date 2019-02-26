@@ -1,11 +1,15 @@
 package com.hit.mtweb.dao;
 
 import com.hit.mtweb.domain.MTSystem;
+import com.hit.mtweb.utils.MTSystemRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,5 +43,36 @@ public class SystemDao {
             systemList.add(MTSystem.mapToMTSystem(map));
         }
         return systemList;
+    }
+
+    public MTSystem queryById(String systemid) {
+        String sql = "select * from systems where systemid = ?";
+        return jdbcTemplate.queryForObject(sql, new MTSystemRowMapper(),systemid);
+    }
+
+    public boolean deleteById(String systemid) {
+        String sql = "delete from systems where systemid = ?";
+        try{
+            jdbcTemplate.update(sql,systemid);
+        }catch (DataAccessException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updateById(MTSystem system) {
+        String sql = "update systems set name=?,software=?,sourcelang=?," +
+                "targetlang=?,citation=?,website=?," +
+                "notes=?,isConstraint=?,isPrimary=? where systemid = ?";
+        try {
+            jdbcTemplate.update(sql, system.getName(), system.getSoftware(), system.getSourcelang(),
+                    system.getTargetlang(), system.getCitation(), system.getWebsite(),
+                    system.getNotes(), system.getIsConstraint(), system.getIsPrimary(),system.getSystemid());
+        }catch (DataAccessException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

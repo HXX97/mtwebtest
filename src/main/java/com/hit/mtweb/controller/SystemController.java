@@ -4,6 +4,7 @@ import com.hit.mtweb.domain.MTSystem;
 import com.hit.mtweb.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -64,9 +64,46 @@ public class SystemController {
 
     //查看系统详情
     @RequestMapping("/detail/{systemid}")
-    public ModelAndView showDetail(@PathVariable int systemid){
+    public String showDetail(@PathVariable String systemid, Model model){
+
+        MTSystem system = systemService.queryById(systemid);
+        model.addAttribute("system",system);
+
         ModelAndView modelAndView = new ModelAndView("system_detail");
-        return modelAndView;
+        return "system_detail";
     }
+
+    //删除系统
+    @RequestMapping("/destroy/{systemid}")
+    public String destroySystem(@PathVariable String systemid,RedirectAttributes model){
+
+        if(systemService.deleteById(systemid)) {
+            model.addFlashAttribute("msg", "Delete Succeeded");
+        }else{
+            model.addFlashAttribute("msg","Delete failed");
+        }
+        return "redirect:/system/user_list";
+    }
+
+    //展示编辑系统表单
+    @RequestMapping(value = "/edit/{systemid}",method = RequestMethod.GET)
+    public String showEditSystemForm(@PathVariable String systemid,Model model){
+        MTSystem mtSystem = systemService.queryById(systemid);
+        model.addAttribute("system",mtSystem);
+        return "system_edit";
+    }
+
+    //编辑系统
+    @RequestMapping(value="/edit/{systemid}",method = RequestMethod.POST)
+    public String processEditSystem(@PathVariable String systemid,MTSystem mtSystem,RedirectAttributes model){
+        mtSystem.setSystemid(systemid);
+        if(systemService.updateById(mtSystem)){
+            model.addFlashAttribute("msg","Edit Succeeded");
+        }else{
+            model.addFlashAttribute("msg","Edit Failed");
+        }
+        return "redirect:/system/user_list";
+    }
+
 
 }
