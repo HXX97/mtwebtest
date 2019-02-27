@@ -25,72 +25,77 @@ public class UserController {
 
     //查看所有用户
     @RequestMapping("/viewAll")
-    public ModelAndView viewAllUsers(){
+    public ModelAndView viewAllUsers() {
         System.out.println("view all users");
         List<User> list = userService.getAllUsers();
         System.out.println(list);
         ModelAndView modelAndView = new ModelAndView("allUsers");
-        modelAndView.addObject("list",list);
+        modelAndView.addObject("list", list);
         return modelAndView;
     }
 
     //展示登录界面，GET方法
-    @RequestMapping(value="/login",method = RequestMethod.GET)
-    public String showLoginForm(){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String showLoginForm() {
         return "login_page";
     }
 
     //处理登录，POST方法
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String processLogin(HttpServletRequest httpServletRequest, HttpSession session, RedirectAttributes model){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String processLogin(HttpServletRequest httpServletRequest, HttpSession session, RedirectAttributes model) {
         //System.out.println(httpServletRequest.getParameter("username"));
         String loginUser = (String) httpServletRequest.getParameter("username");
         String loginPWD = (String) httpServletRequest.getParameter("password");
 
-        if(userService.validateUserByPWD(loginUser,loginPWD)) {
+        if (userService.validateUserByPWD(loginUser, loginPWD)) {
             session.setAttribute("username", httpServletRequest.getParameter("username"));
-            model.addFlashAttribute("msg","Login succeeded");
+            model.addFlashAttribute("msg", "Login succeeded");
             return "redirect:/user/status";
-        }else{
-            model.addFlashAttribute("errorMsg","Username or Password wrong");
+        } else {
+            model.addFlashAttribute("errorMsg", "Username or Password wrong");
             return "redirect:/user/login";
         }
     }
 
     //展示个人主页，GET方法
-    @RequestMapping(value="/status",method = RequestMethod.GET)
-    public String showUserHome(HttpSession session,Model model){
-        /*String username = (String) session.getAttribute("username");
-        model.addAttribute("username",username);*/
+    @RequestMapping(value = "/status", method = RequestMethod.GET)
+    public String showUserHome() {
         return "user_homepage";
     }
 
     //处理注册过程，POST方法
-    @RequestMapping(value="/register",method = RequestMethod.POST)
-    public String processRegister(HttpSession session,User user,RedirectAttributes model){
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String processRegister(HttpSession session, User user, RedirectAttributes model) {
 
-        if(userService.saveUser(user)){
+        if (userService.saveUser(user)) {
             session.setAttribute("username", user.getUsername());
-            model.addFlashAttribute("msg","Register succeeded");
+            model.addFlashAttribute("msg", "Register succeeded");
             return "redirect:/user/status";
-        }else{
-            model.addFlashAttribute("errorMsg","注册失败，请重新注册");
+        } else {
+            model.addFlashAttribute("errorMsg", "注册失败，请重新注册");
             return "redirect:/user/login";
         }
     }
 
     //用户编辑个人信息页面，GET方法
-    @RequestMapping(value="/edit/{username}",method = RequestMethod.GET)
-    public String showEditForm(@PathVariable String username,Model model){
+    @RequestMapping(value = "/edit/{username}", method = RequestMethod.GET)
+    public String showEditForm(@PathVariable String username, Model model) {
         User user = userService.getUserByName(username);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user_edit";
+    }
+
+    //用户编辑个人信息页面，会话超时
+    @RequestMapping("/edit")
+    public String editReLogin(RedirectAttributes model){
+        model.addFlashAttribute("errorMsg","Session expired, please login again");
+        return "redirect:/user/login";
     }
 
 
     //用户编辑个人信息提交，POST方法
-    @RequestMapping(value="/edit/{username}",method = RequestMethod.POST)
-    public String processEditForm(@PathVariable String username,HttpServletRequest httpServletRequest,RedirectAttributes model){
+    @RequestMapping(value = "/edit/{username}", method = RequestMethod.POST)
+    public String processEditForm(@PathVariable String username, HttpServletRequest httpServletRequest, RedirectAttributes model) {
 
         User newUserInfo = new User();
         newUserInfo.setUsername(username);
@@ -99,18 +104,18 @@ public class UserController {
         newUserInfo.setWeb(httpServletRequest.getParameter("web"));
 
 
-        if(userService.updateInfo(newUserInfo)){
-            model.addFlashAttribute("msg","Update profile succeeded");
-        }else{
-            model.addFlashAttribute("msg","Update profile failed");
+        if (userService.updateInfo(newUserInfo)) {
+            model.addFlashAttribute("msg", "Update profile succeeded");
+        } else {
+            model.addFlashAttribute("msg", "Update profile failed");
         }
         return "redirect:/user/status";
 
     }
 
     //登出
-    @RequestMapping(value="/logout")
-    public String logout(HttpSession session){
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session) {
         session.removeAttribute("username");
         return "index";
     }

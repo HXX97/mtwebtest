@@ -40,6 +40,7 @@
         <li><a href="/user/status">主页</a></li>
         <li><a class="active" href="/system/new">添加系统</a></li>
         <li><a href="/system/user_list">系统列表</a></li>
+        <li><a href="/test_sets/list">测试集</a> </li>
         <li><a href="/user/edit/${username}">修改信息</a></li>
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
     </ul>
@@ -67,18 +68,16 @@
             <label for="sourceLang">Source Language</label><br/>
             <select id="sourceLang" name="sourcelang">
                 <option value="CS">CS</option>
-                <option value="DA">DA</option>
-                <option value="DE">DE</option>
                 <option value="EN">EN</option>
+                <option value="MG">MG</option>
             </select>
         </p>
         <p>
             <label for="targetLang">Target Language</label><br/>
             <select id="targetLang" name="targetlang">
                 <option value="CS">CS</option>
-                <option value="DA">DA</option>
-                <option value="DE">DE</option>
                 <option value="EN">EN</option>
+                <option value="MG">MG</option>
             </select>
         </p>
         <p>

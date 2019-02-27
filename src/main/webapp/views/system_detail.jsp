@@ -24,6 +24,7 @@
         <li><a href="/user/status">主页</a></li>
         <li><a href="/system/new">添加系统</a></li>
         <li><a href="/system/user_list">系统列表</a></li>
+        <li><a href="/test_sets/list">测试集</a> </li>
         <li><a href="/user/edit/${username}">修改信息</a></li>
         <li><a class="active" href="#">系统详情</a></li>
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
