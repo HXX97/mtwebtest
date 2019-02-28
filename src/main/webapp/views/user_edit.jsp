@@ -25,8 +25,10 @@
         <li><a href="/system/new">添加系统</a></li>
         <li><a href="/system/user_list">系统列表</a></li>
         <li><a href="/test_sets/list">测试集</a> </li>
-        <li><a class="active" href="/user/edit/${username}">修改信息</a></li>
+        <li><a href="/submit/frame">提交测试</a></li>
+
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a>
+        <li style="float:right"><a class="active" href="/user/edit/${username}">修改信息</a></li>
     </ul>
 </div>
 
@@ -51,10 +53,10 @@
         </table>
     </div>
 
-    <div align="right">
-        <input type="submit" value="提交修改" style="marigin-top:10px;height:30px"/>
+    <div  align="right">
+        <input type="submit" value="Save" style="marigin-top:10px;height:30px"/>
         <input type="button" name="Submit"
-               onclick="javascript:history.back(-1);" value="返回"
+               onclick="javascript:history.back(-1);" value="Back"
                style="margin-right: 10%; margin-top: 10px; width: 60px; height: 30px">
     </div>
 </form>

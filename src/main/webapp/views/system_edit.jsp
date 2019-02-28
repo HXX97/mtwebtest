@@ -18,48 +18,48 @@
         }
 
         function checkForm() {
-            var name = document.getElementById("sysname").value
-            if(name==null||name==""){
+            var name = document.getElementById("sysname").value;
+            if (name == null || name == "") {
                 alert("Name must not be null")
                 return false
-            }else{
+            } else {
                 return true
             }
         }
 
-        function setSelectNCheck(){
+        function setSelectNCheck() {
             var srcSel = document.getElementById("sourceLang");
             var defaultSrclang = "${system.sourcelang}";
-            for(i=0;i<srcSel.length;i++){
-                if(srcSel[i].value==defaultSrclang){
-                    srcSel[i].selected=true
+            for (i = 0; i < srcSel.length; i++) {
+                if (srcSel[i].value == defaultSrclang) {
+                    srcSel[i].selected = true
                 }
                 break
             }
 
             var tgtSel = document.getElementById("targetLang");
             var defaultTgtlang = "${system.targetlang}";
-            for(j=0;j<tgtSel.length;j++){
-                if(tgtSel[j].value==defaultTgtlang){
-                    tgtSel[j].selected=true;
+            for (j = 0; j < tgtSel.length; j++) {
+                if (tgtSel[j].value == defaultTgtlang) {
+                    tgtSel[j].selected = true;
                     break
                 }
             }
 
             var isC = document.getElementById("isPrimary");
             var defaultisC = ${system.isPrimary};
-            if(defaultisC==true){
-                isC.checked=true
-            }else{
-                isC.checked=false
+            if (defaultisC == true) {
+                isC.checked = true
+            } else {
+                isC.checked = false
             }
 
             var isP = document.getElementById("isConstraint");
             var defaultisP = ${system.isConstraint};
-            if(defaultisP==true){
-                isP.checked=true
-            }else{
-                isP.checked=false
+            if (defaultisP == true) {
+                isP.checked = true
+            } else {
+                isP.checked = false
             }
 
         }
@@ -68,7 +68,7 @@
     <style type="text/css">
         p {
             margin: 10px;
-            font-size:small;
+            font-size: small;
         }
     </style>
 </head>
@@ -78,26 +78,30 @@
         <li><a href="/user/status">主页</a></li>
         <li><a class="active" href="/system/new">添加系统</a></li>
         <li><a href="/system/user_list">系统列表</a></li>
-        <li><a href="/test_sets/list">测试集</a> </li>
-        <li><a href="/user/edit/${username}">修改信息</a></li>
+        <li><a href="/test_sets/list">测试集</a></li>
+        <li><a href="/submit/frame">提交测试</a></li>
+
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
+        <li style="float:right"><a href="/user/edit/${username}">修改信息</a></li>
     </ul>
 </div>
-<div>
+<div >
     <h2>Edit System</h2>
     <form method="post" onsubmit="return checkForm()">
         <p>
             <label for="sysname">Name</label><br/>
             <input type="text" id="sysname" name="name" value="${system.name}"/>
         </p>
-        <p>
-            <input type="checkbox" id="isConstraint" name="isConstraint">
-            <label for="isConstraint">Tick if this is constraint system</label>
-        </p>
-        <p>
-            <input type="checkbox" id="isPrimary" name="isPrimary">
-            <label for="isPrimary">Tick if this is primary submission</label>
-        </p>
+        <div>
+            <p>
+                <input type="checkbox" id="isConstraint" name="isConstraint">
+                <label for="isConstraint">Tick if this is constraint system</label>
+            </p>
+            <p>
+                <input type="checkbox" id="isPrimary" name="isPrimary">
+                <label for="isPrimary">Tick if this is primary submission</label>
+            </p>
+        </div>
         <p>
             <label for="software">Software</label><br/>
             <input type="text" id="software" name="software" value="${system.software}"/>
@@ -130,9 +134,11 @@
             <label for="notes">Notes</label><br/>
             <textarea name="notes" id="notes" cols="30" rows="10">${system.notes}</textarea>
         </p>
-        <p>
-            <input type="submit" value="Save">
-        </p>
+        <div >
+            <p>
+                <input type="submit" value="Save">
+            </p>
+        </div>
 
     </form>
 </div>

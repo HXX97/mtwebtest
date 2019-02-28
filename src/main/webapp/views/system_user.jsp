@@ -17,6 +17,15 @@
                 window.location.href = '/user/logout'
             }
         }
+
+        function redirectCreate() {
+            window.location.href = '/system/new'
+        }
+
+        function getBack(){
+            window.location.href='/user/status'
+        }
+
     </script>
 </head>
 <body>
@@ -26,8 +35,10 @@
         <li><a href="/system/new">添加系统</a></li>
         <li><a class="active" href="/system/user_list">系统列表</a></li>
         <li><a href="/test_sets/list">测试集</a> </li>
-        <li><a href="/user/edit/${username}">修改信息</a></li>
+        <li><a href="/submit/frame">提交测试</a></li>
+
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
+        <li style="float:right"><a href="/user/edit/${username}">修改信息</a></li>
     </ul>
 </div>
 <div>
@@ -73,10 +84,12 @@
                 </tr>
             </c:forEach>
         </table>
-        <div style="margin-top: 10px">
+        <div style="margin-top: 10px;width: 80%" align="right">
 
-            <a href="/system/new">Create</a>
-            <a href="/user/status">Back</a>
+            <%--<input type="button" style="margin-right: 10px;width: 100px" onclick="redirectCreate()" value="Create"/>
+            <input type="button" style="width: 100px" onclick="getBack()" value="Back"/>--%>
+            <a href="/system/new" style="margin-right: 10px"><button >Create</button></a>
+            <a href="/user/status"><button>Back</button></a>
         </div>
     </div>
 </div>

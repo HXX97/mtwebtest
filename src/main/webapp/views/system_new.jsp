@@ -41,29 +41,35 @@
         <li><a class="active" href="/system/new">添加系统</a></li>
         <li><a href="/system/user_list">系统列表</a></li>
         <li><a href="/test_sets/list">测试集</a> </li>
-        <li><a href="/user/edit/${username}">修改信息</a></li>
+        <li><a href="/submit/frame">提交测试</a></li>
+
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
+        <li style="float:right"><a href="/user/edit/${username}">修改信息</a></li>
     </ul>
 </div>
-<div>
+<div >
     <h2>New System</h2>
     <form method="post" onsubmit="return checkForm()">
         <p>
             <label for="sysname">Name</label><br/>
             <input type="text" id="sysname" name="name"/>
         </p>
+        <div>
         <p>
             <input type="checkbox" id="isConstraint" name="isConstraint">
             <label for="isConstraint">Tick if this is constraint system</label>
         </p>
+
         <p>
             <input type="checkbox" id="isPrimary" name="isPrimary">
             <label for="isPrimary">Tick if this is primary submission</label>
         </p>
+        </div>
         <p>
             <label for="software">Software</label><br/>
             <input type="text" id="software" name="software"/>
         </p>
+
         <p>
             <label for="sourceLang">Source Language</label><br/>
             <select id="sourceLang" name="sourcelang">
@@ -92,9 +98,11 @@
             <label for="notes">Notes</label><br/>
             <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
         </p>
+        <div >
         <p>
-            <input type="submit" value="Create">
+            <input  type="submit" value="Create">
         </p>
+        </div>
 
     </form>
 </div>
