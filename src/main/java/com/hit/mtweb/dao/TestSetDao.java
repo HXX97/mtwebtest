@@ -1,6 +1,7 @@
 package com.hit.mtweb.dao;
 
 import com.hit.mtweb.domain.TestSet;
+import com.hit.mtweb.utils.TestSetRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,14 @@ public class TestSetDao {
     public List<TestSet> getAllTestSets() {
         List<TestSet> testSetList = new ArrayList<>();
         String sql = "select * from testsets";
-        for(Map map:jdbcTemplate.queryForList(sql)) {
+        for (Map map : jdbcTemplate.queryForList(sql)) {
             testSetList.add(TestSet.mapToTestSet(map));
         }
         return testSetList;
+    }
+
+    public TestSet querySetById(String setId) {
+        String sql = "select * from testsets where testsetid = ?";
+        return jdbcTemplate.queryForObject(sql, new TestSetRowMapper(), setId);
     }
 }

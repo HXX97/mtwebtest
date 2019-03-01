@@ -16,7 +16,19 @@
                 window.location.href = '/user/logout'
             }
         }
+
+        function checkForm() {
+            if(document.getElementById("uploadFile").value=="")
+                return false;
+            else
+                return true;
+        }
     </script>
+    <style type="text/css">
+        p {
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -31,6 +43,30 @@
         <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
         <li style="float: right"><a href="/user/edit/${username}">修改信息</a></li>
     </ul>
+</div>
+<h2>Submit:Upload</h2>
+<div>
+    <form method="post" enctype="multipart/form-data" onsubmit="checkForm()">
+        <p><a style="color: red;font-size: small">${msg}</a></p>
+        <p>Test Set: ${setName}</p>
+        <p>System: ${sysName}</p>
+        <p>Source Language: ${srcLangFull}</p>
+        <p>Target Language: ${tgtLangFull}</p>
+        <p>
+            <label for="uploadFile">Choose File: </label>
+            <input type="file" name="uploadFile" id="uploadFile">
+        </p>
+        <p>
+            <label for="notes">Notes: </label>
+            <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+        </p>
+        <input type="hidden" name="setId" value="${setId}">
+        <input type="hidden" name="sysId" value="${sysId}">
+        <input type="hidden" name="srcLang" value="${srcLang}">
+        <input type="hidden" name="tgtLang" value="${tgtLang}">
+
+        <input type="submit" value="Upload">
+    </form>
 </div>
 
 </body>

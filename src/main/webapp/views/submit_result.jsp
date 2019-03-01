@@ -33,5 +33,41 @@
         <li style="float: right"><a href="/user/edit/${username}">修改信息</a></li>
     </ul>
 </div>
+<h2>Submit:Result</h2>
+<div>
+    <a style="color: red;font-size: small">${msg}</a>
+</div>
+<div align="center">
+    <table class="gridtable" style="margin-top: 20px">
+        <tr>
+            <th>Time</th>
+            <th>System</th>
+            <th>TestSet</th>
+            <th>Run Notes</th>
+            <th>Source language</th>
+            <th>Target language</th>
+            <th>Uploaded File</th>
+            <th>BLEU</th>
+            <th>IGNORE BLEU</th>
+            <th>TER</th>
+            <th>zz BEER2.0</th>
+            <th>zzz Character</th>
+        </tr>
+        <tr>
+            <td>${submission.time}</td>
+            <td><a href="/system/detail/${submission.systemid}">${submission.systemName}</a></td>
+            <td>${submission.testset}</td>
+            <td>${submission.notes}</td>
+            <td>${submission.srclang}</td>
+            <td>${submission.tgtlang}</td>
+            <td><a href="/download/uploads/${submission.file}">${submission.file}</a></td>
+            <td>${submission.BLEU}</td>
+            <td>${submission.IGNORE_BLEU}</td>
+            <td>${submission.TER}</td>
+            <td>${submission.BEER}</td>
+            <td>${submission.charac_ter}</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -15,4 +15,8 @@ public class TestSetService {
     public List<TestSet> getAllTestSets() {
         return testSetDao.getAllTestSets();
     }
+
+    public TestSet querySetById(String setId) {
+        return testSetDao.querySetById(setId);
+    }
 }

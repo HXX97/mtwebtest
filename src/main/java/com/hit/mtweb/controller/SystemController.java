@@ -1,6 +1,8 @@
 package com.hit.mtweb.controller;
 
 import com.hit.mtweb.domain.MTSystem;
+import com.hit.mtweb.domain.Submission;
+import com.hit.mtweb.service.SubmissionService;
 import com.hit.mtweb.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class SystemController {
     @Autowired
     SystemService systemService;
 
+    @Autowired
+    SubmissionService submissionService;
     //查看所有Systems
     @RequestMapping("/all")
     public ModelAndView viewAllSystems() {
@@ -82,6 +86,10 @@ public class SystemController {
 
         MTSystem system = systemService.queryById(systemid);
         model.addAttribute("system", system);
+
+        List<Submission> submissionList = submissionService.queryBySysId(systemid);
+        model.addAttribute("submissionList",submissionList);
+
 
         ModelAndView modelAndView = new ModelAndView("system_detail");
         return "system_detail";

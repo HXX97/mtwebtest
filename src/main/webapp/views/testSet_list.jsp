@@ -54,7 +54,8 @@
             </tr>
             <c:forEach items="${requestScope.testSetList}" var="testSet">
                 <tr>
-                    <td>${testSet.name}</td>
+                    <td><a href="">${testSet.name}</a><br/>
+                        <a href="/download/testSets/${testSet.srcurl}">download</a></td>
                     <td>${testSet.origin}</td>
                     <td>${testSet.domain}</td>
                     <td>${testSet.related_corpora}</td>
