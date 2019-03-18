@@ -181,8 +181,8 @@
                 </table>
 
                 <div align="right" style="margin-bottom: 20px">
-                <button class="btn btn-default"><a href="/system/new">创建新系统</a></button>
-                <button class="btn btn-default"><a href="/submit/frame">提交测试</a></button>
+                <button class="btn btn-default" onclick="window.location.href='/system/new'">创建新系统</button>
+                <button class="btn btn-default" onclick="window.location.href='/submit/frame'">提交测试</button>
                 </div>
 
             </fieldset>

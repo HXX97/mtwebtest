@@ -159,7 +159,7 @@
         </table>
         </fieldset>
         <div align="right">
-        <button class="btn btn-default"><a href="/user/status">返回</a></button>
+        <button class="btn btn-default" onclick="window.location.href='/user/status'">返回</button>
         </div>
     </div>
 </div>
