@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 10297
-  Date: 2019/2/28
-  Time: 1:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Submit:Frame</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/css/local.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-select/1.13.8/css/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-select/1.13.8/js/bootstrap-select.min.js"></script>
+
     <script language="JavaScript">
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
@@ -19,7 +19,7 @@
         }
 
         function checkForm() {
-            var setSrcLang, setTgtLang, sysSrcLang, sysTgtLang;
+            var setSrcLang, setTgtLang, sysSrcLang, sysTgtLang, track;
             var chooseSet = document.getElementsByName("chooseSet");
             for (var i = 0; i < chooseSet.length; i++) {
                 if (chooseSet[i].checked == true) {
@@ -36,6 +36,8 @@
             setSrcLang = obj[i].options[obj[i].selectedIndex].value;
             obj = document.getElementsByName("setTgtLang");
             setTgtLang = obj[i].options[obj[i].selectedIndex].value;
+            obj = document.getElementsByName("setTrack");
+            track = obj[i].options[obj[i].selectedIndex].value;
 
             var chooseSys = document.getElementsByName("chooseSys");
             for (var j = 0; j < chooseSys.length; j++) {
@@ -60,6 +62,7 @@
             } else {
                 document.getElementById("srcLang").value = setSrcLang;
                 document.getElementById("tgtLang").value = setTgtLang;
+                document.getElementById("track").value = track;
             }
 
             return true;
@@ -68,99 +71,179 @@
     </script>
 </head>
 <body>
-<div>
-    <ul>
-        <li><a href="/user/status">主页</a></li>
-        <li><a href="/system/new">添加系统</a></li>
-        <li><a href="/system/user_list">系统列表</a></li>
-        <li><a href="/test_sets/list">测试集</a></li>
-        <li><a class="active" href="#">提交测试</a></li>
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                </div>
 
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">主页</a>
+                        </li>
+                        <li>
+                            <a href="/board">积分榜</a>
+                        </li>
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">CCMT 2019</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">关于本站</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
 
-        <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a></li>
-        <li style="float: right"><a href="/user/edit/${username}">修改信息</a></li>
-    </ul>
-</div>
+                        <li id="userHome">
+                            <a href="/user/status">个人主页</a>
+                        </li>
 
-<h2>Submit:Frame</h2>
-<form method="post" onsubmit="return checkForm()">
-    <div align="center">
-        <table class="gridtable" id="testSetTable" style="margin-top: 20px">
-            <caption style="text-align: left;font-size: large">Choose TestSet</caption>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Origin</th>
-                <th>Domain</th>
-                <th>Citation</th>
-                <th>Notes</th>
-                <th>Source Language</th>
-                <th>Target Language</th>
-            </tr>
-            <c:forEach items="${requestScope.testSetList}" var="testSet">
-                <tr name="setRow">
-                    <td><input type="radio" name="chooseSet" value="${testSet.testsetid}"></td>
-                    <td>${testSet.name}</td>
-                    <td>${testSet.origin}</td>
-                    <td>${testSet.domain}</td>
-                    <td>${testSet.citation}</td>
-                    <td>${testSet.notes}</td>
-                    <td><select name="setSrcLang">
-                        <option value="CS">CS</option>
-                        <option value="EN">EN</option>
-                        <option value="MG">MG</option>
-                    </select></td>
-                    <td><select name="setTgtLang">
-                        <option value="CS">CS</option>
-                        <option value="EN">EN</option>
-                        <option value="MG">MG</option>
-                    </select></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+                        <li id="addSys">
+                            <a href="/system/new">添加系统</a>
+                        </li>
 
-    <div align="center">
-        <%-- <label for="systemTable" style="float: left">Choose Your System</label><br/>--%>
+                        <li id="submit" class="active">
+                            <a href="#">提交测试</a>
+                        </li>
 
-        <table class="gridtable" id="systemTable" style="margin-top: 20px">
-            <caption style="text-align: left;font-size: large">Choose System</caption>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Software</th>
-                <th>Source Language</th>
-                <th>Target Language</th>
-                <th>Citation</th>
-                <th>Notes</th>
-                <th>Constraint System</th>
-                <th>Primary System</th>
-            </tr>
-            <c:forEach items="${requestScope.systemList}" var="system">
-                <tr name="sysRow">
-                    <td><input type="radio" name="chooseSys" value="${system.systemid}"></td>
-                    <td>${system.name}</td>
-                    <td>${system.software}</td>
-                    <td name="sysSrcLang">${system.sourcelang}</td>
-                    <td name="sysTgtLang">${system.targetlang}</td>
-                    <td>${system.citation}</td>
-                    <td>${system.notes}</td>
-                    <td>${system.isConstraint}</td>
-                    <td>${system.isPrimary}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <div style="width:80%;margin-top: 10px">
-            <input type="submit" value="Proceed" style="float: right"/>
+                        <li class="dropdown" id="userDrop">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/user/edit/${username}">个人资料</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:logout()">登出</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-
     </div>
 
-    <input type="hidden" id="setId" name="setId"/>
-    <input type="hidden" id="sysId" name="sysId"/>
-    <input type="hidden" id="srcLang" name="srcLang"/>
-    <input type="hidden" id="tgtLang" name="tgtLang"/>
-</form>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form class="form-horizontal" role="form" method="post" onsubmit="return checkForm()">
+
+                <fieldset>
+                    <legend>选择测试集</legend>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Origin</th>
+                            <th>Domain</th>
+                            <th>Citation</th>
+                            <th>Notes</th>
+                            <th>Source Language</th>
+                            <th>Target Language</th>
+                            <th>Track</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${requestScope.testSetList}" var="testSet">
+                            <tr name="setRow">
+                                <td><input type="radio" name="chooseSet" value="${testSet.testsetid}"></td>
+                                <td>${testSet.name}</td>
+                                <td>${testSet.origin}</td>
+                                <td>${testSet.domain}</td>
+                                <td>${testSet.citation}</td>
+                                <td>${testSet.notes}</td>
+                                <td><select class="selectpicker" name="setSrcLang">
+                                    <option value="CS">CS</option>
+                                    <option value="EN">EN</option>
+                                    <option value="MG">MG</option>
+                                </select></td>
+                                <td><select class="selectpicker" name="setTgtLang">
+                                    <option value="CS">CS</option>
+                                    <option value="EN">EN</option>
+                                    <option value="MG">MG</option>
+                                </select></td>
+                                <td><select class="selectpicker" name="setTrack">
+                                    <option value="CE">CE</option>
+                                    <option value="EC">EC</option>
+                                    <option value="MC">MC</option>
+                                    <option value="TC">TC</option>
+                                    <option value="UC">UC</option>
+                                    <option value="JE">JE</option>
+                                </select></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </fieldset>
+
+                <fieldset>
+                    <legend>选择您的系统</legend>
+                    <table class="table table-hover table-striped" id="systemTable">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Software</th>
+                            <th>Source Language</th>
+                            <th>Target Language</th>
+                            <th>Citation</th>
+                            <th>Notes</th>
+                            <th>Constraint System</th>
+                            <th>Primary System</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach items="${requestScope.systemList}" var="system">
+                            <tr name="sysRow">
+                                <td><input type="radio" name="chooseSys" value="${system.systemid}"></td>
+                                <td>${system.name}</td>
+                                <td>${system.software}</td>
+                                <td name="sysSrcLang">${system.sourcelang}</td>
+                                <td name="sysTgtLang">${system.targetlang}</td>
+                                <td>${system.citation}</td>
+                                <td>${system.notes}</td>
+                                <td>${system.isConstraint}</td>
+                                <td>${system.isPrimary}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <div align="right">
+                    <button type="submit" class="btn btn-primary">下一步</button>
+                    </div>
+                </fieldset>
+
+
+                <input type="hidden" id="setId" name="setId"/>
+                <input type="hidden" id="sysId" name="sysId"/>
+                <input type="hidden" id="srcLang" name="srcLang"/>
+                <input type="hidden" id="tgtLang" name="tgtLang"/>
+                <input type="hidden" id="track" name="track"/>
+            </form>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>

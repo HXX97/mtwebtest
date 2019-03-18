@@ -46,7 +46,7 @@ public class SystemController {
             modelAndView.addObject("errorMsg", "Session expired, please login again");
             return modelAndView;
         }
-        modelAndView = new ModelAndView("system_user");
+        modelAndView = new ModelAndView("old/system_user");
         List<MTSystem> systemList = systemService.queryByOwner(username);
 
         modelAndView.addObject("systemList", systemList);
@@ -76,7 +76,7 @@ public class SystemController {
         } else {
             model.addFlashAttribute("msg", "Create System failed");
         }
-        return "redirect:/system/user_list";
+        return "redirect:/user/status";
     }
 
 
@@ -104,7 +104,7 @@ public class SystemController {
         } else {
             model.addFlashAttribute("msg", "Delete failed");
         }
-        return "redirect:/system/user_list";
+        return "redirect:/user/status";
     }
 
     //展示编辑系统表单
@@ -124,7 +124,7 @@ public class SystemController {
         } else {
             model.addFlashAttribute("msg", "Edit Failed");
         }
-        return "redirect:/system/user_list";
+        return "redirect:/user/status";
     }
 
 

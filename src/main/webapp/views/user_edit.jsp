@@ -8,58 +8,135 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Edit Profile</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/statics/css/local.css"/>
-    <script language="JavaScript">
+    <title>个人资料</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
         function logout() {
-            if(window.confirm('Are you sure to log out?')==true){
-                window.location.href ='/user/logout'
+            if (window.confirm('Are you sure to log out?') == true) {
+                window.location.href = '/user/logout'
             }
         }
     </script>
 </head>
 <body>
-<div>
-    <ul>
-        <li><a href="/user/status">主页</a></li>
-        <li><a href="/system/new">添加系统</a></li>
-        <li><a href="/system/user_list">系统列表</a></li>
-        <li><a href="/test_sets/list">测试集</a> </li>
-        <li><a href="/submit/frame">提交测试</a></li>
 
-        <li style="float: right"><a href="javascript:void(0)" onclick="logout()">登出</a>
-        <li style="float:right"><a class="active" href="/user/edit/${username}">修改信息</a></li>
-    </ul>
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">主页</a>
+                        </li>
+                        <li>
+                            <a href="/board">积分榜</a>
+                        </li>
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">CCMT 2019</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">关于本站</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li  id="userHome">
+                            <a href="/user/status">个人主页</a>
+                        </li>
+
+                        <li id="addSys">
+                            <a href="#">添加系统</a>
+                        </li>
+
+                        <li id="submit">
+                            <a href="#" >提交测试</a>
+                        </li>
+
+                        <li class="dropdown" id="userDrop">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">个人资料</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:logout()">登出</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+
+            <fieldset>
+                <legend>个人资料</legend>
+                <form class="form-horizontal" role="form" method="post">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">账号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" name="username" value="${user.username}" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">电子邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" name="email" value="${user.email}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliation" class="col-sm-2 control-label">单位</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="affiliation" name="affiliation" value="${user.affiliation}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="web" class="col-sm-2 control-label">网址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="web" name="web" value="${user.web}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10" align="right">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="col-md-4 column">
+
+        </div>
+    </div>
 </div>
 
-<form method="post">
-    <div align="center">
-        <table class="gridtable" style="margin-top: 50px">
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Affiliation</th>
-                <th>Web</th>
-            </tr>
-            <tr>
-                <td>${user.username}</td>
-                <td><input type="text" name="email" value="${user.email}"
-                                  style="border:none" /></td>
-                <td><input type="text" name="affiliation" value="${user.affiliation}"
-                                 style="border:none" /></td>
-                <td><input type="text" name="web"
-                                 value="${user.web}" style="border:none" /></td>
-            </tr>
-        </table>
     </div>
-
-    <div  align="right">
-        <input type="submit" value="Save" style="marigin-top:10px;height:30px"/>
-        <input type="button" name="Submit"
-               onclick="javascript:history.back(-1);" value="Back"
-               style="margin-right: 10%; margin-top: 10px; width: 60px; height: 30px">
-    </div>
-</form>
+</div>
 
 </body>
 </html>

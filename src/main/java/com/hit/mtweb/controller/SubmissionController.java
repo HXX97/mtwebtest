@@ -59,35 +59,45 @@ public class SubmissionController {
     }
 
     @RequestMapping(value = "/submit/frame", method = RequestMethod.POST)
-    public String processSubmitFrame(HttpServletRequest servletRequest, RedirectAttributes model) {
+    public String processSubmitFrame(HttpServletRequest servletRequest, Model model) {
 
         String setId = servletRequest.getParameter("setId");
         String sysId = servletRequest.getParameter("sysId");
         String srcLangAbbr = servletRequest.getParameter("srcLang");
         String tgtLangAbbr = servletRequest.getParameter("tgtLang");
+        String track = servletRequest.getParameter("track");
 
-        model.addFlashAttribute("setId", setId);
-        model.addFlashAttribute("sysId", sysId);
-        model.addFlashAttribute("srcLang", srcLangAbbr);
-        model.addFlashAttribute("tgtLang", tgtLangAbbr);
 
-        return "redirect:/submit/upload";
+        model.addAttribute("setId",setId);
+        model.addAttribute("sysId",sysId);
+        model.addAttribute("setName", testSetService.querySetById(setId).getName());
+        model.addAttribute("sysName", systemService.queryById(sysId).getName());
+        model.addAttribute("srcLang", srcLangAbbr);
+        model.addAttribute("tgtLang", tgtLangAbbr);
+        model.addAttribute("srcLangFull",langService.queryFullByAbbr(srcLangAbbr));
+        model.addAttribute("tgtLangFull",langService.queryFullByAbbr(tgtLangAbbr));
+        model.addAttribute("track",track);
+
+
+        return "submit_upload";
     }
 
     //提交第二步：上传文件
     @RequestMapping(value = "/submit/upload", method = RequestMethod.GET)
     public String showUploadFileForm(Model model, HttpServletRequest request) {
-        Map<String, Object> map = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
+        /*Map<String, Object> map = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
 
         String testSetName = testSetService.querySetById((String) map.get("setId")).getName();
         String systemName = systemService.queryById((String) map.get("sysId")).getName();
         String sourceLangFull = langService.queryFullByAbbr((String) map.get("srcLang"));
         String tgtLangFull = langService.queryFullByAbbr((String) map.get("tgtLang"));
+        String track = (String) map.get("track");
 
         model.addAttribute("setName", testSetName);
         model.addAttribute("sysName", systemName);
         model.addAttribute("srcLangFull", sourceLangFull);
         model.addAttribute("tgtLangFull", tgtLangFull);
+        model.addAttribute("track",track);*/
 
         return "submit_upload";
     }
@@ -95,7 +105,8 @@ public class SubmissionController {
     @RequestMapping(value = "/submit/upload", method = RequestMethod.POST)
     public String processUploadFile(@RequestPart MultipartFile uploadFile,
                                     @RequestParam String notes,
-                                    HttpServletRequest request, RedirectAttributes model) {
+                                    HttpServletRequest request, RedirectAttributes model,Model newModel) {
+
 
         String username = (String) request.getSession().getAttribute("username");
         if (username == null) {
@@ -103,15 +114,18 @@ public class SubmissionController {
             return "redirect:/user/login";
         }
 
+
         model.addFlashAttribute("setId", request.getParameter("setId"));
         model.addFlashAttribute("sysId", request.getParameter("sysId"));
         model.addFlashAttribute("srcLang", request.getParameter("srcLang"));
         model.addFlashAttribute("tgtLang", request.getParameter("tgtLang"));
+        model.addFlashAttribute("track",request.getParameter("track"));
 
         if (uploadFile.isEmpty()) {
             model.addFlashAttribute("msg", "File is empty, please choose a file");
             return "redirect:/submit/upload";
         }
+
 
         String path = request.getServletContext().getRealPath("/uploads/");
         String filename = uploadFile.getOriginalFilename();
@@ -133,29 +147,48 @@ public class SubmissionController {
             return "redirect:/submit/upload";
         }
 
+
         model.addFlashAttribute("filename", newFileName);
         model.addFlashAttribute("notes", notes);
         model.addFlashAttribute("msg", "Upload succeeded");
-        return "redirect:/submit/result";
+
+
+
+        Submission submission = submissionService.handleSubmit(request.getParameter("setId"),
+                request.getParameter("sysId"),
+                request.getParameter("srcLang"),
+                request.getParameter("tgtLang"),
+                notes,
+                newFileName,
+                request.getParameter("track"));
+
+        newModel.addAttribute("submission",submission);
+
+        newModel.addAttribute("msg","Upload Succeeded");
+        return "submit_result";
+       /* model.addFlashAttribute("submission",submission);
+
+        return "redirect:/submit/result";*/
     }
 
 
     //提交第三步：返回评价结果
     @RequestMapping(value = "/submit/result")
     public String submitResult(HttpServletRequest request, Model model) {
-        Map<String, Object> map = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
+        /*Map<String, Object> map = (Map<String, Object>) RequestContextUtils.getInputFlashMap(request);
         String setId = (String) map.get("setId");
         String sysId = (String) map.get("sysId");
         String srcLang = (String) map.get("srcLang");
         String tgtLang = (String) map.get("tgtLang");
         String notes = (String) map.get("notes");
         String filename = (String) map.get("filename");
-
-
-        Submission submission = submissionService.handleSubmit(setId, sysId, srcLang, tgtLang, notes, filename);
-        model.addAttribute("submission",submission);
+        String track = (String) map.get("track");
+        Submission submission = submissionService.handleSubmit(setId, sysId, srcLang, tgtLang, notes, filename, track);
+        model.addAttribute("submission",submission);*/
         return "submit_result";
     }
+
+
 
 
 }

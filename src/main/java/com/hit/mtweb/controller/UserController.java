@@ -1,6 +1,8 @@
 package com.hit.mtweb.controller;
 
+import com.hit.mtweb.domain.MTSystem;
 import com.hit.mtweb.domain.User;
+import com.hit.mtweb.service.SystemService;
 import com.hit.mtweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SystemService systemService;
 
     //查看所有用户
     @RequestMapping("/viewAll")
@@ -59,7 +64,16 @@ public class UserController {
 
     //展示个人主页，GET方法
     @RequestMapping(value = "/status", method = RequestMethod.GET)
-    public String showUserHome() {
+    public String showUserHome(Model model,HttpServletRequest request) {
+
+        String username = (String) request.getSession().getAttribute("username");
+        User user = userService.getUserByName(username);
+        model.addAttribute("user",user);
+
+        List<MTSystem> systemList = systemService.queryByOwner(username);
+        model.addAttribute("systemList",systemList);
+
+
         return "user_homepage";
     }
 

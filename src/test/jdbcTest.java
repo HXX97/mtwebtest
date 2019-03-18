@@ -22,4 +22,10 @@ public class jdbcTest {
         System.out.println(userController.viewAllUsers());
     }
 
+    @Test
+    public void timeTest(){
+        Date date = new Date();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+    }
+
 }

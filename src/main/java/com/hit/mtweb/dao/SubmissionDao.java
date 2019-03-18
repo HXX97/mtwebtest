@@ -34,7 +34,16 @@ public class SubmissionDao {
                 "charac_ter," +
                 "time," +
                 "srclang," +
-                "tgtlang) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "tgtlang," +
+                "track," +
+                "BLEU_SBP," +
+                "BLEU_NIST," +
+                "METEOR," +
+                "NIST," +
+                "GTM," +
+                "mWER," +
+                "mPER," +
+                "ICT) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         jdbcTemplate.update(sql,
                 submission.getSystemid(),
@@ -53,7 +62,16 @@ public class SubmissionDao {
                 submission.getCharac_ter(),
                 submission.getTime(),
                 submission.getSrclang(),
-                submission.getTgtlang());
+                submission.getTgtlang(),
+                submission.getTrack(),
+                submission.getBLEU_SBP(),
+                submission.getBLEU_NIST(),
+                submission.getMETEOR(),
+                submission.getNIST(),
+                submission.getGTM(),
+                submission.getMWER(),
+                submission.getMPER(),
+                submission.getICT());
 
     }
 
@@ -61,6 +79,15 @@ public class SubmissionDao {
         List<Submission> submissionList = new ArrayList<>();
         String sql = "select * from submissions where systemid = ?";
         for(Map map:jdbcTemplate.queryForList(sql,systemid)){
+            submissionList.add(Submission.mapToSubmission(map));
+        }
+        return submissionList;
+    }
+
+    public List<Submission> queryByTrack(String track) {
+        List<Submission> submissionList = new ArrayList<>();
+        String sql = "select * from submissions where track = ?";
+        for(Map map:jdbcTemplate.queryForList(sql,track)){
             submissionList.add(Submission.mapToSubmission(map));
         }
         return submissionList;

@@ -1,26 +1,45 @@
 package com.hit.mtweb.controller;
 
+import com.hit.mtweb.domain.Submission;
+import com.hit.mtweb.service.SubmissionService;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 public class GlobController {
 
+
+    @Autowired
+    SubmissionService submissionService;
+
     @RequestMapping("/")
-    public String getHome() {
+    public String getHome(Model model) {
         return "index";
+    }
+
+    @RequestMapping("/board")
+    public String getBoard(){
+        return "leaderBoard";
+    }
+
+
+    @RequestMapping("/test")
+    public String getTest(){
+        return "test";
     }
 
     //{filename:.+} spEL表达式，用于匹配文件名中的'.'
@@ -42,6 +61,20 @@ public class GlobController {
 
 
     }
+
+    @RequestMapping("/leaderboard/{track}/{metric}")
+    @ResponseBody
+    public List<Submission> getLeaderBoard(@PathVariable String track,@PathVariable String metric){
+
+        //System.out.println("Hello World!"+track);
+        //System.out.println("track:"+track+"\nmetric:"+metric);
+        List<Submission> list = submissionService.queryByTrack(track);
+
+        return list;
+
+    }
+
+
 
 
 }

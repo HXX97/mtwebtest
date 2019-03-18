@@ -24,6 +24,16 @@ public class Submission {
     private String time;
     private String srclang;
     private String tgtlang;
+    private String track;
+    private String BLEU_SBP;
+    private String BLEU_NIST;
+    private String METEOR;
+    private String NIST;
+    private String GTM;
+    private String mWER;
+    private String mPER;
+    private String ICT;
+
 
     public static Submission mapToSubmission(Map map) {
         Submission submission = new Submission();
@@ -44,7 +54,15 @@ public class Submission {
         submission.setSrclang((String)map.get("srclang"));
         submission.setTgtlang((String) map.get("tgtlang"));
         submission.setTestsetid(String.valueOf(map.get("testsetid")));
-
+        submission.setTrack((String) map.get("track"));
+        submission.setBLEU_SBP((String) map.get("BLEU_SBP"));
+        submission.setBLEU_NIST((String) map.get("BLEU_NIST"));
+        submission.setMETEOR((String) map.get("METEOR"));
+        submission.setNIST((String) map.get("NIST"));
+        submission.setGTM((String) map.get("GTM"));
+        submission.setMWER((String) map.get("mWER"));
+        submission.setMPER((String) map.get("mPER"));
+        submission.setICT((String) map.get("ICT"));
         return submission;
     }
 
@@ -194,6 +212,79 @@ public class Submission {
         this.testsetid = testsetid;
     }
 
+    public String getTrack() {
+        return track;
+    }
+
+    public void setTrack(String track) {
+        this.track = track;
+    }
+
+
+    public String getBLEU_SBP() {
+        return BLEU_SBP;
+    }
+
+    public void setBLEU_SBP(String BLEU_SBP) {
+        this.BLEU_SBP = BLEU_SBP;
+    }
+
+    public String getBLEU_NIST() {
+        return BLEU_NIST;
+    }
+
+    public void setBLEU_NIST(String BLEU_NIST) {
+        this.BLEU_NIST = BLEU_NIST;
+    }
+
+    public String getMETEOR() {
+        return METEOR;
+    }
+
+    public void setMETEOR(String METEOR) {
+        this.METEOR = METEOR;
+    }
+
+    public String getNIST() {
+        return NIST;
+    }
+
+    public void setNIST(String NIST) {
+        this.NIST = NIST;
+    }
+
+    public String getGTM() {
+        return GTM;
+    }
+
+    public void setGTM(String GTM) {
+        this.GTM = GTM;
+    }
+
+    public String getMWER() {
+        return mWER;
+    }
+
+    public void setMWER(String mWER) {
+        this.mWER = mWER;
+    }
+
+    public String getMPER() {
+        return mPER;
+    }
+
+    public void setMPER(String mPER) {
+        this.mPER = mPER;
+    }
+
+    public String getICT() {
+        return ICT;
+    }
+
+    public void setICT(String ICT) {
+        this.ICT = ICT;
+    }
+
     @Override
     public String toString() {
         return "Submission{" +
@@ -215,6 +306,15 @@ public class Submission {
                 ", time='" + time + '\'' +
                 ", srclang='" + srclang + '\'' +
                 ", tgtlang='" + tgtlang + '\'' +
+                ", track='" + track + '\'' +
+                ", BLEU_SBP='" + BLEU_SBP + '\'' +
+                ", BLEU_NIST='" + BLEU_NIST + '\'' +
+                ", METEOR='" + METEOR + '\'' +
+                ", NIST='" + NIST + '\'' +
+                ", GTM='" + GTM + '\'' +
+                ", mWER='" + mWER + '\'' +
+                ", mPER='" + mPER + '\'' +
+                ", ICT='" + ICT + '\'' +
                 '}';
     }
 }

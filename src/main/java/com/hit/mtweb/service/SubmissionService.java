@@ -27,7 +27,7 @@ public class SubmissionService {
     @Autowired
     SystemDao systemDao;
 
-    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename) {
+    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track) {
         Submission submission = new Submission();
         submission.setSystemid(sysId);
         submission.setSystemName(systemDao.queryById(sysId).getName());
@@ -38,15 +38,22 @@ public class SubmissionService {
         submission.setNotes(notes);
         submission.setFile(filename);
         submission.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        submission.setTrack(track);
 
         submission.setBLEU(computeBLEU(setId,srcLang,tgtLang,filename));
         submission.setTER(computeTER(setId,srcLang,tgtLang,filename));
         submission.setBEER(computeBEER(setId,srcLang,tgtLang,filename));
 
+        submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename));
+
         this.saveSubmission(submission);
 
         return submission;
 
+    }
+
+    private String computeBLEU_SBP(String setId, String srcLang, String tgtLang, String filename) {
+        return "100";
     }
 
     private void saveSubmission(Submission submission) {
@@ -71,4 +78,9 @@ public class SubmissionService {
     public List<Submission> queryBySysId(String systemid) {
         return submissionDao.queryBySysId(systemid);
     }
+
+    public List<Submission> queryByTrack(String track) {
+        return submissionDao.queryByTrack(track);
+    }
+
 }
