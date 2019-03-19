@@ -2,9 +2,11 @@ package com.hit.mtweb.dao;
 
 import com.hit.mtweb.domain.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +80,7 @@ public class SubmissionDao {
     public List<Submission> queryBySysId(String systemid) {
         List<Submission> submissionList = new ArrayList<>();
         String sql = "select * from submissions where systemid = ?";
-        for(Map map:jdbcTemplate.queryForList(sql,systemid)){
+        for (Map map : jdbcTemplate.queryForList(sql, systemid)) {
             submissionList.add(Submission.mapToSubmission(map));
         }
         return submissionList;
@@ -87,9 +89,21 @@ public class SubmissionDao {
     public List<Submission> queryByTrack(String track) {
         List<Submission> submissionList = new ArrayList<>();
         String sql = "select * from submissions where track = ?";
-        for(Map map:jdbcTemplate.queryForList(sql,track)){
+        for (Map map : jdbcTemplate.queryForList(sql, track)) {
             submissionList.add(Submission.mapToSubmission(map));
         }
         return submissionList;
+    }
+
+    public boolean deleteBySysId(String systemid) {
+
+        String sql = "delete from submissions where systemid = ?";
+        try {
+            jdbcTemplate.update(sql, systemid);
+        } catch (DataAccessException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

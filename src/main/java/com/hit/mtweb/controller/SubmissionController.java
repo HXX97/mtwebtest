@@ -122,6 +122,7 @@ public class SubmissionController {
         model.addFlashAttribute("track",request.getParameter("track"));
 
         if (uploadFile.isEmpty()) {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "File is empty, please choose a file");
             return "redirect:/submit/upload";
         }
@@ -143,6 +144,7 @@ public class SubmissionController {
 
         } catch (IOException e) {
             e.printStackTrace();
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "Something error, please upload again");
             return "redirect:/submit/upload";
         }
@@ -150,6 +152,7 @@ public class SubmissionController {
 
         model.addFlashAttribute("filename", newFileName);
         model.addFlashAttribute("notes", notes);
+        model.addFlashAttribute("msgLevel","0");
         model.addFlashAttribute("msg", "Upload succeeded");
 
 
@@ -163,7 +166,7 @@ public class SubmissionController {
                 request.getParameter("track"));
 
         newModel.addAttribute("submission",submission);
-
+        newModel.addAttribute("msgLevel","0");
         newModel.addAttribute("msg","Upload Succeeded");
         return "submit_result";
        /* model.addFlashAttribute("submission",submission);

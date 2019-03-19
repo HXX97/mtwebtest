@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,6 +66,7 @@ public class SystemController {
                                           MTSystem system,
                                           RedirectAttributes model) {
         String username = (String) httpServletRequest.getSession().getAttribute("username");
+
         if(username==null){
             model.addFlashAttribute("errorMsg","Session expired, please login again");
             return "redirect:/user/login";
@@ -72,8 +74,10 @@ public class SystemController {
 
         system.setOwner(username);
         if (systemService.saveNewSystem(system)) {
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Create System succeeded");
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "Create System failed");
         }
         return "redirect:/user/status";
@@ -100,8 +104,10 @@ public class SystemController {
     public String destroySystem(@PathVariable String systemid, RedirectAttributes model) {
 
         if (systemService.deleteById(systemid)) {
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Delete Succeeded");
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "Delete failed");
         }
         return "redirect:/user/status";
@@ -120,8 +126,10 @@ public class SystemController {
     public String processEditSystem(@PathVariable String systemid, MTSystem mtSystem, RedirectAttributes model) {
         mtSystem.setSystemid(systemid);
         if (systemService.updateById(mtSystem)) {
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Edit Succeeded");
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "Edit Failed");
         }
         return "redirect:/user/status";

@@ -1,5 +1,6 @@
 package com.hit.mtweb.service;
 
+import com.hit.mtweb.dao.SubmissionDao;
 import com.hit.mtweb.dao.SystemDao;
 import com.hit.mtweb.domain.MTSystem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ public class SystemService {
 
     @Autowired
     SystemDao systemDao;
+
+    @Autowired
+    SubmissionDao submissionDao;
 
     public boolean saveNewSystem(MTSystem system) {
         return systemDao.saveNewSystem(system);
@@ -26,7 +30,9 @@ public class SystemService {
     }
 
     public boolean deleteById(String systemid) {
-        return systemDao.deleteById(systemid);
+
+
+        return submissionDao.deleteBySysId(systemid)&&systemDao.deleteById(systemid);
     }
 
     public boolean updateById(MTSystem mtSystem) {

@@ -54,9 +54,11 @@ public class UserController {
 
         if (userService.validateUserByPWD(loginUser, loginPWD)) {
             session.setAttribute("username", httpServletRequest.getParameter("username"));
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Login succeeded");
             return "redirect:/user/status";
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("errorMsg", "Username or Password wrong");
             return "redirect:/user/login";
         }
@@ -83,9 +85,11 @@ public class UserController {
 
         if (userService.saveUser(user)) {
             session.setAttribute("username", user.getUsername());
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Register succeeded");
             return "redirect:/user/status";
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("errorMsg", "注册失败，请重新注册");
             return "redirect:/user/login";
         }
@@ -119,8 +123,10 @@ public class UserController {
 
 
         if (userService.updateInfo(newUserInfo)) {
+            model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Update profile succeeded");
         } else {
+            model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "Update profile failed");
         }
         return "redirect:/user/status";

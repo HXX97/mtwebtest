@@ -21,6 +21,12 @@
             var message = "${msg}";
             if (message != "" && message != "null") {
                 document.getElementById("msg").classList.remove("hidden");
+                var msgLevel = "${msgLevel}";
+                if(msgLevel==1){
+                    document.getElementById("msg").classList.add("alert-danger");
+                }else{
+                    document.getElementById("msg").classList.add("alert-success");
+                }
             }
         }
 
@@ -105,7 +111,7 @@
 <div class="row clearfix">
     <div class="col-md-12 column">
 
-        <div class="alert alert-dismissable alert-info hidden" id="msg">
+        <div class="alert alert-dismissable hidden" id="msg">
             <button type="button" class="close " data-dismiss="alert" aria-hidden="true">×</button>
             <h4>Message</h4>${msg}
         </div>

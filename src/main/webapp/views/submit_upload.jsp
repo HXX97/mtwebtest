@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="zh-CN">
+<html>
 <head>
     <title>Submit:Upload</title>
     <meta charset="utf-8">
@@ -36,9 +36,17 @@
 
         function init() {
             var message = "${msg}";
+
             if (message != "" && message != "null") {
                 document.getElementById("msg").classList.remove("hidden");
+                var msgLevel = "${msgLevel}";
+                if(msgLevel==1){
+                    document.getElementById("msg").classList.add("alert-danger");
+                }else{
+                    document.getElementById("msg").classList.add("alert-success");
+                }
             }
+
         }
 
         $(document).ready(function () {

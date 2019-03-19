@@ -9,6 +9,24 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function init() {
+            var message = "${msg}";
+            if (message != "" && message != "null") {
+                document.getElementById("msg").classList.remove("hidden");
+                var msgLevel = "${msgLevel}";
+                if(msgLevel==1){
+                    document.getElementById("msg").classList.add("alert-danger");
+                }else{
+                    document.getElementById("msg").classList.add("alert-success");
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            init();
+        })
+    </script>
     <style>
         fieldset {
             padding: .35em .625em .75em;
@@ -79,47 +97,51 @@
                 </div>
 
             </nav>
-
-
-            <div class="row clearfix" style="margin-top: 5%">
-                <div class="col-md-4 column">
-                </div>
-                <div class="col-md-4 column">
-                    <fieldset>
-                        <legend>用户登录
-                        </legend>
-                    <form class="form-horizontal" role="form" method="post">
-                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">账号</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="username" name="username" required/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label">密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" name="password" required/>
-                                <a id="errorMsg" href="javascript:void(0)" style="color: red">${errorMsg}</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label><input type="checkbox"/>记住密码</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10" align="right">
-                                <button type="submit" class="btn btn-default">登录</button>
-                            </div>
-                        </div>
-                    </form>
-                    </fieldset>
-                </div>
-                <div class="col-md-4 column">
-                </div>
+        </div>
+        <div class="col-md-12 column">
+            <div class="alert alert-dismissable hidden" id="msg">
+                <button type="button" class="close " data-dismiss="alert" aria-hidden="true">×</button>
+                <h4>Notice</h4>${msg}
             </div>
+        </div>
+    </div>
+    <div class="row clearfix" style="margin-top: 5%">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+            <fieldset>
+                <legend>用户登录
+                </legend>
+                <form class="form-horizontal" role="form" method="post">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">账号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="username" name="username" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="password" required/>
+                            <a id="errorMsg" href="javascript:void(0)" style="color: red">${errorMsg}</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label><input type="checkbox"/>记住密码</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10" align="right">
+                            <button type="submit" class="btn btn-default">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="col-md-4 column">
         </div>
     </div>
 </div>
