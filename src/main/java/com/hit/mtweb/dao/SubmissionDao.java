@@ -7,9 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository("submissionDao")
 public class SubmissionDao {
@@ -45,7 +43,8 @@ public class SubmissionDao {
                 "GTM," +
                 "mWER," +
                 "mPER," +
-                "ICT) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "ICT,"+
+                "submitter) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         jdbcTemplate.update(sql,
                 submission.getSystemid(),
@@ -73,7 +72,8 @@ public class SubmissionDao {
                 submission.getGTM(),
                 submission.getMWER(),
                 submission.getMPER(),
-                submission.getICT());
+                submission.getICT(),
+                submission.getSubmitter());
 
     }
 
@@ -100,10 +100,61 @@ public class SubmissionDao {
         String sql = "delete from submissions where systemid = ?";
         try {
             jdbcTemplate.update(sql, systemid);
-        } catch (DataAccessException e){
+        } catch (Exception e){
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+
+    public List<Submission> queryByOwnerNTrack(String username, String track) {
+        List<Submission> submissionList = new ArrayList<>();
+        String sql = "select * from submissions where submitter = ? and track = ?";
+        System.out.println(sql);
+        for (Map map : jdbcTemplate.queryForList(sql,username, track)) {
+            submissionList.add(Submission.mapToSubmission(map));
+        }
+        return submissionList;
+    }
+
+    public List<Submission> queryByTrackSortMetric(String track, String metric) {
+        List<Submission> submissionList = new ArrayList<>();
+
+       /* String sql = "select * from submissions where track = ? order by "+metric+" desc";
+        for (Map map : jdbcTemplate.queryForList(sql,track)) {
+            submissionList.add(Submission.mapToSubmission(map));
+        }*/
+
+
+        //根据metric降序，每个systemid只根据该metric取最高分
+
+
+        //先取到所有的systemid
+        Set<String> systemidSet = new HashSet<>();
+
+        String sql = "select distinct systemid from submissions where track = ?";
+        List<Map<String, Object>> systemIdmaps = jdbcTemplate.queryForList(sql, track);
+        for(Map m:systemIdmaps){
+            systemidSet.add(String.valueOf(m.get("systemid")));
+        }
+
+        //取到每个id的最好成绩,加入到List中
+        sql = "select * from submissions where systemid = ? and track = ? order by ifnull(cast("+metric+" as decimal(10,2)),0) desc,time desc limit 1";
+        for(String systemid:systemidSet){
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql, Integer.valueOf(systemid), track);
+            for(Map map:maps){
+                submissionList.add(Submission.mapToSubmission(map));
+            }
+        }
+
+        //将结果list排序
+        Collections.sort(submissionList, new Comparator<Submission>() {
+            @Override
+            public int compare(Submission o1, Submission o2) {
+                return -Integer.valueOf(o1.getBLEU_SBP())+Integer.valueOf(o2.getBLEU_SBP());
+            }
+        });
+
+        return submissionList;
     }
 }

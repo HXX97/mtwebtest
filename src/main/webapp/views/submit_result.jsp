@@ -4,11 +4,11 @@
     <title>Submit:Result</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://cdn.bootcss.com/bootstrap-select/1.13.8/css/bootstrap-select.min.css" rel="stylesheet">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-select/1.13.8/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-select.min.css">
+    <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
 
     <script language="JavaScript">
         function logout() {
@@ -65,12 +65,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">CCMT 2019</a>
+                                <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
                             </li>
                             <li class="divider">
                             </li>
                             <li>
-                                <a href="#">关于本站</a>
+                                <a href="/about">关于本站</a>
                             </li>
                         </ul>
                     </li>

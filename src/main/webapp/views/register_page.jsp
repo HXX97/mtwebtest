@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
@@ -12,22 +12,6 @@
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
     <script>
-
-        function checkForm(){
-
-            var username = document.getElementById("username").value;
-
-            //用户名正则，3到16位（字母，数字，下划线）
-            var uPattern = /^[a-zA-Z0-9_]{3,16}$/;
-            //输出 true
-
-            if(!uPattern.test(username)){
-                window.alert("用户名格式不正确！只能包括字母数字和下划线，长度3-16位");
-                return false;
-            }
-            return true;
-        }
-
         function init() {
             var message = "${msg}";
             if (message != "" && message != "null") {
@@ -128,9 +112,8 @@
         </div>
         <div class="col-md-4 column">
             <fieldset>
-                <legend>用户登录
-                </legend>
-                <form class="form-horizontal" role="form" method="post" onsubmit="return checkForm()">
+                <legend>用户注册</legend>
+                <form class="form-horizontal" role="form" method="post">
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">账号</label>
                         <div class="col-sm-10">
@@ -138,22 +121,34 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">密码</label>
+                        <label for="username" class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" id="password" name="password" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">电子邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" name="email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliation" class="col-sm-2 control-label">单位</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="affiliation" name="affiliation"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="web" class="col-sm-2 control-label">网址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="web" name="web" />
                             <a id="errorMsg" href="javascript:void(0)" style="color: red">${errorMsg}</a>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label><input type="checkbox"/>记住密码</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10" align="right">
-                            <button type="submit" class="btn btn-default">登录</button>
+                            <button type="submit" class="btn btn-default">注册</button>
                         </div>
                     </div>
                 </form>

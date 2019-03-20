@@ -11,6 +11,7 @@ public class Submission {
     private String systemName;
     private String testsetid;
     private String testset;
+    private String submitter;
     private String file;
     private String notes;
     private String BLEU;
@@ -41,6 +42,7 @@ public class Submission {
         submission.setSystemid(String.valueOf(map.get("systemid")));
         submission.setSystemName((String) map.get("systemname"));
         submission.setTestset((String) map.get("testset"));
+        submission.setSubmitter((String) map.get("submitter"));
         submission.setFile((String) map.get("file"));
         submission.setNotes((String) map.get("notes"));
         submission.setBLEU((String) map.get("BLEU"));
@@ -63,6 +65,7 @@ public class Submission {
         submission.setMWER((String) map.get("mWER"));
         submission.setMPER((String) map.get("mPER"));
         submission.setICT((String) map.get("ICT"));
+
         return submission;
     }
 
@@ -285,6 +288,14 @@ public class Submission {
         this.ICT = ICT;
     }
 
+    public String getSubmitter() {
+        return submitter;
+    }
+
+    public void setSubmitter(String submitter) {
+        this.submitter = submitter;
+    }
+
     @Override
     public String toString() {
         return "Submission{" +
@@ -293,6 +304,7 @@ public class Submission {
                 ", systemName='" + systemName + '\'' +
                 ", testsetid='" + testsetid + '\'' +
                 ", testset='" + testset + '\'' +
+                ", submitter='" + submitter + '\'' +
                 ", file='" + file + '\'' +
                 ", notes='" + notes + '\'' +
                 ", BLEU='" + BLEU + '\'' +

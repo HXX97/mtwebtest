@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/user")
 @Controller
@@ -34,7 +33,7 @@ public class UserController {
         System.out.println("view all users");
         List<User> list = userService.getAllUsers();
         System.out.println(list);
-        ModelAndView modelAndView = new ModelAndView("allUsers");
+        ModelAndView modelAndView = new ModelAndView("old/allUsers");
         modelAndView.addObject("list", list);
         return modelAndView;
     }
@@ -79,6 +78,14 @@ public class UserController {
         return "user_homepage";
     }
 
+
+    //展示注册页面,GET方法
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public String showRegisterForm(){
+        return "register_page";
+    }
+
+
     //处理注册过程，POST方法
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegister(HttpSession session, User user, RedirectAttributes model) {
@@ -91,7 +98,7 @@ public class UserController {
         } else {
             model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("errorMsg", "注册失败，请重新注册");
-            return "redirect:/user/login";
+            return "redirect:/user/register";
         }
     }
 

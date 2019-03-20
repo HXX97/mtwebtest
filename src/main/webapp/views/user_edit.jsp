@@ -8,12 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>个人资料</title>
+    <title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-select.min.css">
+    <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
     <script>
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
@@ -47,12 +49,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">CCMT 2019</a>
+                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
                                 </li>
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="#">关于本站</a>
+                                    <a href="/about">关于本站</a>
                                 </li>
                             </ul>
                         </li>

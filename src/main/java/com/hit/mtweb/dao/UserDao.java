@@ -48,7 +48,7 @@ public class UserDao {
                     user.getAffiliation(),
                     user.getWeb(),
                     user.getPassword());
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -68,7 +68,7 @@ public class UserDao {
                     newUserInfo.getWeb(),
                     newUserInfo.getAffiliation(),
                     newUserInfo.getUsername());
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

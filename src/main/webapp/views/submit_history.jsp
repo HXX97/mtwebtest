@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Leader Board</title>
+    <title>History</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
@@ -11,7 +11,6 @@
     <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
-
     <script>
 
 
@@ -44,32 +43,35 @@
 
         function getLeaderBoard() {
             var track = document.getElementById("track").value;
-            var metric = document.getElementById("metric").value;
+            //var metric = document.getElementById("metric").value;
+
+            var username = "${username}";
+            if(username==""){
+                window.alert("登录已超时，请重新登录！");
+                window.location.href="/user/login";
+                return
+            }
             var data;
             $.ajax(
                 {
                     type: 'get',
-                    url: '${pageContext.request.contextPath}/leaderboard/' + track + "/" + metric,
+                    url: '${pageContext.request.contextPath}/submit/history/'  + username + '/'+ track ,
                     success: function (result) {
                         for (var i = 0; i < result.length; i++) {
-                            //console.log(result[i]);
                             data += '<tr>' +
                                 '<td>' + (i + 1) + '</td>' +
                                 '<td><a href="/system/detail/'+result[i].systemid+'">'+ result[i].systemName + '</td>' +
                                 '<td>' + result[i].testset + '</td>' +
                                 '<td>' + result[i].notes + '</td>' +
-                                /*'<td>' + result[i].srclang + '</td>' +
-                                '<td>' + result[i].tgtlang + '</td>' +*/
-                                '<td>' + result[i].bleu_SBP + '</td>' +
-                                '<td>' + result[i].bleu_NIST + '</td>' +
-                                '<td>' + result[i].ter + '</td>' +
-                                '<td>' + result[i].meteor + '</td>' +
-                                '<td>' + result[i].nist + '</td>' +
-                                '<td>' + result[i].gtm + '</td>' +
-                                '<td>' + result[i].mwer + '</td>' +
-                                '<td>' + result[i].mper + '</td>' +
-                                '<td>' + result[i].ict + '</td>' +
-                                '<td>' + result[i].submitter + '</td>' +
+                                '<td>' + result[i].BLEU_SBP + '</td>' +
+                                '<td>' + result[i].BLEU_NIST + '</td>' +
+                                '<td>' + result[i].TER + '</td>' +
+                                '<td>' + result[i].METEOR + '</td>' +
+                                '<td>' + result[i].NIST + '</td>' +
+                                '<td>' + result[i].GTM + '</td>' +
+                                '<td>' + result[i].mWER + '</td>' +
+                                '<td>' + result[i].mPER + '</td>' +
+                                '<td>' + result[i].ICT + '</td>' +
                                 '<td>' + result[i].time + '</td>' +
                                 '</tr>'
                         }
@@ -109,7 +111,7 @@
                         <li>
                             <a href="/">主页</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="#">积分榜</a>
                         </li>
                         <li>
@@ -142,15 +144,21 @@
                             <a href="/submit/frame">提交测试</a>
                         </li>
 
+                        <li id="history">
+                            <a href="#">历史提交</a>
+                        </li>
+
                         <li class="dropdown" id="userDrop">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
+                                    class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/user/login">登录</a>
+                                    <a href="/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>
+                                    <a href="javascript:logout()">登出</a>
                                 </li>
+
                             </ul>
                         </li>
                     </ul>
@@ -161,18 +169,18 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-4">
-            <h4>积分榜</h4>
+            <h4>历史提交</h4>
         </div>
         <div class="col-md-4">
-            <label for="track">选择任务:</label>
+            <%--<label for="track">选择任务:</label>
             <select class="selectpicker" id="track" onchange="getLeaderBoard()">
                 <option value="CE">CE</option>
                 <option value="EC">EC</option>
                 <option value="TC">TC</option>
-            </select>
+            </select>--%>
         </div>
         <div class="col-md-4">
-            <label for="metric">选择指标：</label>
+            <%--<label for="metric">选择指标：</label>
             <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
                 <option value="BLEU_SBP">BLEU_SBP</option>
                 <option value="BLEU_NIST">BLEU_NIST</option>
@@ -183,7 +191,13 @@
                 <option value="mWER">mWER</option>
                 <option value="mPER">mPER</option>
                 <option value="ICT">ICT</option>
-            </select>
+            </select>--%>
+            <label for="track">选择任务:</label>
+                <select class="selectpicker" id="track" onchange="getLeaderBoard()">
+                    <option value="CE">CE</option>
+                    <option value="EC">EC</option>
+                    <option value="TC">TC</option>
+                </select>
         </div>
     </div>
     <div class="row clearfix">
@@ -195,8 +209,6 @@
                     <th>System</th>
                     <th>TestSet</th>
                     <th>Run Notes</th>
-                    <%--<th>Source language</th>
-                    <th>Target language</th>--%>
                     <th>BLEU_SBP</th>
                     <th>BLEU_NIST</th>
                     <th>TER</th>
@@ -206,29 +218,11 @@
                     <th>mWER</th>
                     <th>mPER</th>
                     <th>ICT</th>
-                    <th>Submitter</th>
                     <th>Submit Time</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr id="firstTr"></tr>
-                <%--<c:forEach items="${resultList}" var="submission">
-                    <tr>
-                        <td>${submission.time}</td>
-                        <td>${submission.systemName}</td>
-                        <td>${submission.testset}</td>
-                        <td>${submission.notes}</td>
-                        <td>${submission.BLEU_SBP}</td>
-                        <td>${submission.BLEU_NIST}</td>
-                        <td>${submission.TER}</td>
-                        <td>${submission.METEOR}</td>
-                        <td>${submission.NIST}</td>
-                        <td>${submission.GTM}</td>
-                        <td>${submission.MPER}</td>
-                        <td>${submission.MPER}</td>
-                        <td>${submission.ICT}</td>
-                    </tr>
-                </c:forEach>--%>
                 </tbody>
             </table>
         </div>

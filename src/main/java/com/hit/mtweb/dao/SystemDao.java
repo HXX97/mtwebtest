@@ -29,7 +29,7 @@ public class SystemDao {
             jdbcTemplate.update(sql, system.getName(), system.getSoftware(), system.getSourcelang(),
                     system.getTargetlang(), system.getCitation(), system.getWebsite(),
                     system.getNotes(), system.getIsConstraint(), system.getIsPrimary(), system.getOwner());
-        }catch (DataAccessException e){
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }
@@ -54,7 +54,7 @@ public class SystemDao {
         String sql = "delete from systems where systemid = ?";
         try{
             jdbcTemplate.update(sql,systemid);
-        }catch (DataAccessException e){
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }
@@ -69,7 +69,7 @@ public class SystemDao {
             jdbcTemplate.update(sql, system.getName(), system.getSoftware(), system.getSourcelang(),
                     system.getTargetlang(), system.getCitation(), system.getWebsite(),
                     system.getNotes(), system.getIsConstraint(), system.getIsPrimary(),system.getSystemid());
-        }catch (DataAccessException e){
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }

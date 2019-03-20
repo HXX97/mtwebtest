@@ -42,6 +42,11 @@ public class GlobController {
         return "test";
     }
 
+    @RequestMapping("/about")
+    public String getAbout(){
+        return "about";
+    }
+
     //{filename:.+} spEL表达式，用于匹配文件名中的'.'
     @RequestMapping("/download/{datatype}/{filename:.+}")
     public ResponseEntity<byte[]> downloadFile(@PathVariable String datatype,
@@ -66,9 +71,10 @@ public class GlobController {
     @ResponseBody
     public List<Submission> getLeaderBoard(@PathVariable String track,@PathVariable String metric){
 
-        //System.out.println("Hello World!"+track);
-        //System.out.println("track:"+track+"\nmetric:"+metric);
-        List<Submission> list = submissionService.queryByTrack(track);
+        //List<Submission> list = submissionService.queryByTrack(track);
+        List<Submission> list = submissionService.queryByTrackSortMetric(track,metric);
+
+
 
         return list;
 

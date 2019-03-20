@@ -27,12 +27,14 @@ public class SubmissionService {
     @Autowired
     SystemDao systemDao;
 
-    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track) {
+    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track,String username) {
         Submission submission = new Submission();
         submission.setSystemid(sysId);
         submission.setSystemName(systemDao.queryById(sysId).getName());
         submission.setTestsetid(setId);
         submission.setTestset(testSetDao.querySetById(setId).getName());
+        submission.setSubmitter(username);
+
         submission.setSrclang(langDao.queryFullByAbbr(srcLang));
         submission.setTgtlang(langDao.queryFullByAbbr(tgtLang));
         submission.setNotes(notes);
@@ -83,4 +85,11 @@ public class SubmissionService {
         return submissionDao.queryByTrack(track);
     }
 
+    public List<Submission> queryByOwnerNTrack(String username, String track) {
+        return submissionDao.queryByOwnerNTrack(username,track);
+    }
+
+    public List<Submission> queryByTrackSortMetric(String track, String metric) {
+        return submissionDao.queryByTrackSortMetric(track,metric);
+    }
 }

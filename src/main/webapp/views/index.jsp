@@ -6,9 +6,11 @@
     <title>Home</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-select.min.css">
+    <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
     <script>
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
@@ -65,12 +67,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">CCMT 2019</a>
+                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
                                 </li>
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="#">关于本站</a>
+                                    <a href="/about">关于本站</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,7 +114,7 @@
                     本站提供第十五届全国机器翻译学术会议(CCMT 2019)的评测服务，各参赛队伍需使用主办方提供的账户登录，并提交评测相关信息。所有任务的评测结果将在本站的积分榜展示，请各参赛队伍注意。
                 </p>
                 <p>
-                    <a class="btn btn-primary btn-large" href="#">了解更多</a>
+                    <a class="btn btn-primary btn-large" href="http://ccmt2019.jxnu.edu.cn">了解更多</a>
                 </p>
             </div>
             <h3>最新消息</h3>
@@ -133,7 +135,7 @@
 
             </p>
             <p>
-                <a class="btn" href="#">了解更多 »</a>
+                <a class="btn" href="http://ccmt2019.jxnu.edu.cn">了解更多 »</a>
             </p>
         </div>
         <div class="col-md-4 column">
@@ -145,7 +147,7 @@
                 关于数据使用的要求，请参见后续系统要求部分。
             </p>
             <p>
-                <a class="btn" href="#">了解更多 »</a>
+                <a class="btn" href="http://ccmt2019.jxnu.edu.cn">了解更多 »</a>
             </p>
         </div>
         <div class="col-md-4 column">
@@ -156,7 +158,7 @@
                 第十五届全国机器翻译学术会议（CCMT 2019）将于2019年9月27日至29日在中国江西举行。根据惯例，本次会议将继续组织统一的机器翻译评测。
             </p>
             <p>
-                <a class="btn" href="#">了解更多 »</a>
+                <a class="btn" href="http://ccmt2019.jxnu.edu.cn">了解更多 »</a>
             </p>
         </div>
     </div>
