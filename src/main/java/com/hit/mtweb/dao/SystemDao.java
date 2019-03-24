@@ -19,6 +19,7 @@ public class SystemDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
     public boolean saveNewSystem(MTSystem system) {
         String sql = "insert into systems(name,software,sourcelang," +
                 "targetlang,citation,website," +
@@ -29,7 +30,7 @@ public class SystemDao {
             jdbcTemplate.update(sql, system.getName(), system.getSoftware(), system.getSourcelang(),
                     system.getTargetlang(), system.getCitation(), system.getWebsite(),
                     system.getNotes(), system.getIsConstraint(), system.getIsPrimary(), system.getOwner());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -39,7 +40,7 @@ public class SystemDao {
     public List<MTSystem> queryByOwner(String username) {
         String sql = "select * from systems where owner = ?";
         List<MTSystem> systemList = new ArrayList<>();
-        for(Map map:jdbcTemplate.queryForList(sql, username)) {
+        for (Map map : jdbcTemplate.queryForList(sql, username)) {
             systemList.add(MTSystem.mapToMTSystem(map));
         }
         return systemList;
@@ -47,14 +48,19 @@ public class SystemDao {
 
     public MTSystem queryById(String systemid) {
         String sql = "select * from systems where systemid = ?";
-        return jdbcTemplate.queryForObject(sql, new MTSystemRowMapper(),systemid);
+        try {
+            return jdbcTemplate.queryForObject(sql, new MTSystemRowMapper(), systemid);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean deleteById(String systemid) {
         String sql = "delete from systems where systemid = ?";
-        try{
-            jdbcTemplate.update(sql,systemid);
-        }catch (Exception e){
+        try {
+            jdbcTemplate.update(sql, systemid);
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -68,8 +74,8 @@ public class SystemDao {
         try {
             jdbcTemplate.update(sql, system.getName(), system.getSoftware(), system.getSourcelang(),
                     system.getTargetlang(), system.getCitation(), system.getWebsite(),
-                    system.getNotes(), system.getIsConstraint(), system.getIsPrimary(),system.getSystemid());
-        }catch (Exception e){
+                    system.getNotes(), system.getIsConstraint(), system.getIsPrimary(), system.getSystemid());
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

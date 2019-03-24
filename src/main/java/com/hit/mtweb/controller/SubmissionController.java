@@ -162,7 +162,8 @@ public class SubmissionController {
                 notes,
                 newFileName,
                 request.getParameter("track"),
-                username);
+                username,
+                request.getServletContext().getRealPath("/"));
 
         newModel.addAttribute("submission",submission);
         newModel.addAttribute("msgLevel","0");

@@ -66,11 +66,15 @@
                         </li>
 
                         <li id="addSys">
-                            <a href="#">添加系统</a>
+                            <a href="/system/new">添加系统</a>
                         </li>
 
                         <li id="submit">
-                            <a href="#" >提交测试</a>
+                            <a href="/submit/frame" >提交测试</a>
+                        </li>
+
+                        <li id="history">
+                            <a href="/submit/history">历史提交</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">

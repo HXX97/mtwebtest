@@ -55,6 +55,8 @@ public class UserController {
             session.setAttribute("username", httpServletRequest.getParameter("username"));
             model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Login succeeded");
+            //设置session过期时间，单位为s，-1则表示永不过期
+            //session.setMaxInactiveInterval(600);
             return "redirect:/user/status";
         } else {
             model.addFlashAttribute("msgLevel","1");
@@ -65,9 +67,15 @@ public class UserController {
 
     //展示个人主页，GET方法
     @RequestMapping(value = "/status", method = RequestMethod.GET)
-    public String showUserHome(Model model,HttpServletRequest request) {
+    public String showUserHome(Model model,HttpServletRequest request,RedirectAttributes redirectAttributes) {
 
         String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            redirectAttributes.addFlashAttribute("errorMsg", "Session expired, please login again");
+            return "redirect:/user/login";
+        }
+
+
         User user = userService.getUserByName(username);
         model.addAttribute("user",user);
 
@@ -94,6 +102,10 @@ public class UserController {
             session.setAttribute("username", user.getUsername());
             model.addFlashAttribute("msgLevel","0");
             model.addFlashAttribute("msg", "Register succeeded");
+
+            //设置session过期时间，单位为s，-1则表示永不过期
+            //session.setMaxInactiveInterval(600);
+
             return "redirect:/user/status";
         } else {
             model.addFlashAttribute("msgLevel","1");
@@ -104,10 +116,17 @@ public class UserController {
 
     //用户编辑个人信息页面，GET方法
     @RequestMapping(value = "/edit/{username}", method = RequestMethod.GET)
-    public String showEditForm(@PathVariable String username, Model model) {
-        User user = userService.getUserByName(username);
-        model.addAttribute("user", user);
-        return "user_edit";
+    public String showEditForm(@PathVariable String username, Model model,HttpServletRequest request,RedirectAttributes redirectAttributes) {
+        String sessionUser = (String) request.getSession().getAttribute("username");
+        if (sessionUser == null) {//用户登录已失效
+            redirectAttributes.addFlashAttribute("errorMsg", "Session expired, please login again");
+            return "redirect:/user/login";
+        }else {
+            User user = userService.getUserByName(username);
+            model.addAttribute("user", user);
+            return "user_edit";
+        }
+
     }
 
     //用户编辑个人信息页面，会话超时
@@ -144,6 +163,7 @@ public class UserController {
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("username");
+        session.invalidate();
         return "index";
     }
 

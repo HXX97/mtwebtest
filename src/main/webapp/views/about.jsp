@@ -9,6 +9,40 @@
     <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
+
+
+    <script>
+        function logout() {
+            if (window.confirm('Are you sure to log out?') == true) {
+                window.location.href = '/user/logout'
+            }
+        }
+
+        function init(){
+            var username="${username}";
+            if(username!="null"&&username!=""){
+                var userDrop = document.getElementById("userDrop");
+                userDrop.classList.remove("dropdown");
+                document.getElementById("userHome").classList.remove("hidden");
+                document.getElementById("addSys").classList.remove("hidden");
+                document.getElementById("submit").classList.remove("hidden");
+                document.getElementById("history").classList.remove("hidden");
+
+                userDrop.innerHTML='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+username+'<strong class="caret"></strong></a>\n' +
+                    '                            <ul class="dropdown-menu">\n' +
+                    '                                <li>\n' +
+                    '                                    <a href="/user/edit/'+username+'">个人资料</a>\n' +
+                    '                                </li>\n' +
+                    '                                <li>\n' +
+                    '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
+                    '                                </li>\n' +
+                    '                            </ul>';
+            }
+        }
+
+        $(document).ready(function(){init()});
+    </script>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -56,6 +90,10 @@
 
                         <li class="hidden" id="submit">
                             <a href="/submit/frame" >提交测试</a>
+                        </li>
+
+                        <li class="hidden" id="history">
+                            <a href="/submit/history">历史提交</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">

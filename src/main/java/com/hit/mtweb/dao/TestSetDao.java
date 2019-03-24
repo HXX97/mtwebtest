@@ -26,6 +26,11 @@ public class TestSetDao {
 
     public TestSet querySetById(String setId) {
         String sql = "select * from testsets where testsetid = ?";
-        return jdbcTemplate.queryForObject(sql, new TestSetRowMapper(), setId);
+        try {
+            return jdbcTemplate.queryForObject(sql, new TestSetRowMapper(), setId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

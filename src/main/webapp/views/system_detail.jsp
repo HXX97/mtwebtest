@@ -72,6 +72,10 @@
                             <a href="/submit/frame">提交测试</a>
                         </li>
 
+                        <li id="history">
+                            <a href="/submit/history">历史提交</a>
+                        </li>
+
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
                                     class="caret"></strong></a>

@@ -57,7 +57,11 @@ public class UserDao {
 
     public User getUserByName(String username) {
         String sql = "select * from users where username = ?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+        try {
+            return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

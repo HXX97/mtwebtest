@@ -8,6 +8,10 @@ import com.hit.mtweb.domain.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +31,7 @@ public class SubmissionService {
     @Autowired
     SystemDao systemDao;
 
-    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track,String username) {
+    public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track,String username,String path) {
         Submission submission = new Submission();
         submission.setSystemid(sysId);
         submission.setSystemName(systemDao.queryById(sysId).getName());
@@ -46,7 +50,7 @@ public class SubmissionService {
         submission.setTER(computeTER(setId,srcLang,tgtLang,filename));
         submission.setBEER(computeBEER(setId,srcLang,tgtLang,filename));
 
-        submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename));
+        submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename,path));
 
         this.saveSubmission(submission);
 
@@ -54,7 +58,32 @@ public class SubmissionService {
 
     }
 
-    private String computeBLEU_SBP(String setId, String srcLang, String tgtLang, String filename) {
+    private String computeBLEU_SBP(String setId, String srcLang, String tgtLang, String filename,String path) {
+
+        System.out.println("setId:"+setId);
+        System.out.println("srcLang:"+srcLang);
+        System.out.println("tgtLang:"+tgtLang);
+        System.out.println("filename:"+filename);
+        System.out.println("path:"+path);
+        System.out.println("RealPath:"+System.getProperty("rootPath"));
+
+        try {
+            String command = "python "+path+"eval\\test.py"+" "+path+"uploads\\"+filename;
+            System.out.println(command);
+            Process process = Runtime.getRuntime().exec(command);
+            InputStream in = process.getInputStream();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while((line = bf.readLine())!=null) {
+                System.out.println(line);
+            }
+            in.close();
+            bf.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         return "100";
     }
 

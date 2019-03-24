@@ -25,6 +25,29 @@
     <!--<mvc:resources mapping="/jsp/**" location="/views/"/>-->
     <mvc:default-servlet-handler />  <!--这句要加上，要不然可能会访问不到静态资源，具体作用自行百度-->
 
+    <!-- 拦截器，用于防止用户会话失效 -->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>    &lt;!&ndash; 不拦截登录请求 &ndash;&gt;
+            <mvc:exclude-mapping path="/user/logout"/>    &lt;!&ndash; 不拦截注销请求 &ndash;&gt;
+            <mvc:exclude-mapping path="/"/>                &lt;!&ndash;不拦截主页&ndash;&gt;
+            <mvc:exclude-mapping path="/board"/>
+            <mvc:exclude-mapping path="/test"/>
+            <mvc:exclude-mapping path="/about"/>
+            <mvc:exclude-mapping path="/leaderboard/*"/>
+            <mvc:exclude-mapping path="/download/*" />
+            <mvc:exclude-mapping path="/test_sets/list"/>
+            <mvc:exclude-mapping path="/system/detail/*"/>
+            <mvc:exclude-mapping path="*.jsp"/>
+            <mvc:exclude-mapping path="*.html"/>
+            <mvc:exclude-mapping path="*.js"/>
+            <mvc:exclude-mapping path="*.css"/>
+            <bean class="com.hit.mtweb.interceptor.SessionInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+    
+    
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

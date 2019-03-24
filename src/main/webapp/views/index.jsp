@@ -26,6 +26,7 @@
                 document.getElementById("userHome").classList.remove("hidden");
                 document.getElementById("addSys").classList.remove("hidden");
                 document.getElementById("submit").classList.remove("hidden");
+                document.getElementById("history").classList.remove("hidden");
 
                 userDrop.innerHTML='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+username+'<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
@@ -89,6 +90,10 @@
 
                         <li class="hidden" id="submit">
                             <a href="/submit/frame" >提交测试</a>
+                        </li>
+
+                        <li class="hidden" id="history">
+                            <a href="/submit/history">历史提交</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
