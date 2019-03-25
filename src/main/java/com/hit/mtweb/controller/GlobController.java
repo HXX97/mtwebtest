@@ -54,6 +54,9 @@ public class GlobController {
                                                      HttpServletRequest request) throws IOException {
         //获取下载文件夹位置
         String path=request.getServletContext().getRealPath(File.separator+datatype+File.separator);
+        if(datatype.equals("testSets")){
+            path+=File.separator+"srcs"+File.separator;
+        }
         File file = new File(path+File.separator+filename);
         HttpHeaders httpHeaders = new HttpHeaders();
         //下载显示的文件名，防止中文乱码
@@ -63,7 +66,6 @@ public class GlobController {
         //application/octet-stream:二进制流数据下载(最常见的文件下载)
         httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.CREATED);
-
 
     }
 

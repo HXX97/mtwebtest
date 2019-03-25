@@ -178,9 +178,12 @@
                         <label for="sourceLang" class="col-sm-2 control-label">源语言</label>
                         <div class="col-sm-10">
                             <select class="selectpicker" id="sourceLang" name="sourcelang">
-                                <option value="CS">CS</option>
-                                <option value="EN">EN</option>
-                                <option value="MG">MG</option>
+                                <option value="zh">Chinese</option>
+                                <option value="en">English</option>
+                                <option value="mn">Mongolian</option>
+                                <option value="jp">Japanese</option>
+                                <option value="ti">Tibetan</option>
+                                <option value="uy">Uyghur</option>
                             </select>
                         </div>
                     </div>
@@ -188,9 +191,12 @@
                         <label for="targetLang" class="col-sm-2 control-label">目标语言</label>
                         <div class="col-sm-10">
                             <select class="selectpicker" id="targetLang" name="targetlang">
-                                <option value="CS">CS</option>
-                                <option value="EN">EN</option>
-                                <option value="MG">MG</option>
+                                <option value="zh">Chinese</option>
+                                <option value="en">English</option>
+                                <option value="mn">Mongolian</option>
+                                <option value="jp">Japanese</option>
+                                <option value="ti">Tibetan</option>
+                                <option value="uy">Uyghur</option>
                             </select>
                         </div>
                     </div>

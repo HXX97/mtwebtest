@@ -15,6 +15,11 @@ public class TestSet {
     private String notes;
     private String setups;
     private String srcurl;
+    private String direction;
+    private String refurl;
+    private String realsrcurl;
+    private String srclang;
+    private String tgtlang;
 
     public static TestSet mapToTestSet(Map map) {
         TestSet testSet = new TestSet();
@@ -27,9 +32,15 @@ public class TestSet {
         testSet.setNotes((String)map.get("notes"));
         testSet.setSetups((String)map.get("setups"));
         testSet.setSrcurl((String)map.get("srcurl"));
+        testSet.setDirection((String) map.get("direction"));
+        testSet.setRefurl((String)map.get("refurl"));
+        testSet.setRealsrcurl((String)map.get("realsrcurl"));
+        testSet.setSrclang((String) map.get("srclang"));
+        testSet.setTgtlang((String) map.get("tgtlang"));
         return testSet;
 
     }
+
 
     public String getTestsetid() {
         return testsetid;
@@ -103,6 +114,46 @@ public class TestSet {
         this.srcurl = srcurl;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public String getRefurl() {
+        return refurl;
+    }
+
+    public void setRefurl(String refurl) {
+        this.refurl = refurl;
+    }
+
+    public String getRealsrcurl() {
+        return realsrcurl;
+    }
+
+    public void setRealsrcurl(String realsrcurl) {
+        this.realsrcurl = realsrcurl;
+    }
+
+    public String getSrclang() {
+        return srclang;
+    }
+
+    public void setSrclang(String srclang) {
+        this.srclang = srclang;
+    }
+
+    public String getTgtlang() {
+        return tgtlang;
+    }
+
+    public void setTgtlang(String tgtlang) {
+        this.tgtlang = tgtlang;
+    }
+
     @Override
     public String toString() {
         return "TestSet{" +
@@ -115,6 +166,11 @@ public class TestSet {
                 ", notes='" + notes + '\'' +
                 ", setups='" + setups + '\'' +
                 ", srcurl='" + srcurl + '\'' +
+                ", direction='" + direction + '\'' +
+                ", refurl='" + refurl + '\'' +
+                ", realsrcurl='" + realsrcurl + '\'' +
+                ", srclang='" + srclang + '\'' +
+                ", tgtlang='" + tgtlang + '\'' +
                 '}';
     }
 }

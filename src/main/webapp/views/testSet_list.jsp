@@ -114,7 +114,7 @@
 
             </nav>
             <div class="col-md-4">
-                <h4>数据下载</h4>
+                <h4>测试集下载</h4>
             </div>
             <div class="col-md-4">
             </div>
@@ -131,11 +131,12 @@
                     <th>Related Corpora</th>
                     <th>Citation</th>
                     <th>Notes</th>
-                    <th>TestSetups</th>
+                    <th>Direction</th>
+                    <%--<th>TestSetups</th>--%>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${requestScope.testSetList}" var="testSet">
+                <c:forEach items="${testSetList}" var="testSet">
                     <tr>
                         <td><a href="">${testSet.name}</a><br/>
                             <a href="/download/testSets/${testSet.srcurl}">download</a></td>
@@ -144,7 +145,8 @@
                         <td>${testSet.related_corpora}</td>
                         <td>${testSet.citation}</td>
                         <td>${testSet.notes}</td>
-                        <td>${testSet.setups}</td>
+                        <td>${testSet.direction}</td>
+                        <%--<td>${testSet.setups}</td>--%>
                     </tr>
                 </c:forEach>
                 </tbody>

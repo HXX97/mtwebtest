@@ -173,7 +173,11 @@
             <select class="selectpicker" id="track" onchange="getLeaderBoard()">
                 <option value="CE">CE</option>
                 <option value="EC">EC</option>
+                <option value="MC">MC</option>
                 <option value="TC">TC</option>
+                <option value="UC">UC</option>
+                <option value="JE">JE</option>
+
             </select>
         </div>
         <div class="col-md-4">

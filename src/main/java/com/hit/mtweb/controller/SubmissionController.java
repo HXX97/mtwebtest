@@ -106,6 +106,7 @@ public class SubmissionController {
                                     HttpServletRequest request, RedirectAttributes model,Model newModel) {
 
 
+        //若会话超时，重定向到登录页面
         String username = (String) request.getSession().getAttribute("username");
         if (username == null) {
             model.addFlashAttribute("errorMsg", "Session expired, please login again");
@@ -119,6 +120,7 @@ public class SubmissionController {
         model.addFlashAttribute("tgtLang", request.getParameter("tgtLang"));
         model.addFlashAttribute("track",request.getParameter("track"));
 
+        //上传文件为空，让用户重新上传
         if (uploadFile.isEmpty()) {
             model.addFlashAttribute("msgLevel","1");
             model.addFlashAttribute("msg", "File is empty, please choose a file");
@@ -126,10 +128,14 @@ public class SubmissionController {
         }
 
 
+        //开始上传处理
+        //上传文件夹
         String path = request.getServletContext().getRealPath("/uploads/");
         String filename = uploadFile.getOriginalFilename();
         String suffix = filename.substring(filename.indexOf('.'));
-        String newFileName = username + System.currentTimeMillis() + suffix;
+        //新文件名
+        //String newFileName = username + System.currentTimeMillis()+filename.substring(0,filename.indexOf('.')) + suffix;
+        String newFileName = username+System.currentTimeMillis()+filename;
 
         File filePath = new File(path, filename);
         //判断路径是否存在，不存在则创建
@@ -148,13 +154,6 @@ public class SubmissionController {
         }
 
 
-        model.addFlashAttribute("filename", newFileName);
-        model.addFlashAttribute("notes", notes);
-        model.addFlashAttribute("msgLevel","0");
-        model.addFlashAttribute("msg", "Upload succeeded");
-
-
-
         Submission submission = submissionService.handleSubmit(request.getParameter("setId"),
                 request.getParameter("sysId"),
                 request.getParameter("srcLang"),
@@ -165,10 +164,14 @@ public class SubmissionController {
                 username,
                 request.getServletContext().getRealPath("/"));
 
-        newModel.addAttribute("submission",submission);
-        newModel.addAttribute("msgLevel","0");
-        newModel.addAttribute("msg","Upload Succeeded");
-        return "submit_result";
+        //newModel.addAttribute("submission",submission);
+        /*newModel.addAttribute("msgLevel","0");
+        newModel.addAttribute("msg","上传成功！正在计算得分，稍后会可在历史提交记录中查看。");*/
+        model.addFlashAttribute("filename", newFileName);
+        model.addFlashAttribute("notes", notes);
+        model.addFlashAttribute("msgLevel","0");
+        model.addFlashAttribute("msg", "上传成功！正在计算得分，稍后可在历史提交记录中查看。");
+        return "redirect:/user/status";
        /* model.addFlashAttribute("submission",submission);
 
         return "redirect:/submit/result";*/

@@ -1,15 +1,11 @@
 package com.hit.mtweb.dao;
 
 import com.hit.mtweb.domain.MTSystem;
-import com.hit.mtweb.utils.MTSystemRowMapper;
+import com.hit.mtweb.utils.RowMappers.MTSystemRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -175,14 +175,20 @@
                                 <td>${testSet.citation}</td>
                                 <td>${testSet.notes}</td>
                                 <td><select class="selectpicker" name="setSrcLang">
-                                    <option value="CS">CS</option>
-                                    <option value="EN">EN</option>
-                                    <option value="MG">MG</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="en">English</option>
+                                    <option value="mn">Mongolian</option>
+                                    <option value="jp">Japanese</option>
+                                    <option value="ti">Tibetan</option>
+                                    <option value="uy">Uyghur</option>
                                 </select></td>
                                 <td><select class="selectpicker" name="setTgtLang">
-                                    <option value="CS">CS</option>
-                                    <option value="EN">EN</option>
-                                    <option value="MG">MG</option>
+                                    <option value="zh">Chinese</option>
+                                    <option value="en">English</option>
+                                    <option value="mn">Mongolian</option>
+                                    <option value="jp">Japanese</option>
+                                    <option value="ti">Tibetan</option>
+                                    <option value="uy">Uyghur</option>
                                 </select></td>
                                 <td><select class="selectpicker" name="setTrack">
                                     <option value="CE">CE</option>

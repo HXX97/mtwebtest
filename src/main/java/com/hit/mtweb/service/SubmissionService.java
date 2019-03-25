@@ -1,17 +1,15 @@
 package com.hit.mtweb.service;
 
-import com.hit.mtweb.dao.LangDao;
-import com.hit.mtweb.dao.SubmissionDao;
-import com.hit.mtweb.dao.SystemDao;
-import com.hit.mtweb.dao.TestSetDao;
+import com.hit.mtweb.dao.*;
+import com.hit.mtweb.domain.MTSystem;
 import com.hit.mtweb.domain.Submission;
+import com.hit.mtweb.domain.TestSet;
+import com.hit.mtweb.utils.Threads.HandleSubmitThread;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,28 +29,44 @@ public class SubmissionService {
     @Autowired
     SystemDao systemDao;
 
+    @Autowired
+    TrackDao trackDao;
+
     public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track,String username,String path) {
         Submission submission = new Submission();
+        MTSystem system = systemDao.queryById(sysId);
+        TestSet testSet = testSetDao.querySetById(setId);
+
         submission.setSystemid(sysId);
-        submission.setSystemName(systemDao.queryById(sysId).getName());
+        submission.setSystemName(system.getName());
         submission.setTestsetid(setId);
-        submission.setTestset(testSetDao.querySetById(setId).getName());
+        submission.setTestset(testSet.getName());
         submission.setSubmitter(username);
 
         submission.setSrclang(langDao.queryFullByAbbr(srcLang));
         submission.setTgtlang(langDao.queryFullByAbbr(tgtLang));
         submission.setNotes(notes);
+        //用户上传的结果
         submission.setFile(filename);
         submission.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
         submission.setTrack(track);
 
-        submission.setBLEU(computeBLEU(setId,srcLang,tgtLang,filename));
-        submission.setTER(computeTER(setId,srcLang,tgtLang,filename));
-        submission.setBEER(computeBEER(setId,srcLang,tgtLang,filename));
 
-        submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename,path));
+        //翻译方向
+        String direction = trackDao.getDirection(track);
 
-        this.saveSubmission(submission);
+
+        new HandleSubmitThread(submission,testSet,system,path,direction,submissionDao).start();
+
+        //submission.setBLEU(computeBLEU(setId,srcLang,tgtLang,filename));
+        //submission.setTER(computeTER(setId,srcLang,tgtLang,filename));
+        //submission.setBEER(computeBEER(setId,srcLang,tgtLang,filename));
+
+        //submission.setBLEU_SBP("110");
+
+        //submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename,path));
+
+        //this.saveSubmission(submission);
 
         return submission;
 
@@ -67,7 +81,7 @@ public class SubmissionService {
         System.out.println("path:"+path);
         System.out.println("RealPath:"+System.getProperty("rootPath"));
 
-        try {
+        /*try {
             String command = "python "+path+"eval\\test.py"+" "+path+"uploads\\"+filename;
             System.out.println(command);
             Process process = Runtime.getRuntime().exec(command);
@@ -81,7 +95,7 @@ public class SubmissionService {
             bf.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
         return "100";

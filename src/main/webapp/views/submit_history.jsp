@@ -63,15 +63,15 @@
                                 '<td><a href="/system/detail/'+result[i].systemid+'">'+ result[i].systemName + '</td>' +
                                 '<td>' + result[i].testset + '</td>' +
                                 '<td>' + result[i].notes + '</td>' +
-                                '<td>' + result[i].BLEU_SBP + '</td>' +
-                                '<td>' + result[i].BLEU_NIST + '</td>' +
-                                '<td>' + result[i].TER + '</td>' +
-                                '<td>' + result[i].METEOR + '</td>' +
-                                '<td>' + result[i].NIST + '</td>' +
-                                '<td>' + result[i].GTM + '</td>' +
-                                '<td>' + result[i].mWER + '</td>' +
-                                '<td>' + result[i].mPER + '</td>' +
-                                '<td>' + result[i].ICT + '</td>' +
+                                '<td>' + result[i].bleu_SBP + '</td>' +
+                                '<td>' + result[i].bleu_NIST + '</td>' +
+                                '<td>' + result[i].ter + '</td>' +
+                                '<td>' + result[i].meteor + '</td>' +
+                                '<td>' + result[i].nist + '</td>' +
+                                '<td>' + result[i].gtm + '</td>' +
+                                '<td>' + result[i].mwer + '</td>' +
+                                '<td>' + result[i].mper + '</td>' +
+                                '<td>' + result[i].ict + '</td>' +
                                 '<td>' + result[i].time + '</td>' +
                                 '</tr>'
                         }
@@ -196,7 +196,10 @@
                 <select class="selectpicker" id="track" onchange="getLeaderBoard()">
                     <option value="CE">CE</option>
                     <option value="EC">EC</option>
+                    <option value="MC">MC</option>
                     <option value="TC">TC</option>
+                    <option value="UC">UC</option>
+                    <option value="JE">JE</option>
                 </select>
         </div>
     </div>

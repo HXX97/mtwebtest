@@ -1,7 +1,7 @@
 package com.hit.mtweb.dao;
 
 import com.hit.mtweb.domain.TestSet;
-import com.hit.mtweb.utils.TestSetRowMapper;
+import com.hit.mtweb.utils.RowMappers.TestSetRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
