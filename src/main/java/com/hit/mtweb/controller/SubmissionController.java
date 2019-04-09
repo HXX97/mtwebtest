@@ -135,7 +135,7 @@ public class SubmissionController {
         String suffix = filename.substring(filename.indexOf('.'));
         //新文件名
         //String newFileName = username + System.currentTimeMillis()+filename.substring(0,filename.indexOf('.')) + suffix;
-        String newFileName = username+System.currentTimeMillis()+filename;
+        String newFileName = username+System.currentTimeMillis()+"primary"+filename;//加上primary
 
         File filePath = new File(path, filename);
         //判断路径是否存在，不存在则创建
@@ -163,6 +163,8 @@ public class SubmissionController {
                 request.getParameter("track"),
                 username,
                 request.getServletContext().getRealPath("/"));
+
+        submissionService.saveSubmission(submission);
 
         //newModel.addAttribute("submission",submission);
         /*newModel.addAttribute("msgLevel","0");

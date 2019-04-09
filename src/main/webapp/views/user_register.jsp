@@ -55,7 +55,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -66,9 +66,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -130,6 +128,12 @@
                         <label for="email" class="col-sm-2 control-label">电子邮箱</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" name="email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="phone" name="phone" />
                         </div>
                     </div>
                     <div class="form-group">

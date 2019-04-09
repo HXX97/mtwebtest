@@ -20,6 +20,7 @@ public class TestSet {
     private String realsrcurl;
     private String srclang;
     private String tgtlang;
+    private String track;
 
     public static TestSet mapToTestSet(Map map) {
         TestSet testSet = new TestSet();
@@ -37,10 +38,19 @@ public class TestSet {
         testSet.setRealsrcurl((String)map.get("realsrcurl"));
         testSet.setSrclang((String) map.get("srclang"));
         testSet.setTgtlang((String) map.get("tgtlang"));
+        testSet.setTrack((String)map.get("track"));
         return testSet;
 
     }
 
+
+    public String getTrack() {
+        return track;
+    }
+
+    public void setTrack(String track) {
+        this.track = track;
+    }
 
     public String getTestsetid() {
         return testsetid;
@@ -171,6 +181,7 @@ public class TestSet {
                 ", realsrcurl='" + realsrcurl + '\'' +
                 ", srclang='" + srclang + '\'' +
                 ", tgtlang='" + tgtlang + '\'' +
+                ", track='" + track + '\'' +
                 '}';
     }
 }

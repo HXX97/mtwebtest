@@ -50,6 +50,8 @@ public class SubmissionService {
         submission.setFile(filename);
         submission.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
         submission.setTrack(track);
+        submission.setIsConstraint(system.getIsConstraint());
+        submission.setState("computing...");
 
 
         //翻译方向
@@ -67,6 +69,8 @@ public class SubmissionService {
         //submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename,path));
 
         //this.saveSubmission(submission);
+
+
 
         return submission;
 
@@ -101,7 +105,7 @@ public class SubmissionService {
         return "100";
     }
 
-    private void saveSubmission(Submission submission) {
+    public void saveSubmission(Submission submission) {
         submissionDao.saveSubmission(submission);
     }
 
@@ -134,5 +138,9 @@ public class SubmissionService {
 
     public List<Submission> queryByTrackSortMetric(String track, String metric) {
         return submissionDao.queryByTrackSortMetric(track,metric);
+    }
+
+    public void updateBySubmission(Submission submission) {
+        submissionDao.updateSubmissionBySub(submission);
     }
 }

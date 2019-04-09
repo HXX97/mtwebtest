@@ -24,9 +24,8 @@
             }
         }
 
-        function confirmDestroy(){
-            var r = window.confirm('确定要删除吗？这将删除该系统的所有信息，包括提交记录');
-            return r;
+        function confirmDestroy() {
+            return window.confirm('确定要删除吗？这将删除该系统的所有信息，包括提交记录');
         }
 
 
@@ -35,9 +34,9 @@
             if (message != "" && message != "null") {
                 document.getElementById("msg").classList.remove("hidden");
                 var msgLevel = "${msgLevel}";
-                if(msgLevel==1){
+                if (msgLevel == 1) {
                     document.getElementById("msg").classList.add("alert-danger");
-                }else{
+                } else {
                     document.getElementById("msg").classList.add("alert-success");
                 }
             }
@@ -60,7 +59,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -71,9 +70,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -91,7 +88,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li id="userHome" class="active">
-                            <a href="#" >个人主页</a>
+                            <a href="#">个人主页</a>
                         </li>
 
                         <li id="addSys">
@@ -105,12 +102,21 @@
                         <li id="history">
                             <a href="/submit/history">历史提交</a>
                         </li>
+
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+
+
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
                                     class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="/user/edit/${username}">个人资料</a>
+                                </li>
+                                <li>
+                                    <a href="/user/changePWD">修改密码</a>
                                 </li>
                                 <li>
                                     <a href="javascript:logout()">登出</a>
@@ -122,7 +128,6 @@
                 </div>
             </nav>
         </div>
-
 
 
     </div>
@@ -157,8 +162,8 @@
                         <th>Systemid</th>
                         <th>Name</th>
                         <th>Software</th>
-                        <th>Source language</th>
-                        <th>Target language</th>
+                        <%--<th>Source language</th>
+                        <th>Target language</th>--%>
                         <th>Citation</th>
                         <th>Website</th>
                         <th>Notes</th>
@@ -174,8 +179,8 @@
                             <td>${system.systemid}</td>
                             <td><a href="/system/detail/${system.systemid}">${system.name}</a></td>
                             <td>${system.software}</td>
-                            <td>${system.sourcelang}</td>
-                            <td>${system.targetlang}</td>
+                                <%--<td>${system.sourcelang}</td>
+                                <td>${system.targetlang}</td>--%>
                             <td>${system.citation}</td>
                             <td>${system.website}</td>
                             <td>${system.notes}</td>
@@ -184,7 +189,8 @@
                             <td>${system.owner}</td>
                             <td><a href="/system/detail/${system.systemid}">Detail</a></td>
                             <td><a href="/system/edit/${system.systemid}">Edit</a></td>
-                            <td><a href="/system/destroy/${system.systemid}" onclick="return confirmDestroy()">Destroy</a></td>
+                            <td><a href="/system/destroy/${system.systemid}"
+                                   onclick="return confirmDestroy()">Destroy</a></td>
                         </tr>
                     </c:forEach>
 
@@ -192,8 +198,8 @@
                 </table>
 
                 <div align="right" style="margin-bottom: 20px">
-                <button class="btn btn-default" onclick="window.location.href='/system/new'">创建新系统</button>
-                <button class="btn btn-default" onclick="window.location.href='/submit/frame'">提交测试</button>
+                    <button class="btn btn-default" onclick="window.location.href='/system/new'">创建新系统</button>
+                    <button class="btn btn-primary" onclick="window.location.href='/submit/frame'">提交测试</button>
                 </div>
 
             </fieldset>

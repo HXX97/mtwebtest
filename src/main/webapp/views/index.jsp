@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -18,20 +18,21 @@
             }
         }
 
-        function init(){
-            var username="${username}";
-            if(username!="null"&&username!=""){
+        function init() {
+            var username = "${username}";
+            if (username != "null" && username != "") {
                 var userDrop = document.getElementById("userDrop");
                 userDrop.classList.remove("dropdown");
                 document.getElementById("userHome").classList.remove("hidden");
                 document.getElementById("addSys").classList.remove("hidden");
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
+                document.getElementById("downTest").classList.remove("hidden");
 
-                userDrop.innerHTML='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+username+'<strong class="caret"></strong></a>\n' +
+                userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
                     '                                <li>\n' +
-                    '                                    <a href="/user/edit/'+username+'">个人资料</a>\n' +
+                    '                                    <a href="/user/edit/' + username + '">个人资料</a>\n' +
                     '                                </li>\n' +
                     '                                <li>\n' +
                     '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
@@ -40,7 +41,9 @@
             }
         }
 
-        $(document).ready(function(){init()});
+        $(document).ready(function () {
+            init()
+        });
     </script>
 </head>
 
@@ -50,7 +53,11 @@
         <div class="col-md-12 column">
             <nav class="navbar navbar-default navbar-inverse" role="navigation">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,9 +68,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -89,12 +94,17 @@
                         </li>
 
                         <li class="hidden" id="submit">
-                            <a href="/submit/frame" >提交测试</a>
+                            <a href="/submit/frame">提交测试</a>
                         </li>
 
                         <li class="hidden" id="history">
                             <a href="/submit/history">历史提交</a>
                         </li>
+
+                        <li class="hidden" id="downTest">
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+
 
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
@@ -113,7 +123,7 @@
             </nav>
             <div class="jumbotron">
                 <h2>
-                    欢迎来到哈尔滨工业大学机器翻译评测网站！
+                    欢迎来到CCMT2019机器翻译评测网站！
                 </h2>
                 <p>
                     本站提供第十五届全国机器翻译学术会议(CCMT 2019)的评测服务，各参赛队伍需使用主办方提供的账户登录，并提交评测相关信息。所有任务的评测结果将在本站的积分榜展示，请各参赛队伍注意。

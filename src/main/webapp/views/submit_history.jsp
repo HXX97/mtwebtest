@@ -46,21 +46,21 @@
             //var metric = document.getElementById("metric").value;
 
             var username = "${username}";
-            if(username==""){
+            if (username == "") {
                 window.alert("登录已超时，请重新登录！");
-                window.location.href="/user/login";
+                window.location.href = "/user/login";
                 return
             }
             var data;
             $.ajax(
                 {
                     type: 'get',
-                    url: '${pageContext.request.contextPath}/submit/history/'  + username + '/'+ track ,
+                    url: '${pageContext.request.contextPath}/submit/history/' + username + '/' + track,
                     success: function (result) {
                         for (var i = 0; i < result.length; i++) {
                             data += '<tr>' +
                                 '<td>' + (i + 1) + '</td>' +
-                                '<td><a href="/system/detail/'+result[i].systemid+'">'+ result[i].systemName + '</td>' +
+                                '<td><a href="/system/detail/' + result[i].systemid + '">' + result[i].systemName + '</td>' +
                                 '<td>' + result[i].testset + '</td>' +
                                 '<td>' + result[i].notes + '</td>' +
                                 '<td>' + result[i].bleu_SBP + '</td>' +
@@ -72,7 +72,9 @@
                                 '<td>' + result[i].mwer + '</td>' +
                                 '<td>' + result[i].mper + '</td>' +
                                 '<td>' + result[i].ict + '</td>' +
+                                '<td>' + result[i].isConstraint + '</td>' +
                                 '<td>' + result[i].time + '</td>' +
+                                '<td>' + result[i].state + '</td>' +
                                 '</tr>'
                         }
                         //清空上次数据
@@ -103,7 +105,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -111,12 +113,10 @@
                         <li>
                             <a href="/">主页</a>
                         </li>
-                        <li >
-                            <a href="#">积分榜</a>
-                        </li>
                         <li>
-                            <a href="/test_sets/list">数据下载</a>
+                            <a href="/board">积分榜</a>
                         </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -148,6 +148,10 @@
                             <a href="#">历史提交</a>
                         </li>
 
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
                                     class="caret"></strong></a>
@@ -172,35 +176,17 @@
             <h4>历史提交</h4>
         </div>
         <div class="col-md-4">
-            <%--<label for="track">选择任务:</label>
+        </div>
+        <div class="col-md-4">
+            <label for="track">选择任务:</label>
             <select class="selectpicker" id="track" onchange="getLeaderBoard()">
                 <option value="CE">CE</option>
                 <option value="EC">EC</option>
+                <option value="MC">MC</option>
                 <option value="TC">TC</option>
-            </select>--%>
-        </div>
-        <div class="col-md-4">
-            <%--<label for="metric">选择指标：</label>
-            <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
-                <option value="BLEU_SBP">BLEU_SBP</option>
-                <option value="BLEU_NIST">BLEU_NIST</option>
-                <option value="TER">TER</option>
-                <option value="METEOR">METEOR</option>
-                <option value="NIST">NIST</option>
-                <option value="GTM">GTM</option>
-                <option value="mWER">mWER</option>
-                <option value="mPER">mPER</option>
-                <option value="ICT">ICT</option>
-            </select>--%>
-            <label for="track">选择任务:</label>
-                <select class="selectpicker" id="track" onchange="getLeaderBoard()">
-                    <option value="CE">CE</option>
-                    <option value="EC">EC</option>
-                    <option value="MC">MC</option>
-                    <option value="TC">TC</option>
-                    <option value="UC">UC</option>
-                    <option value="JE">JE</option>
-                </select>
+                <option value="UC">UC</option>
+                <option value="JE">JE</option>
+            </select>
         </div>
     </div>
     <div class="row clearfix">
@@ -221,7 +207,9 @@
                     <th>mWER</th>
                     <th>mPER</th>
                     <th>ICT</th>
+                    <th>isConstraint</th>
                     <th>Submit Time</th>
+                    <th>State</th>
                 </tr>
                 </thead>
                 <tbody>

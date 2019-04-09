@@ -24,7 +24,7 @@ public class TestSetRowMapper implements RowMapper<TestSet> {
         testSet.setRealsrcurl(resultSet.getString("realsrcurl"));
         testSet.setSrclang(resultSet.getString("srclang"));
         testSet.setSrclang(resultSet.getString("tgtlang"));
-
+        testSet.setTrack(resultSet.getString("track"));
         return testSet;
     }
 }

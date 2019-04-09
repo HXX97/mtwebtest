@@ -78,7 +78,7 @@ public class SystemController {
             model.addFlashAttribute("msg", "Create System succeeded");
         } else {
             model.addFlashAttribute("msgLevel","1");
-            model.addFlashAttribute("msg", "Create System failed");
+            model.addFlashAttribute("msg", "Create System failed, check if name is duplicated");
         }
         return "redirect:/user/status";
     }

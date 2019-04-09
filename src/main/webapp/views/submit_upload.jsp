@@ -12,14 +12,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-select/1.13.8/css/bootstrap-select.min.css" >
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-select/1.13.8/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/css/fileinput.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-select/1.13.8/js/bootstrap-select.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/js/fileinput.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/js/locales/zh.min.js"></script>
-
 
 
     <script language="JavaScript">
@@ -42,9 +41,9 @@
             if (message != "" && message != "null") {
                 document.getElementById("msg").classList.remove("hidden");
                 var msgLevel = "${msgLevel}";
-                if(msgLevel==1){
+                if (msgLevel == 1) {
                     document.getElementById("msg").classList.add("alert-danger");
-                }else{
+                } else {
                     document.getElementById("msg").classList.add("alert-success");
                 }
             }
@@ -69,7 +68,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -80,9 +79,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">相关资料下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -113,6 +110,10 @@
 
                         <li id="history">
                             <a href="/submit/history">历史提交</a>
+                        </li>
+
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
@@ -151,7 +152,8 @@
         <div class="col-md-6 column">
             <fieldset>
                 <legend>上传文件</legend>
-                <form class="form-horizontal" action="/submit/upload" role="form" method="post" enctype="multipart/form-data" onsubmit="checkForm()">
+                <form class="form-horizontal" action="/submit/upload" role="form" method="post"
+                      enctype="multipart/form-data" onsubmit="checkForm()">
                     <p>测试集: ${setName}</p>
                     <p>系统: ${sysName}</p>
                     <p>源语言: ${srcLangFull}</p>
@@ -176,7 +178,7 @@
 
                     <div align="right">
 
-                    <button class="btn btn-default" onclick="javascript:window.history.back()">返回上一步</button>
+                        <button class="btn btn-default" onclick="javascript:window.history.back()">返回上一步</button>
                         <button type="submit" class="btn btn-primary">上传</button>
                     </div>
                 </form>

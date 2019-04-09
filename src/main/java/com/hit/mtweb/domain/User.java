@@ -11,6 +11,7 @@ public class User {
     private String affiliation;
     private String web;
     private String password;
+    private String phone;
 
     public String getUsername() {
         return username;
@@ -52,6 +53,14 @@ public class User {
         this.password = password;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -70,6 +79,7 @@ public class User {
         user.setAffiliation((String)map.get("affiliation"));
         user.setEmail((String)map.get("email"));
         user.setWeb((String)map.get("web"));
+        user.setPhone((String)map.get("phone"));
         return user;
     }
 }

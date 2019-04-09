@@ -4,11 +4,9 @@ import com.hit.mtweb.dao.SubmissionDao;
 import com.hit.mtweb.domain.MTSystem;
 import com.hit.mtweb.domain.Submission;
 import com.hit.mtweb.domain.TestSet;
-import jdk.internal.util.xml.impl.Input;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class HandleSubmitThread extends Thread {
@@ -103,17 +101,20 @@ public class HandleSubmitThread extends Thread {
                         }
                     }
                     break;
-
                 }
             }
+            //更新submission状态
+            submission.setState("success");
             //清除工作文件夹
             FileUtils.deleteDirectory(workDir);
 
 
         } catch (IOException | InterruptedException e) {
+            submission.setState("failure");//出现问题，更新本次状态为failure
             e.printStackTrace();
         }finally {
-            submissionDao.saveSubmission(submission);
+            //submissionDao.saveSubmission(submission);
+            submissionDao.updateSubmissionBySub(submission);
             System.out.println("存入数据库完成！本次提交评测结束！");
             if(workDir.exists()){
                 try {

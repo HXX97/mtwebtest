@@ -32,4 +32,8 @@ public class UserService {
     public boolean updateInfo(User newUserInfo) {
         return userDao.updateInfo(newUserInfo);
     }
+
+    public boolean updatePWD(String username,String newP) {
+        return userDao.updatePWD(username,newP);
+    }
 }

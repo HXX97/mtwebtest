@@ -90,7 +90,7 @@ public class UserController {
     //展示注册页面,GET方法
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String showRegisterForm(){
-        return "register_page";
+        return "user_register";
     }
 
 
@@ -121,6 +121,10 @@ public class UserController {
         if (sessionUser == null) {//用户登录已失效
             redirectAttributes.addFlashAttribute("errorMsg", "Session expired, please login again");
             return "redirect:/user/login";
+        }else if(!sessionUser.equals(username)){
+            redirectAttributes.addFlashAttribute("msgLevel","1");
+            redirectAttributes.addFlashAttribute("msg","尝试修改其他用户信息,已记录");
+            return "redirect:/user/status";
         }else {
             User user = userService.getUserByName(username);
             model.addAttribute("user", user);
@@ -141,11 +145,13 @@ public class UserController {
     @RequestMapping(value = "/edit/{username}", method = RequestMethod.POST)
     public String processEditForm(@PathVariable String username, HttpServletRequest httpServletRequest, RedirectAttributes model) {
 
+
         User newUserInfo = new User();
         newUserInfo.setUsername(username);
         newUserInfo.setEmail(httpServletRequest.getParameter("email"));
         newUserInfo.setAffiliation(httpServletRequest.getParameter("affiliation"));
         newUserInfo.setWeb(httpServletRequest.getParameter("web"));
+        newUserInfo.setPhone(httpServletRequest.getParameter("phone"));
 
 
         if (userService.updateInfo(newUserInfo)) {
@@ -165,6 +171,39 @@ public class UserController {
         session.removeAttribute("username");
         session.invalidate();
         return "index";
+    }
+
+    @RequestMapping(value="/changePWD",method = RequestMethod.GET)
+    public String showChangePWDForm(){
+        return "user_changePWD";
+    }
+
+
+    @RequestMapping(value = "/changePWD",method = RequestMethod.POST)
+    public String changePWD(HttpServletRequest request,RedirectAttributes model){
+        String old = request.getParameter("old");
+        String newP = request.getParameter("new");
+        String user = (String) request.getSession().getAttribute("username");
+        String msg ;
+        String msgLevel;
+
+        if(userService.validateUserByPWD(user,old)){
+            if(userService.updatePWD(user,newP)){
+                msg="修改成功";
+                msgLevel="0";
+            }else{
+                msg="修改失败";
+                msgLevel="1";
+            }
+        }else{
+            msgLevel="1";
+            msg="修改失败，原密码错误";
+
+        }
+        model.addFlashAttribute("msgLevel",msgLevel);
+        model.addFlashAttribute("msg",msg);
+        return "redirect:/user/status";
+
     }
 
 }

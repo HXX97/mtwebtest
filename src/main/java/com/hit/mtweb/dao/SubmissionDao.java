@@ -44,7 +44,9 @@ public class SubmissionDao {
                 "mWER," +
                 "mPER," +
                 "ICT," +
-                "submitter) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "submitter," +
+                "isConstraint," +
+                "state) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         jdbcTemplate.update(sql,
                 submission.getSystemid(),
@@ -73,9 +75,41 @@ public class SubmissionDao {
                 submission.getMWER(),
                 submission.getMPER(),
                 submission.getICT(),
-                submission.getSubmitter());
+                submission.getSubmitter(),
+                submission.getIsConstraint(),
+                submission.getState());
 
     }
+
+
+    public void updateSubmissionBySub(Submission submission){
+
+        String sql = "update submissions set " +
+                "BLEU_SBP=?," +
+                "BLEU_NIST=?," +
+                "TER=?," +
+                "METEOR=?," +
+                "NIST=?," +
+                "GTM=?," +
+                "mWER=?," +
+                "mPER=?," +
+                "ICT=?," +
+                "state=? where systemid=? and time=?";
+
+        jdbcTemplate.update(sql,submission.getBLEU_SBP(),
+                submission.getBLEU_NIST(),
+                submission.getTER(),
+                submission.getMETEOR(),
+                submission.getNIST(),
+                submission.getGTM(),
+                submission.getMWER(),
+                submission.getMPER(),
+                submission.getICT(),
+                submission.getState(),
+                submission.getSystemid(),
+                submission.getState());
+    }
+
 
     public List<Submission> queryBySysId(String systemid) {
         List<Submission> submissionList = new ArrayList<>();
@@ -131,16 +165,16 @@ public class SubmissionDao {
         //先取到所有的systemid
         Set<String> systemidSet = new HashSet<>();
 
-        String sql = "select distinct systemid from submissions where track = ?";
-        List<Map<String, Object>> systemIdmaps = jdbcTemplate.queryForList(sql, track);
+        String sql = "select distinct systemid from submissions where track = ? and state= ?";
+        List<Map<String, Object>> systemIdmaps = jdbcTemplate.queryForList(sql, track,"success");
         for (Map m : systemIdmaps) {
             systemidSet.add(String.valueOf(m.get("systemid")));
         }
 
         //取到每个id的最好成绩,加入到List中
-        sql = "select * from submissions where systemid = ? and track = ? order by ifnull(cast(" + metric + " as decimal(10,2)),0) desc,time desc limit 1";
+        sql = "select * from submissions where systemid = ? and track = ? and state= ? order by ifnull(cast(" + metric + " as decimal(10,2)),0) desc,time desc limit 1";
         for (String systemid : systemidSet) {
-            List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql, Integer.valueOf(systemid), track);
+            List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql, Integer.valueOf(systemid), track,"success");
             for (Map map : maps) {
                 submissionList.add(Submission.mapToSubmission(map));
             }
@@ -150,7 +184,11 @@ public class SubmissionDao {
         Collections.sort(submissionList, new Comparator<Submission>() {
             @Override
             public int compare(Submission o1, Submission o2) {
-                return -Integer.valueOf(o1.getBLEU_SBP()) + Integer.valueOf(o2.getBLEU_SBP());
+
+                Double diff = Double.valueOf(o2.getBLEU_SBP())-Double.valueOf(o1.getBLEU_SBP());
+                if(diff.equals(0.0)) return 0;
+                else return diff<0.0?-1:1;
+
             }
         });
 

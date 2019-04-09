@@ -86,9 +86,9 @@ def A2B_middot_ref(ref_path):
             fout.write(newline)
             count += cnt
         fin.close()
-        fout.close()
+        fout.close()        
         os.system("del %s" % ref_path+'_to_A2B')
-
+    
 def extractRealTestSet(input_file, output_file):
     '''extract real test set according realSegID,
     if the MT_Direction is en-zh, get on with A2B & mid-dot exchange
@@ -97,26 +97,26 @@ def extractRealTestSet(input_file, output_file):
     fin = open(input_file, 'rU')
     fout = open(output_file, 'w')
 
-    # copy a new list in case of deleting the original realSegID_list
+# copy a new list in case of deleting the original realSegID_list
     list = []; list.extend(realSegID_list)
-
-
+   
+    
     for line in fin:
         if line.find("<seg id=") == -1:
-            fout.write(line)
+	    fout.write(line)
         else:
-            start = line.find("\"")
+	    start = line.find("\"")
             end = line.find("\">")
             segid = line[start+1:end]
-            if len(list) and segid == list[0]:
-                fout.write(line)
+	    if len(list) and segid == list[0]:
+	 	fout.write(line)                
                 list.remove(list[0])
 
-
+    
     fin.close()
     fout.close()
 
-    # if the MT_Direction is en-zh, get on with A2B & mid-dot substitution
+# if the MT_Direction is en-zh, get on with A2B & mid-dot substitution
 
 
     if MT_Direction == "en-zh-news":
@@ -132,7 +132,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "en-zh-scie":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -146,8 +146,8 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
-
+        
+        
     elif MT_Direction == "jp-zh-news":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -161,7 +161,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "mn-zh-dail":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -175,7 +175,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "ti-zh-gove":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -189,7 +189,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "uy-zh-news":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -203,7 +203,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "ka-zh-news":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -217,7 +217,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
     elif MT_Direction == "ki-zh-news":
         cmd = "rename %s %s_to_A2B" % (output_file, output_file)
         os.system(cmd)
@@ -231,7 +231,7 @@ def extractRealTestSet(input_file, output_file):
             (newline, cnt) = re.subn('•', '·', line)
             fout.write(newline)
             count += cnt
-
+        
 
         fin.close()
         fout.close()
@@ -242,16 +242,16 @@ def splitwords(input_file):
     cmd = format % (input_file,input_file + '.split')
     os.system(cmd)
     if FLAG == False: #reference is splited only once
-        cmd = format % (inputDataDir+ref+'.xml',inputDataDir+ref+'.xml.split')
-        os.system(cmd)
-        FLAG = True
+       cmd = format % (inputDataDir+ref+'.xml',inputDataDir+ref+'.xml.split')
+       os.system(cmd)
+       FLAG = True
 def tokenization():
     global FLAGS
     format = "perl .\\exe\\token.pl %s %s"
     if FLAGS == False:
-        cmd = format % (inputDataDir+ref+'.xml',inputDataDir+ref+'.xml.token')
-        os.system(cmd)
-        FLAGS = True
+       cmd = format % (inputDataDir+ref+'.xml',inputDataDir+ref+'.xml.token')
+       os.system(cmd)
+       FLAGS = True
 def meteor_eval(input_file,output_file):
     format1 = "java -Xmx1G -jar .\\exe\\meteor\\meteor-1.4.jar %s %s -l en -sgml >%s"
     format2 = "java -Xmx1G -jar .\\exe\\meteor\\meteor-1.4.jar %s %s -l other -sgml >%s"
@@ -283,7 +283,7 @@ def meteor_eval(input_file,output_file):
         splitwords(input_file)
         cmd = format2 % (input_file + '.split',inputDataDir+ref+'.xml.split',output_file)
     print "  -->starting meteor evaluation for " + input_file + "..."
-
+    
     os.system(cmd)
 
 def buildPlainref(ref_file,output):
@@ -291,29 +291,29 @@ def buildPlainref(ref_file,output):
     format = "python .\\exe\\toplainref.py %s %s"
     global FLAGREF
     if FLAGREF == False:
-        cmd = format % (ref_file,output)
-        os.system(cmd)
-        FLAGREF = True
+       cmd = format % (ref_file,output)
+       os.system(cmd)
+       FLAGREF = True
 
 def buildPlaincandi(input_file,output):
     #generate plaintext candidate translation
     format = "python .\\exe\\toplaintest.py %s %s"
     cmd = format % (input_file,output)
     os.system(cmd)
-
+    
 def ter_eval(input_file,output_file):
     format1 = "java -jar .\\exe\\ter\\tercom.7.25.jar -s -r %s -h %s >%s"
     format2 = "java -jar .\\exe\\ter\\tercom.7.25.jar -s -r %s -h %s >%s"
-
+    
     if MT_Direction == "zh-en-news":
         buildPlainref(inputDataDir+ref+'.xml.token',ref+'.xml.token.plain')
         buildPlaincandi(input_file,input_file + '.plain')
     else:
         buildPlainref(inputDataDir+ref+'.xml.split',ref+'.xml.split.plain')
         buildPlaincandi(input_file + '.split',input_file + '.split.plain')
+    
 
-
-
+    
     if MT_Direction == "zh-en-news":
         cmd = format1 % (ref + '.xml.token.plain',input_file + '.plain', output_file)
     elif MT_Direction == "en-zh-news":
@@ -347,7 +347,7 @@ def mteval_sbp(input_file, output_file):
     format8 = ".\\exe\\mteval_sbp    -r %s -s %s -t %s >%s"
     format9 = ".\\exe\\mteval_sbp    -r %s -s %s -t %s >%s"
 
-
+    
     if MT_Direction == "zh-en-news":
         cmd = format1 % (inputDataDir+ref+'.xml', inputDataDir+src+'.xml', input_file, output_file)
     elif MT_Direction == "en-zh-news":
@@ -377,7 +377,7 @@ def extractTable_mteval_sbp(input_file, input_file1, input_file2, output_file):
     fin_ter = open(input_file2,'rU')
     fout = open(output_file, 'a')
 
-    # read and extract
+# read and extract
     for i in range(8): line = fin.readline()
     #print line
     for item in line.split():
@@ -408,56 +408,55 @@ def extractTable_mteval_sbp(input_file, input_file1, input_file2, output_file):
     while True:
         line = fin_meteor.readline()
         if line.startswith('Final score'):
-            meteor_score = (line.split()[2])[:6]
-            break
+              meteor_score = (line.split()[2])[:6]
+              break
 
     while True:
         line = fin_ter.readline()
         if line.startswith('Total TER'):
-            ter_score = (line.split()[2])[:6]
-            break
+              ter_score = (line.split()[2])[:6]
+              break
     #print '/////////////////////////////////////////////////////////////'
-    # print
-
+# print
+    
     if MT_Direction == "zh-en-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[4],
-                                  cumulative_BLEU[4], cumulative_BLEU[6],cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[4], cumulative_NIST[5], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "en-zh-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "en-zh-scie":
         #print "en-zh-scie is scheduling the second time"
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "jp-zh-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "mn-zh-dail":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "ti-zh-gove":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "uy-zh-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "ka-zh-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
     elif MT_Direction == "ki-zh-news":
         print >> fout, '\t'.join([input_file, cumulative_BLEU_SBP[5],
-                                  cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
-                                  cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])
+            cumulative_BLEU[5], cumulative_BLEU[6], cumulative_NIST[6],
+            cumulative_NIST[7], GTM, mWER, mPER, ICT, meteor_score, ter_score])    
     else:
-
+        
         print "error in extract for the value of MT_Direction."
         sys.exit(-1)
 
@@ -478,8 +477,8 @@ def sort_result(input_file, output_file):
     for line in fin: table.append(line.split())
 
     if MT_Direction == "zh-en-news":
-        table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7,8,9, 10, 11, 0), reverse = True)
-        fout.write("participants	BLEU4-SBP	BLEU5   BLEU6   NIST6   NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")
+        table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7,8,9, 0), reverse = True)
+        fout.write("participants	BLEU4-SBP	BLEU4	NIST5	GTM	mWER	mPER	ICT	METEOR	TER\n")
     elif MT_Direction == "en-zh-news":
         table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0), reverse = True)
         fout.write("participants	BLEU5-SBP	BLEU5	BLEU6	NIST6	NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")
@@ -504,14 +503,14 @@ def sort_result(input_file, output_file):
     elif MT_Direction == "ki-zh-news":
         table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0), reverse = True)
         fout.write("participants	BLEU5-SBP	BLEU5	BLEU6	NIST6	NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")
-
+   
         print "error in sort_result for the value of MT_Direction"
     for line in table: print >> fout, '\t'.join(line)
 
     fin.close()
     fout.close()
 
-    # record the system in the sorted table
+# record the system in the sorted table
     table_sorted_name = []
     for line in table: table_sorted_name.append(os.path.splitext(line[0])[0])
     return table_sorted_name
@@ -530,7 +529,7 @@ def SignTestBleuSBP(table_sorted_name):
     output7 = "SignTestBleuSBP5_Out"
     output8 = "SignTestBleuSBP5_Out"
     output9 = "SignTestBleuSBP5_Out"
-
+  
     format1 = ".\\exe\\SignTestBleuSBP4 -c -b %s.xmlt -t %s.xmlt -s %s -r %s >> %s"
     format2 = ".\\exe\\SignTestBleuSBP5    -b %s.xmlt -t %s.xmlt -s %s -r %s >> %s"
     format3 = ".\\exe\\SignTestBleuSBP5    -b %s.xmlt -t %s.xmlt -s %s -r %s >> %s"
@@ -543,7 +542,7 @@ def SignTestBleuSBP(table_sorted_name):
 
     if len(table_sorted_name) < 2:
         print "  There are only " + str(len(table_sorted_name)) \
-              + " *primary*.xml files!\n  So you can't call SignTestBleuSBP*.exe :("
+            + " *primary*.xml files!\n  So you can't call SignTestBleuSBP*.exe :("
         raw_input("  Please press Enter to exit.")
         sys.exit(-1)
     else:
@@ -560,17 +559,17 @@ def SignTestBleuSBP(table_sorted_name):
                     cmd = format2 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output2)
                 elif MT_Direction == "en-zh-scie":
                     cmd = format3 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output3)
-                elif MT_Direction == "jp-zh-news":
+      	        elif MT_Direction == "jp-zh-news":
                     cmd = format4 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output4)
-                elif MT_Direction == "mn-zh-dail":
+		elif MT_Direction == "mn-zh-dail":
                     cmd = format5 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output5)
-                elif MT_Direction == "ti-zh-gove":
+	        elif MT_Direction == "ti-zh-gove":
                     cmd = format6 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output6)
-                elif MT_Direction == "uy-zh-news":
+		elif MT_Direction == "uy-zh-news":
                     cmd = format7 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output7)
-                elif  MT_Direction == "ka-zh-news":
+		elif  MT_Direction == "ka-zh-news":
                     cmd = format8 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output8)
-                elif MT_Direction == "ki-zh-news":
+		elif MT_Direction == "ki-zh-news":
                     cmd = format9 % (base, contrast, inputDataDir+src+'.xml', inputDataDir+ref+'.xml', output9)
                 os.system(cmd)
 
@@ -622,9 +621,9 @@ def extractTable_SignTestBleuSBP(table_sorted_name):
                     print "found error!!!"
                     os.system("pause")
 
-    ##    length = len(table_sorted_name)
-    ##    print length
-    ##    print table
+##    length = len(table_sorted_name)
+##    print length
+##    print table
 
     print >> fout, '\t' + '\t'.join(table_sorted_name)
     index = 0
@@ -644,7 +643,7 @@ def arrangeFiles():
     "arrange the files produced during the whole process"
     os.system("del *.scr")
     if MT_Direction == "zh-en-news":
-        cmd_list = ['rd /s /q OutputDatazen',
+    	cmd_list = ['rd /s /q OutputDatazen',
                     'mkdir OutputDatazen\\result_temp',
                     'mkdir OutputDatazen\\xmlt',
                     'mkdir OutputDatazen\\result_tables',
@@ -661,10 +660,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*','del *plain','del .\\InputData\\*.token']
-        for cmd in cmd_list: os.system(cmd)
+    	for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "en-zh-news":
-        cmd_list = ['rd /s /q OutputDataezn',
+    	cmd_list = ['rd /s /q OutputDataezn',
                     'mkdir OutputDataezn\\result_temp',
                     'mkdir OutputDataezn\\xmlt',
                     'mkdir OutputDataezn\\result_tables',
@@ -681,10 +680,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*','del *plain', 'del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "en-zh-scie":
-        cmd_list = ['rd /s /q OutputDataezs',
+    	cmd_list = ['rd /s /q OutputDataezs',
                     'mkdir OutputDataezs\\result_temp',
                     'mkdir OutputDataezs\\xmlt',
                     'mkdir OutputDataezs\\result_tables',
@@ -701,10 +700,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*', 'del *plain','del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "jp-zh-news":
-        cmd_list = ['rd /s /q OutputDatajzn',
+    	cmd_list = ['rd /s /q OutputDatajzn',
                     'mkdir OutputDatajzn\\result_temp',
                     'mkdir OutputDatajzn\\xmlt',
                     'mkdir OutputDatajzn\\result_tables',
@@ -721,10 +720,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*', 'del *plain','del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "mn-zh-dail":
-        cmd_list = ['rd /s /q OutputDatamzd',
+    	cmd_list = ['rd /s /q OutputDatamzd',
                     'mkdir OutputDatamzd\\result_temp',
                     'mkdir OutputDatamzd\\xmlt',
                     'mkdir OutputDatamzd\\result_tables',
@@ -741,10 +740,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*', 'del *plain','del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
+    	for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "ti-zh-gove":
-        cmd_list = ['rd /s /q OutputDatatzg',
+    	cmd_list = ['rd /s /q OutputDatatzg',
                     'mkdir OutputDatatzg\\result_temp',
                     'mkdir OutputDatatzg\\xmlt',
                     'mkdir OutputDatatzg\\result_tables',
@@ -761,10 +760,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*','del *plain', 'del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "uy-zh-news":
-        cmd_list = ['rd /s /q OutputData',
+    	cmd_list = ['rd /s /q OutputData',
                     'mkdir OutputDatauzn\\result_temp',
                     'mkdir OutputDatauzn\\xmlt',
                     'mkdir OutputDatauzn\\result_tables',
@@ -781,10 +780,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*', 'del *plain','del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "ka-zh-news":
-        cmd_list = ['rd /s /q OutputDataazn',
+    	cmd_list = ['rd /s /q OutputDataazn',
                     'mkdir OutputDataazn\\result_temp',
                     'mkdir OutputDataazn\\xmlt',
                     'mkdir OutputDataazn\\result_tables',
@@ -801,10 +800,10 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*','del *plain', 'del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
+    	for cmd in cmd_list: os.system(cmd)
+    
     if MT_Direction == "ki-zh-news":
-        cmd_list = ['rd /s /q OutputDataizn',
+    	cmd_list = ['rd /s /q OutputDataizn',
                     'mkdir OutputDataizn\\result_temp',
                     'mkdir OutputDataizn\\xmlt',
                     'mkdir OutputDataizn\\result_tables',
@@ -821,9 +820,9 @@ def arrangeFiles():
                     'del *.result', 'del SignTestBleuSBP*_Out',
                     'del *.xmlt*', 'del *table*',
                     'del *log*', 'del *plain','del .\\InputData\\*.split']
-        for cmd in cmd_list: os.system(cmd)
-
-
+    	for cmd in cmd_list: os.system(cmd)
+    
+    
 def wc(direction):
     if direction == "zh-en-news":
         mt_direction = "zh-en-news"
@@ -836,7 +835,7 @@ def wc(direction):
     if direction == "mn-zh-dail":
         mt_direction = "mn-zh-dail"
     if direction == "ti-zh-gove":
-        mt_direction = "ti-zh-gove"
+        mt_direction = "ti-zh-gove"    
     if direction == "uy-zh-news":
         mt_direction = "uy-zh-news"
     if direction == "ka-zh-news":
@@ -850,21 +849,21 @@ if __name__ == "__main__":
 
     MT_Direction = wc(sys.argv[1])
     InputData = sys.argv[2]
-
+    
     curDir = ".\\"
     exeDir = curDir + '\\exe\\'
     inputDataDir = curDir + InputData
 
-    # get file names extented in '.xml'
+# get file names extented in '.xml'
     xml_list = getFileNames(inputDataDir, '.xml')
     src = [e for e in xml_list if e.find("src") != -1][0]  # src file
     ref = [e for e in xml_list if e.find("ref") != -1][0]  # ref file
 
-    # get file names extented in '.xmlt'
+# get file names extented in '.xmlt'
     xmlt_list = xml_list
     xmlt_list.remove(src); xmlt_list.remove(ref)
 
-    # get file names extented in '.xml' && have the key word 'primary'
+# get file names extented in '.xml' && have the key word 'primary'
     primary_xml_list = [e for e in xml_list if (e.find("primary") != -1)]
 
     ##print xmlt_list
@@ -876,7 +875,7 @@ if __name__ == "__main__":
     realSegID_list = readRealSegID(inputDataDir + 'realSegID.txt')
 
     A2B_middot_ref(inputDataDir + ref +'.xml')
-
+    
     print "\nsetp 1: extracting realTestSet..."
     for e in xmlt_list: extractRealTestSet(inputDataDir+e+'.xml', e+'.xmlt')
 
@@ -886,20 +885,20 @@ if __name__ == "__main__":
     print "\nstep 3: starting meteor evaluation..."
     for e in xmlt_list: meteor_eval(e+'.xmlt', e+'.meteor.result')
 
-    print "\nstep 4: starting ter evaluation..."
+    print "\nstep 4: starting ter evaluation..." 
     for e in xmlt_list: ter_eval(e+'.xmlt', e+'.ter.result')
 
     print "\nstep 5: starting extract_mteval_result..."
     for e in xml_list: extractTable_mteval_sbp(e+'.result',e+'.meteor.result', e+'.ter.result', 'result_table_all')
     for e in primary_xml_list: extractTable_mteval_sbp(e+'.result',e+'.meteor.result', e+'.ter.result', 'result_table_primary')
-
+   
     print "\nstep 6: starting sort_result..."
     sort_result('result_table_all', 'result_table_all_sorted')
     table_sorted_name = sort_result('result_table_primary', 'result_table_primary_sorted')
 
     if len(table_sorted_name) < 2:
         print "  There are only " + str(len(table_sorted_name)) \
-              + " *primary*.xml files!\n  So you can't call SignTestBleuSBP*.exe :("
+            + " *primary*.xml files!\n  So you can't call SignTestBleuSBP*.exe :("
     else:
         print "\nstep 7: starting SignTestBleu..."
         SignTestBleuSBP(table_sorted_name)

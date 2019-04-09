@@ -32,12 +32,17 @@
                 alert("You have not chosen a Test Set!");
                 return false;
             }
-            var obj = document.getElementsByName("setSrcLang");
+            /*var obj = document.getElementsByName("setSrcLang");
             setSrcLang = obj[i].options[obj[i].selectedIndex].value;
             obj = document.getElementsByName("setTgtLang");
             setTgtLang = obj[i].options[obj[i].selectedIndex].value;
             obj = document.getElementsByName("setTrack");
-            track = obj[i].options[obj[i].selectedIndex].value;
+            track = obj[i].options[obj[i].selectedIndex].value;*/
+
+            setSrcLang = document.getElementsByName("setSrclang")[i].textContent;
+            setTgtLang = document.getElementsByName("setTgtlang")[i].textContent;
+            track = document.getElementsByName("setTrack")[i].textContent;
+
 
             var chooseSys = document.getElementsByName("chooseSys");
             for (var j = 0; j < chooseSys.length; j++) {
@@ -51,7 +56,7 @@
                 return false;
             }
 
-            obj = document.getElementsByName("sysSrcLang");
+            /*obj = document.getElementsByName("sysSrcLang");
             sysSrcLang = obj[j].textContent;
             obj = document.getElementsByName("sysTgtLang");
             sysTgtLang = obj[j].textContent;
@@ -63,7 +68,11 @@
                 document.getElementById("srcLang").value = setSrcLang;
                 document.getElementById("tgtLang").value = setTgtLang;
                 document.getElementById("track").value = track;
-            }
+            }*/
+
+            document.getElementById("srcLang").value = setSrcLang;
+            document.getElementById("tgtLang").value = setTgtLang;
+            document.getElementById("track").value = track;
 
             return true;
 
@@ -80,7 +89,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -91,9 +100,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -125,6 +132,11 @@
                         <li id="history">
                             <a href="/submit/history">历史提交</a>
                         </li>
+
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+
 
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
@@ -166,7 +178,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${requestScope.testSetList}" var="testSet">
+                        <c:forEach items="${testSetList}" var="testSet">
                             <tr name="setRow">
                                 <td><input type="radio" name="chooseSet" value="${testSet.testsetid}"></td>
                                 <td>${testSet.name}</td>
@@ -174,30 +186,33 @@
                                 <td>${testSet.domain}</td>
                                 <td>${testSet.citation}</td>
                                 <td>${testSet.notes}</td>
-                                <td><select class="selectpicker" name="setSrcLang">
-                                    <option value="zh">Chinese</option>
-                                    <option value="en">English</option>
-                                    <option value="mn">Mongolian</option>
-                                    <option value="jp">Japanese</option>
-                                    <option value="ti">Tibetan</option>
-                                    <option value="uy">Uyghur</option>
-                                </select></td>
-                                <td><select class="selectpicker" name="setTgtLang">
-                                    <option value="zh">Chinese</option>
-                                    <option value="en">English</option>
-                                    <option value="mn">Mongolian</option>
-                                    <option value="jp">Japanese</option>
-                                    <option value="ti">Tibetan</option>
-                                    <option value="uy">Uyghur</option>
-                                </select></td>
-                                <td><select class="selectpicker" name="setTrack">
-                                    <option value="CE">CE</option>
-                                    <option value="EC">EC</option>
-                                    <option value="MC">MC</option>
-                                    <option value="TC">TC</option>
-                                    <option value="UC">UC</option>
-                                    <option value="JE">JE</option>
-                                </select></td>
+                                <td name="setSrclang">${testSet.srclang}</td>
+                                <td name="setTgtlang">${testSet.tgtlang}</td>
+                                <td name="setTrack">${testSet.track}</td>
+                                    <%--<td><select class="selectpicker" name="setSrcLang">
+                                        <option value="zh">Chinese</option>
+                                        <option value="en">English</option>
+                                        <option value="mn">Mongolian</option>
+                                        <option value="jp">Japanese</option>
+                                        <option value="ti">Tibetan</option>
+                                        <option value="uy">Uyghur</option>
+                                    </select></td>
+                                    <td><select class="selectpicker" name="setTgtLang">
+                                        <option value="zh">Chinese</option>
+                                        <option value="en">English</option>
+                                        <option value="mn">Mongolian</option>
+                                        <option value="jp">Japanese</option>
+                                        <option value="ti">Tibetan</option>
+                                        <option value="uy">Uyghur</option>
+                                    </select></td>
+                                    <td><select class="selectpicker" name="setTrack">
+                                        <option value="CE">CE</option>
+                                        <option value="EC">EC</option>
+                                        <option value="MC">MC</option>
+                                        <option value="TC">TC</option>
+                                        <option value="UC">UC</option>
+                                        <option value="JE">JE</option>
+                                    </select></td>--%>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -212,12 +227,12 @@
                             <th></th>
                             <th>Name</th>
                             <th>Software</th>
-                            <th>Source Language</th>
-                            <th>Target Language</th>
+                            <%--<th>Source Language</th>
+                            <th>Target Language</th>--%>
                             <th>Citation</th>
                             <th>Notes</th>
                             <th>Constraint System</th>
-                            <th>Primary System</th>
+                            <%--<th>Primary System</th>--%>
                         </tr>
                         </thead>
 
@@ -227,12 +242,12 @@
                                 <td><input type="radio" name="chooseSys" value="${system.systemid}"></td>
                                 <td>${system.name}</td>
                                 <td>${system.software}</td>
-                                <td name="sysSrcLang">${system.sourcelang}</td>
-                                <td name="sysTgtLang">${system.targetlang}</td>
+                                    <%--<td name="sysSrcLang">${system.sourcelang}</td>
+                                    <td name="sysTgtLang">${system.targetlang}</td>--%>
                                 <td>${system.citation}</td>
                                 <td>${system.notes}</td>
                                 <td>${system.isConstraint}</td>
-                                <td>${system.isPrimary}</td>
+                                <%--<td>${system.isPrimary}</td>--%>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -240,7 +255,9 @@
 
                     <div align="right">
                         <!-- 除了IE,所有浏览器button 的默认type="submit" -->
-                        <button class="btn btn-default" type="button" onclick="window.location.href='/system/new'">创建新系统</button>
+                        <button class="btn btn-default" type="button" onclick="window.location.href='/system/new'">
+                            创建新系统
+                        </button>
                         <button type="submit" class="btn btn-primary">下一步</button>
                     </div>
                 </fieldset>

@@ -35,7 +35,7 @@ public class UserDao {
     }
 
     public boolean saveUser(User user) {
-        String sql = "insert into users values(?,?,?,?,?)";
+        String sql = "insert into users values(?,?,?,?,?,?)";
 
         try {
             jdbcTemplate.update(sql,
@@ -43,7 +43,8 @@ public class UserDao {
                     user.getEmail(),
                     user.getAffiliation(),
                     user.getWeb(),
-                    user.getPassword());
+                    user.getPassword(),
+                    user.getPhone());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -56,6 +57,7 @@ public class UserDao {
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -73,5 +75,16 @@ public class UserDao {
             return false;
         }
         return true;
+    }
+
+    public boolean updatePWD(String username,String newP) {
+        try{
+            String sql = "update users set password=? where username= ?";
+            jdbcTemplate.update(sql,newP,username);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

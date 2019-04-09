@@ -34,6 +34,8 @@ public class Submission {
     private String mWER;
     private String mPER;
     private String ICT;
+    private Boolean isConstraint;
+    private String state; //上传状态
 
 
     public static Submission mapToSubmission(Map map) {
@@ -65,8 +67,27 @@ public class Submission {
         submission.setMWER((String) map.get("mWER"));
         submission.setMPER((String) map.get("mPER"));
         submission.setICT((String) map.get("ICT"));
+        submission.setIsConstraint((Boolean)map.get("isConstraint"));
+        submission.setState((String)map.get("state"));
 
         return submission;
+    }
+
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public boolean getIsConstraint() {
+        return isConstraint;
+    }
+
+    public void setIsConstraint(boolean primary) {
+        isConstraint = primary;
     }
 
     public String getSubmissionid() {
@@ -327,6 +348,9 @@ public class Submission {
                 ", mWER='" + mWER + '\'' +
                 ", mPER='" + mPER + '\'' +
                 ", ICT='" + ICT + '\'' +
+                ", isConstraint='" + isConstraint+'\'' +
+                ", state='" + state +
                 '}';
     }
+
 }

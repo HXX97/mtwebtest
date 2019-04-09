@@ -30,6 +30,8 @@
                 document.getElementById("addSys").classList.remove("hidden");
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
+                document.getElementById("downTest").classList.remove("hidden");
+
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
@@ -70,6 +72,7 @@
                                 '<td>' + result[i].mwer + '</td>' +
                                 '<td>' + result[i].mper + '</td>' +
                                 '<td>' + result[i].ict + '</td>' +
+                                '<td>' + result[i].isConstraint + '</td>' +
                                 '<td>' + result[i].submitter + '</td>' +
                                 '<td>' + result[i].time + '</td>' +
                                 '</tr>'
@@ -102,7 +105,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -113,9 +116,7 @@
                         <li class="active">
                             <a href="#">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -145,6 +146,10 @@
 
                         <li class="hidden" id="history">
                             <a href="/submit/history">历史提交</a>
+                        </li>
+
+                        <li class="hidden" id="downTest">
+                            <a href="/test_sets/list">数据下载</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
@@ -181,7 +186,7 @@
             </select>
         </div>
         <div class="col-md-4">
-            <label for="metric">选择指标：</label>
+            <label for="metric">排序指标：</label>
             <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
                 <option value="BLEU_SBP">BLEU_SBP</option>
                 <option value="BLEU_NIST">BLEU_NIST</option>
@@ -215,6 +220,7 @@
                     <th>mWER</th>
                     <th>mPER</th>
                     <th>ICT</th>
+                    <th>IsConstraint</th>
                     <th>Submitter</th>
                     <th>Submit Time</th>
                 </tr>

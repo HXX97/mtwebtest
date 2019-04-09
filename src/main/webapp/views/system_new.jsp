@@ -31,7 +31,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">HIT MT Evalution</a>
+                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,9 +42,7 @@
                         <li>
                             <a href="/board">积分榜</a>
                         </li>
-                        <li>
-                            <a href="/test_sets/list">数据下载</a>
-                        </li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -77,6 +75,11 @@
                             <a href="/submit/history">历史提交</a>
                         </li>
 
+                        <li>
+                            <a href="/test_sets/list">数据下载</a>
+                        </li>
+
+
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
                                     class="caret"></strong></a>
@@ -104,7 +107,7 @@
                 <legend>新建系统</legend>
                 <form class="form-horizontal" role="form" method="post">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">系统名</label>
+                        <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" name="name" required/>
                         </div>
@@ -112,66 +115,72 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
-                                <label><input type="checkbox" id="isConstraint" name="isConstraint"/>是否为受约束系统</label>
+                                <label><input type="checkbox" id="isConstraint" name="isConstraint"/>Check if this is constraint system</label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+<%--                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label><input type="checkbox" id="isPrimary" name="isPrimary"/>是否为主提交系统</label>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
+                    <input type="hidden" name="isPrimary" value="true"/>
+
                     <div class="form-group">
-                        <label for="software" class="col-sm-2 control-label">所用框架</label>
+                        <label for="software" class="col-sm-2 control-label">Software</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="software" name="software"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="sourceLang" class="col-sm-2 control-label">源语言</label>
-                        <div class="col-sm-10">
-                            <select class="selectpicker" id="sourceLang" name="sourcelang">
-                                <option value="zh">Chinese</option>
-                                <option value="en">English</option>
-                                <option value="mn">Mongolian</option>
-                                <option value="jp">Japanese</option>
-                                <option value="ti">Tibetan</option>
-                                <option value="uy">Uyghur</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="targetLang" class="col-sm-2 control-label">目标语言</label>
-                        <div class="col-sm-10">
-                            <select class="selectpicker" id="targetLang" name="targetlang">
-                                <option value="zh">Chinese</option>
-                                <option value="en">English</option>
-                                <option value="mn">Mongolian</option>
-                                <option value="jp">Japanese</option>
-                                <option value="ti">Tibetan</option>
-                                <option value="uy">Uyghur</option>
-                            </select>
-                        </div>
-                    </div>
+                    <%--                    <div class="form-group">
+                                            <label for="sourceLang" class="col-sm-2 control-label">源语言</label>
+                                            <div class="col-sm-10">
+                                                <select class="selectpicker" id="sourceLang" name="sourcelang">
+                                                    <option value="zh">Chinese</option>
+                                                    <option value="en">English</option>
+                                                    <option value="mn">Mongolian</option>
+                                                    <option value="jp">Japanese</option>
+                                                    <option value="ti">Tibetan</option>
+                                                    <option value="uy">Uyghur</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="targetLang" class="col-sm-2 control-label">目标语言</label>
+                                            <div class="col-sm-10">
+                                                <select class="selectpicker" id="targetLang" name="targetlang">
+                                                    <option value="zh">Chinese</option>
+                                                    <option value="en">English</option>
+                                                    <option value="mn">Mongolian</option>
+                                                    <option value="jp">Japanese</option>
+                                                    <option value="ti">Tibetan</option>
+                                                    <option value="uy">Uyghur</option>
+                                                </select>
+                                            </div>
+                                        </div>--%>
+
+                    <input type="hidden" name="sourcelang" value="zh"/>
+                    <input type="hidden" name="targetlang" value="en"/>
+
 
                     <div class="form-group">
-                        <label for="citation" class="col-sm-2 control-label">引用</label>
+                        <label for="citation" class="col-sm-2 control-label">Citation</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="citation" name="citation"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="website" class="col-sm-2 control-label">网址</label>
+                        <label for="website" class="col-sm-2 control-label">Web</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="website" name="website"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="notes" class="col-sm-2 control-label">备注</label>
+                        <label for="notes" class="col-sm-2 control-label">System Description</label>
                         <div class="col-sm-10">
                             <%--<input type="text" class="form-control" id="notes" name="notes"/>--%>
                             <textarea class="form-control" id="notes" name="notes" rows="5"
@@ -195,15 +204,13 @@
                 <h4>提示</h4>
                 <ul>
                     <li>
-                        Primary systems will be selected for human evaluation, and described in the overview paper.
-                        Other
-                        systems will not. Systems submitted after the deadline may also be excluded.
+                        单个用户的系统名不可重复。
                     </li>
                     <li>
-                        The system name will be used to refer to the system in the overview.
+                        受限训练是指只可以使用评测组织方指定范围的数据进行训练。
                     </li>
                     <li>
-                        The system name will be used to refer to the system in the overview.
+                        单个系统的多次提交，只会将最好成绩记入积分榜。
                     </li>
                 </ul>
             </div>
