@@ -57,20 +57,7 @@ public class SubmissionService {
         //翻译方向
         String direction = trackDao.getDirection(track);
 
-
         new HandleSubmitThread(submission,testSet,system,path,direction,submissionDao).start();
-
-        //submission.setBLEU(computeBLEU(setId,srcLang,tgtLang,filename));
-        //submission.setTER(computeTER(setId,srcLang,tgtLang,filename));
-        //submission.setBEER(computeBEER(setId,srcLang,tgtLang,filename));
-
-        //submission.setBLEU_SBP("110");
-
-        //submission.setBLEU_SBP(computeBLEU_SBP(setId,srcLang,tgtLang,filename,path));
-
-        //this.saveSubmission(submission);
-
-
 
         return submission;
 
@@ -84,23 +71,6 @@ public class SubmissionService {
         System.out.println("filename:"+filename);
         System.out.println("path:"+path);
         System.out.println("RealPath:"+System.getProperty("rootPath"));
-
-        /*try {
-            String command = "python "+path+"eval\\test.py"+" "+path+"uploads\\"+filename;
-            System.out.println(command);
-            Process process = Runtime.getRuntime().exec(command);
-            InputStream in = process.getInputStream();
-            BufferedReader bf = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while((line = bf.readLine())!=null) {
-                System.out.println(line);
-            }
-            in.close();
-            bf.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
 
         return "100";
     }

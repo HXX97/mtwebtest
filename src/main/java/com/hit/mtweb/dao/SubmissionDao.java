@@ -96,6 +96,8 @@ public class SubmissionDao {
                 "ICT=?," +
                 "state=? where systemid=? and time=?";
 
+        //System.out.println(sql);
+
         jdbcTemplate.update(sql,submission.getBLEU_SBP(),
                 submission.getBLEU_NIST(),
                 submission.getTER(),
@@ -107,7 +109,7 @@ public class SubmissionDao {
                 submission.getICT(),
                 submission.getState(),
                 submission.getSystemid(),
-                submission.getState());
+                submission.getTime());
     }
 
 

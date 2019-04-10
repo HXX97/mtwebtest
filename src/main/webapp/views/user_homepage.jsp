@@ -168,7 +168,7 @@
                         <th>Website</th>
                         <th>Notes</th>
                         <th>Constraint System</th>
-                        <th>Primary System</th>
+                        <%--<th>Primary System</th>--%>
                         <th>Owner</th>
                         <th colspan="3">Option</th>
                     </tr>
@@ -185,7 +185,7 @@
                             <td>${system.website}</td>
                             <td>${system.notes}</td>
                             <td>${system.isConstraint}</td>
-                            <td>${system.isPrimary}</td>
+                            <%--<td>${system.isPrimary}</td>--%>
                             <td>${system.owner}</td>
                             <td><a href="/system/detail/${system.systemid}">Detail</a></td>
                             <td><a href="/system/edit/${system.systemid}">Edit</a></td>
