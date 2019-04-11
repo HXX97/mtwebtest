@@ -78,49 +78,7 @@ CREATE TABLE `testsets` (
   PRIMARY KEY (`testsetid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8
 ```
-* Create submissions Table
-```$xslt
-CREATE TABLE `submissions` (
-  `submissionid` int(11) NOT NULL AUTO_INCREMENT,
-  `systemid` int(11) DEFAULT NULL,
-  `systemname` varchar(40) DEFAULT NULL,
-  `testset` varchar(40) DEFAULT NULL,
-  `file` varchar(100) DEFAULT NULL,
-  `notes` varchar(200) DEFAULT NULL,
-  `BLEU` varchar(10) DEFAULT NULL,
-  `BLEU_cased` varchar(10) DEFAULT NULL,
-  `IGNORE_BLEU` varchar(10) DEFAULT NULL,
-  `IGNORE_BLEU_cased` varchar(10) DEFAULT NULL,
-  `IGNORE_BLEU_cased_norm` varchar(10) DEFAULT NULL,
-  `TER` varchar(10) DEFAULT NULL,
-  `BEER` varchar(10) DEFAULT NULL,
-  `charac_ter` varchar(10) DEFAULT NULL,
-  `time` varchar(40) DEFAULT NULL,
-  `srclang` varchar(20) DEFAULT NULL,
-  `tgtlang` varchar(20) DEFAULT NULL,
-  `testsetid` int(11) DEFAULT NULL,
-  `track` varchar(10) DEFAULT NULL,
-  `BLEU_SBP` varchar(10) DEFAULT NULL,
-  `BLEU_NIST` varchar(10) DEFAULT NULL,
-  `METEOR` varchar(10) DEFAULT NULL,
-  `NIST` varchar(10) DEFAULT NULL,
-  `GTM` varchar(10) DEFAULT NULL,
-  `mWER` varchar(10) DEFAULT NULL,
-  `mPER` varchar(10) DEFAULT NULL,
-  `ICT` varchar(10) DEFAULT NULL,
-  `submitter` varchar(20) DEFAULT NULL,
-  `isConstraint` tinyint(1) DEFAULT NULL,
-  `state` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`submissionid`),
-  KEY `systemid` (`systemid`),
-  KEY `testset` (`testset`),
-  KEY `FK_2` (`testsetid`),
-  KEY `FK_username` (`submitter`),
-  CONSTRAINT `FK_2` FOREIGN KEY (`testsetid`) REFERENCES `testsets` (`testsetid`),
-  CONSTRAINT `FK_username` FOREIGN KEY (`submitter`) REFERENCES `users` (`username`),
-  CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`systemid`) REFERENCES `systems` (`systemid`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
-```
+
 * Create Submissions Table
 ```$xslt
 CREATE TABLE `submissions` (
