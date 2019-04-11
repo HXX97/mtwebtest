@@ -115,7 +115,7 @@ public class SubmissionDao {
 
     public List<Submission> queryBySysId(String systemid) {
         List<Submission> submissionList = new ArrayList<>();
-        String sql = "select * from submissions where systemid = ?";
+        String sql = "select * from submissions where systemid = ? order by time desc";
         for (Map map : jdbcTemplate.queryForList(sql, systemid)) {
             submissionList.add(Submission.mapToSubmission(map));
         }
@@ -124,7 +124,7 @@ public class SubmissionDao {
 
     public List<Submission> queryByTrack(String track) {
         List<Submission> submissionList = new ArrayList<>();
-        String sql = "select * from submissions where track = ?";
+        String sql = "select * from submissions where track = ? order by time desc";
         for (Map map : jdbcTemplate.queryForList(sql, track)) {
             submissionList.add(Submission.mapToSubmission(map));
         }
@@ -145,7 +145,7 @@ public class SubmissionDao {
 
     public List<Submission> queryByOwnerNTrack(String username, String track) {
         List<Submission> submissionList = new ArrayList<>();
-        String sql = "select * from submissions where submitter = ? and track = ?";
+        String sql = "select * from submissions where submitter = ? and track = ? order by time desc";
         for (Map map : jdbcTemplate.queryForList(sql, username, track)) {
             submissionList.add(Submission.mapToSubmission(map));
         }

@@ -20,7 +20,7 @@
     <script>
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
-                window.location.href = '/user/logout'
+                window.location.href = '${pageContext.request.contextPath}/user/logout'
             }
         }
 
@@ -65,10 +65,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/">主页</a>
+                            <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -80,7 +80,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="/about">关于本站</a>
+                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
                                 </li>
                             </ul>
                         </li>
@@ -92,19 +92,19 @@
                         </li>
 
                         <li id="addSys">
-                            <a href="/system/new">添加系统</a>
+                            <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
                         <li id="submit">
-                            <a href="/submit/frame">提交测试</a>
+                            <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
                         <li id="history">
-                            <a href="/submit/history">历史提交</a>
+                            <a href="${pageContext.request.contextPath}/submit/history">历史提交</a>
                         </li>
 
                         <li>
-                            <a href="/test_sets/list">数据下载</a>
+                            <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
 
@@ -113,10 +113,10 @@
                                     class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/user/edit/${username}">个人资料</a>
+                                    <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
-                                    <a href="/user/changePWD">修改密码</a>
+                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>
                                 </li>
                                 <li>
                                     <a href="javascript:logout()">登出</a>
@@ -177,7 +177,7 @@
                     <c:forEach items="${requestScope.systemList}" var="system">
                         <tr>
                             <td>${system.systemid}</td>
-                            <td><a href="/system/detail/${system.systemid}">${system.name}</a></td>
+                            <td><a href="${pageContext.request.contextPath}/system/detail/${system.systemid}">${system.name}</a></td>
                             <td>${system.software}</td>
                                 <%--<td>${system.sourcelang}</td>
                                 <td>${system.targetlang}</td>--%>
@@ -187,9 +187,9 @@
                             <td>${system.isConstraint}</td>
                             <%--<td>${system.isPrimary}</td>--%>
                             <td>${system.owner}</td>
-                            <td><a href="/system/detail/${system.systemid}">Detail</a></td>
-                            <td><a href="/system/edit/${system.systemid}">Edit</a></td>
-                            <td><a href="/system/destroy/${system.systemid}"
+                            <td><a href="${pageContext.request.contextPath}/system/detail/${system.systemid}">Detail</a></td>
+                            <td><a href="${pageContext.request.contextPath}/system/edit/${system.systemid}">Edit</a></td>
+                            <td><a href="${pageContext.request.contextPath}/system/destroy/${system.systemid}"
                                    onclick="return confirmDestroy()">Destroy</a></td>
                         </tr>
                     </c:forEach>
@@ -198,8 +198,8 @@
                 </table>
 
                 <div align="right" style="margin-bottom: 20px">
-                    <button class="btn btn-default" onclick="window.location.href='/system/new'">创建新系统</button>
-                    <button class="btn btn-primary" onclick="window.location.href='/submit/frame'">提交测试</button>
+                    <button class="btn btn-default" onclick="window.location.href='${pageContext.request.contextPath}/system/new'">创建新系统</button>
+                    <button class="btn btn-primary" onclick="window.location.href='${pageContext.request.contextPath}/submit/frame'">提交测试</button>
                 </div>
 
             </fieldset>

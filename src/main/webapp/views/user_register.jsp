@@ -61,10 +61,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/">主页</a>
+                            <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -76,7 +76,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="/about">关于本站</a>
+                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
                                 </li>
                             </ul>
                         </li>
@@ -86,7 +86,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/user/login">登录</a>
+                                    <a href="${pageContext.request.contextPath}/user/login">登录</a>
                                 </li>
                                 <li>
                                     <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>

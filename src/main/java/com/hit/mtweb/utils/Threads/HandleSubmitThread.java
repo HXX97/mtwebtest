@@ -71,9 +71,9 @@ public class HandleSubmitThread extends Thread {
             new StreamReaderThread(process.getErrorStream()).start();
             process.waitFor();
             System.out.println("Python program terminated");
-            //清除工作文件夹
-            //FileUtils.cleanDirectory(destDirFile);
-            //FileUtils.deleteDirectory(destDirFile);
+            int exitValue = process.exitValue();
+
+
             for(String outputdir: Objects.requireNonNull(workDir.list())){
                 if(outputdir.contains("OutputData")){
 
@@ -103,8 +103,12 @@ public class HandleSubmitThread extends Thread {
                     break;
                 }
             }
+            if(exitValue==0){
             //更新submission状态
-            submission.setState("success");
+            submission.setState("success");}
+            else{
+                submission.setState("failure");
+            }
             //清除工作文件夹
             FileUtils.deleteDirectory(workDir);
 

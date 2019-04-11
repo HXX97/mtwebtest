@@ -17,7 +17,7 @@
     <script language="JavaScript">
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
-                window.location.href = '/user/logout'
+                window.location.href = '${pageContext.request.contextPath}/user/logout'
             }
         }
 
@@ -86,10 +86,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/">主页</a>
+                            <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -109,23 +109,23 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li id="userHome">
-                            <a href="/user/status">个人主页</a>
+                            <a href="${pageContext.request.contextPath}/user/status">个人主页</a>
                         </li>
 
                         <li id="addSys">
-                            <a href="/system/new">添加系统</a>
+                            <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
                         <li id="submit">
-                            <a href="/submit/frame">提交测试</a>
+                            <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
                         <li id="history">
-                            <a href="/submit/history">历史提交</a>
+                            <a href="${pageContext.request.contextPath}/submit/history">历史提交</a>
                         </li>
 
                         <li>
-                            <a href="/test_sets/list">数据下载</a>
+                            <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
@@ -133,7 +133,7 @@
                                     class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/user/edit/${username}">个人资料</a>
+                                    <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
                                     <a href="javascript:logout()">登出</a>
@@ -175,7 +175,7 @@
                             </div>
                         </div>
                     </div>--%>
-                    <input type="hidden" name="isPrimary" value=${system.isPrimary}/>
+                    <input type="hidden" name="isPrimary" value="${system.isPrimary}"/>
                     <div class="form-group">
                         <label for="software" class="col-sm-2 control-label">Software</label>
                         <div class="col-sm-10">

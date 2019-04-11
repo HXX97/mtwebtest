@@ -16,33 +16,10 @@
     <script>
         function logout() {
             if (window.confirm('Are you sure to log out?') == true) {
-                window.location.href = '/user/logout'
+                window.location.href = '${pageContext.request.contextPath}/user/logout'
             }
         }
 
-        /*function init(){
-            var username="${username}";
-            if(username!="null"&&username!=""){
-                var userDrop = document.getElementById("userDrop");
-                userDrop.classList.remove("dropdown");
-                document.getElementById("userHome").classList.remove("hidden");
-                document.getElementById("addSys").classList.remove("hidden");
-                document.getElementById("submit").classList.remove("hidden");
-                document.getElementById("history").classList.remove("hidden");
-
-                userDrop.innerHTML='<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+username+'<strong class="caret"></strong></a>\n' +
-                    '                            <ul class="dropdown-menu">\n' +
-                    '                                <li>\n' +
-                    '                                    <a href="/user/edit/'+username+'">个人资料</a>\n' +
-                    '                                </li>\n' +
-                    '                                <li>\n' +
-                    '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
-                    '                                </li>\n' +
-                    '                            </ul>';
-            }
-        }
-
-        $(document).ready(function(){init()});*/
     </script>
 </head>
 
@@ -62,10 +39,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/">主页</a>
+                            <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -77,7 +54,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="/about">关于本站</a>
+                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
                                 </li>
                             </ul>
                         </li>
@@ -85,19 +62,19 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li id="userHome">
-                            <a href="/user/status">个人主页</a>
+                            <a href="${pageContext.request.contextPath}/user/status">个人主页</a>
                         </li>
 
                         <li id="addSys">
-                            <a href="/system/new">添加系统</a>
+                            <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
                         <li id="submit">
-                            <a href="/submit/frame">提交测试</a>
+                            <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
                         <li id="history">
-                            <a href="/submit/history">历史提交</a>
+                            <a href="${pageContext.request.contextPath}/submit/history">历史提交</a>
                         </li>
 
                         <li class="active">
@@ -109,7 +86,7 @@
                                     class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/user/edit/${username}">个人资料</a>
+                                    <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
                                     <a href="javascript:logout()">登出</a>
@@ -147,7 +124,7 @@
                 <c:forEach items="${testSetList}" var="testSet">
                     <tr>
                         <td><a href="">${testSet.name}</a><br/>
-                            <a href="/download/testSets/${testSet.srcurl}">download</a></td>
+                            <a href="${pageContext.request.contextPath}/download/testSets/${testSet.srcurl}">download</a></td>
                         <td>${testSet.origin}</td>
                         <td>${testSet.domain}</td>
                         <td>${testSet.related_corpora}</td>

@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SubmissionService {
@@ -48,7 +47,16 @@ public class SubmissionService {
         submission.setNotes(notes);
         //用户上传的结果
         submission.setFile(filename);
-        submission.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        //System.setProperty("user.timezone","GMT +08");
+
+        /*TimeZone timeZone =TimeZone.getTimeZone("GMT+8");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        sdf.setTimeZone(timeZone);*/
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // CST(北京时间)在东8区
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        submission.setTime(sdf.format(new Date()));
         submission.setTrack(track);
         submission.setIsConstraint(system.getIsConstraint());
         submission.setState("computing...");
@@ -113,4 +121,15 @@ public class SubmissionService {
     public void updateBySubmission(Submission submission) {
         submissionDao.updateSubmissionBySub(submission);
     }
+
+/*    public static void main(String[] args){
+
+        System.out.println(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // CST(北京时间)在东8区
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        System.out.println(sdf.format(new Date()));
+
+    }*/
+
 }

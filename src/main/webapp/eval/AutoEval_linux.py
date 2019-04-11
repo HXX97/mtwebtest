@@ -77,7 +77,7 @@ def A2B_middot_ref(ref_path):
     if MT_Direction != "zh-en-news":
         cmd = "python .\\exe\\A2B.py -i %s -o %s_to_A2B -e utf-8" % (ref_path,ref_path)
         os.system(cmd)
-        os.system("del %s" % ref_path)
+        os.system("rm %s" % ref_path)
         fin = open(ref_path+'_to_A2B', 'rU')
         fout = open(ref_path, 'w')
         count=0
@@ -87,7 +87,7 @@ def A2B_middot_ref(ref_path):
             count += cnt
         fin.close()
         fout.close()
-        os.system("del %s" % ref_path+'_to_A2B')
+        os.system("rm %s" % ref_path+'_to_A2B')
 
 def extractRealTestSet(input_file, output_file):
     '''extract real test set according realSegID,
@@ -642,9 +642,9 @@ def extractTable_SignTestBleuSBP(table_sorted_name):
 
 def arrangeFiles():
     "arrange the files produced during the whole process"
-    os.system("del *.scr")
+    os.system("rm *.scr")
     if MT_Direction == "zh-en-news":
-        cmd_list = ['rd /s /q OutputDatazen',
+        cmd_list = ['rm -rf OutputDatazen',
                     'mkdir OutputDatazen\\result_temp',
                     'mkdir OutputDatazen\\xmlt',
                     'mkdir OutputDatazen\\result_tables',
@@ -658,13 +658,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDatazen\\others',
                     'copy *.xmlt_* .\\OutputDatazen\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*','del *plain','del .\\InputData\\*.token']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*','rm *plain','rm .\\InputData\\*.token']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "en-zh-news":
-        cmd_list = ['rd /s /q OutputDataezn',
+        cmd_list = ['rm -rf OutputDataezn',
                     'mkdir OutputDataezn\\result_temp',
                     'mkdir OutputDataezn\\xmlt',
                     'mkdir OutputDataezn\\result_tables',
@@ -678,13 +678,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDataezn\\others',
                     'copy *.xmlt_* .\\OutputDataezn\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*','del *plain', 'del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*','rm *plain', 'rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "en-zh-scie":
-        cmd_list = ['rd /s /q OutputDataezs',
+        cmd_list = ['rm -rf OutputDataezs',
                     'mkdir OutputDataezs\\result_temp',
                     'mkdir OutputDataezs\\xmlt',
                     'mkdir OutputDataezs\\result_tables',
@@ -698,13 +698,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDataezs\\others',
                     'copy *.xmlt_* .\\OutputDataezs\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*', 'del *plain','del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*', 'rm *plain','rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "jp-en-pat":
-        cmd_list = ['rd /s /q OutputDatajzn',
+        cmd_list = ['rm -rf OutputDatajzn',
                     'mkdir OutputDatajzn\\result_temp',
                     'mkdir OutputDatajzn\\xmlt',
                     'mkdir OutputDatajzn\\result_tables',
@@ -718,13 +718,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDatajzn\\others',
                     'copy *.xmlt_* .\\OutputDatajzn\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*', 'del *plain','del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*', 'rm *plain','rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "mn-zh-dail":
-        cmd_list = ['rd /s /q OutputDatamzd',
+        cmd_list = ['rm -rf OutputDatamzd',
                     'mkdir OutputDatamzd\\result_temp',
                     'mkdir OutputDatamzd\\xmlt',
                     'mkdir OutputDatamzd\\result_tables',
@@ -738,13 +738,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDatamzd\\others',
                     'copy *.xmlt_* .\\OutputDatamzd\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*', 'del *plain','del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*', 'rm *plain','rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "ti-zh-gove":
-        cmd_list = ['rd /s /q OutputDatatzg',
+        cmd_list = ['rm -rf OutputDatatzg',
                     'mkdir OutputDatatzg\\result_temp',
                     'mkdir OutputDatatzg\\xmlt',
                     'mkdir OutputDatatzg\\result_tables',
@@ -758,13 +758,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDatatzg\\others',
                     'copy *.xmlt_* .\\OutputDatatzg\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*','del *plain', 'del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*','rm *plain', 'rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "uy-zh-news":
-        cmd_list = ['rd /s /q OutputData',
+        cmd_list = ['rm -rf OutputData',
                     'mkdir OutputDatauzn\\result_temp',
                     'mkdir OutputDatauzn\\xmlt',
                     'mkdir OutputDatauzn\\result_tables',
@@ -778,13 +778,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDatauzn\\others',
                     'copy *.xmlt_* .\\OutputDatauzn\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*', 'del *plain','del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*', 'rm *plain','rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "ka-zh-news":
-        cmd_list = ['rd /s /q OutputDataazn',
+        cmd_list = ['rm -rf OutputDataazn',
                     'mkdir OutputDataazn\\result_temp',
                     'mkdir OutputDataazn\\xmlt',
                     'mkdir OutputDataazn\\result_tables',
@@ -798,13 +798,13 @@ def arrangeFiles():
                     'copy *log* .\\OutputDataazn\\others',
                     'copy *.xmlt_* .\\OutputDataazn\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*','del *plain', 'del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*','rm *plain', 'rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
     if MT_Direction == "ki-zh-news":
-        cmd_list = ['rd /s /q OutputDataizn',
+        cmd_list = ['rm -rf OutputDataizn',
                     'mkdir OutputDataizn\\result_temp',
                     'mkdir OutputDataizn\\xmlt',
                     'mkdir OutputDataizn\\result_tables',
@@ -818,9 +818,9 @@ def arrangeFiles():
                     'copy *log* .\\OutputDataizn\\others',
                     'copy *.xmlt_* .\\OutputDataizn\\others',
 
-                    'del *.result', 'del SignTestBleuSBP*_Out',
-                    'del *.xmlt*', 'del *table*',
-                    'del *log*', 'del *plain','del .\\InputData\\*.split']
+                    'rm *.result', 'rm SignTestBleuSBP*_Out',
+                    'rm *.xmlt*', 'rm *table*',
+                    'rm *log*', 'rm *plain','rm .\\InputData\\*.split']
         for cmd in cmd_list: os.system(cmd)
 
 
