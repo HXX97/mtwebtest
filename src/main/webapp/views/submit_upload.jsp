@@ -163,7 +163,7 @@
 
                         <label for="uploadFile">选择文件: </label>
                         <input type="file" class="file" name="uploadFile" id="uploadFile" required
-                               data-show-preview="false">
+                               data-show-preview="false" accept="application/xml">
 
                     </p>
                     <p>
