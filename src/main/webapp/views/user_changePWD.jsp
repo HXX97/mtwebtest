@@ -94,7 +94,10 @@
                                     class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">个人资料</a>
+                                    <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
+                                </li>
+                                <li>
+                                    <a href="#">修改密码</a>
                                 </li>
                                 <li>
                                     <a href="javascript:logout()">登出</a>

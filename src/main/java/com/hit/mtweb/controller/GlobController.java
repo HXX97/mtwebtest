@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class GlobController {
@@ -26,8 +27,12 @@ public class GlobController {
     @Autowired
     SubmissionService submissionService;
 
+    //Logger logger = Logger.getLogger(String.valueOf(GlobController.class));
+
     @RequestMapping("/")
     public String getHome(Model model) {
+        //logger.info("Visited Homepage");
+
         return "index";
     }
 
@@ -75,14 +80,8 @@ public class GlobController {
 
         //List<Submission> list = submissionService.queryByTrack(track);
         List<Submission> list = submissionService.queryByTrackSortMetric(track,metric);
-
-
-
         return list;
 
     }
-
-
-
 
 }

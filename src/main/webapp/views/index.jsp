@@ -33,7 +33,9 @@
                     '                            <ul class="dropdown-menu">\n' +
                     '                                <li>\n' +
                     '                                    <a href="${pageContext.request.contextPath}/user/edit/' + username + '">个人资料</a>\n' +
-                    '                                </li>\n' +
+                    '                                </li>\n' +'<li>\n' +
+                    '                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>\n' +
+                    '                                </li>'+
                     '                                <li>\n' +
                     '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
                     '                                </li>\n' +

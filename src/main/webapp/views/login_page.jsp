@@ -142,13 +142,13 @@
                             <a id="errorMsg" href="javascript:void(0)" style="color: red">${errorMsg}</a>
                         </div>
                     </div>
-                    <div class="form-group">
+                   <%-- <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label><input type="checkbox"/>记住密码</label>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10" align="right">
                             <button type="submit" class="btn btn-default">登录</button>

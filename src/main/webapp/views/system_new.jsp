@@ -88,6 +88,9 @@
                                     <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
+                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>
+                                </li>
+                                <li>
                                     <a href="javascript:logout()">登出</a>
                                 </li>
 

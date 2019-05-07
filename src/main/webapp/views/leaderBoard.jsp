@@ -37,7 +37,7 @@
                     '                            <ul class="dropdown-menu">\n' +
                     '                                <li>\n' +
                     '                                    <a href="${pageContext.request.contextPath}/user/edit/' + username + '">个人资料</a>\n' +
-                    '                                </li>\n' +
+                    '                                </li>\n' +'<li> <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a> </li>'+
                     '                                <li>\n' +
                     '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
                     '                                </li>\n' +
@@ -181,7 +181,7 @@
                 <option value="MC">MC</option>
                 <option value="TC">TC</option>
                 <option value="UC">UC</option>
-                <option value="JE">JE</option>
+                <%--<option value="JE">JE</option>--%>
 
             </select>
         </div>

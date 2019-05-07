@@ -160,6 +160,9 @@
                                     <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
                                 </li>
                                 <li>
+                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>
+                                </li>
+                                <li>
                                     <a href="javascript:logout()">登出</a>
                                 </li>
 
@@ -185,7 +188,7 @@
                 <option value="MC">MC</option>
                 <option value="TC">TC</option>
                 <option value="UC">UC</option>
-                <option value="JE">JE</option>
+                <%--<option value="JE">JE</option>--%>
             </select>
         </div>
     </div>
