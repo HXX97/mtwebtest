@@ -17,6 +17,36 @@
             }
         }
 
+
+        function init() {
+            var username = "${username}";
+            if (username != "null" && username != "") {
+                var userDrop = document.getElementById("userDrop");
+                userDrop.classList.remove("dropdown");
+                document.getElementById("userHome").classList.remove("hidden");
+                document.getElementById("addSys").classList.remove("hidden");
+                document.getElementById("submit").classList.remove("hidden");
+                document.getElementById("history").classList.remove("hidden");
+                document.getElementById("downTest").classList.remove("hidden");
+
+                userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
+                    '                            <ul class="dropdown-menu">\n' +
+                    '                                <li>\n' +
+                    '                                    <a href="${pageContext.request.contextPath}/user/edit/' + username + '">个人资料</a>\n' +
+                    '                                </li>\n' +'<li>\n' +
+                    '                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>\n' +
+                    '                                </li>'+
+                    '                                <li>\n' +
+                    '                                    <a href="javascript:void(0)" onclick="logout()">登出</a>\n' +
+                    '                                </li>\n' +
+                    '                            </ul>';
+            }
+        }
+
+        $(document).ready(function () {
+            init()
+        });
+
     </script>
 </head>
 <body>
@@ -58,41 +88,36 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li id="userHome">
+                        <li id="userHome" class="hidden">
                             <a href="${pageContext.request.contextPath}/user/status">个人主页</a>
                         </li>
 
-                        <li id="addSys">
+                        <li id="addSys" class="hidden">
                             <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
-                        <li id="submit">
+                        <li id="submit" class="hidden">
                             <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
-                        <li id="history">
+                        <li id="history" class="hidden">
                             <a href="${pageContext.request.contextPath}/submit/history">历史提交</a>
                         </li>
 
-                        <li>
+                        <li id="downTest" class="hidden">
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
 
                         <li class="dropdown" id="userDrop">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong
-                                    class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/user/edit/${username}">个人资料</a>
+                                    <a href="${pageContext.request.contextPath}/user/login">登录</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/user/changePWD">修改密码</a>
+                                    <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>
                                 </li>
-                                <li>
-                                    <a href="javascript:logout()">登出</a>
-                                </li>
-
                             </ul>
                         </li>
                     </ul>

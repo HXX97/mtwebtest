@@ -194,8 +194,8 @@
                 <option value="METEOR">METEOR</option>
                 <option value="NIST">NIST</option>
                 <option value="GTM">GTM</option>
-                <option value="mWER">mWER</option>
-                <option value="mPER">mPER</option>
+                <%--<option value="mWER">mWER</option>
+                <option value="mPER">mPER</option>--%>
                 <option value="ICT">ICT</option>
             </select>
         </div>

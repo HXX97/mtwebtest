@@ -284,7 +284,8 @@ def meteor_eval(input_file,output_file):
         cmd = format2 % (input_file + '.split',inputDataDir+ref+'.xml.split',output_file)
     print "  -->starting meteor evaluation for " + input_file + "..."
 
-    os.system(cmd)
+    exitValue = os.system(cmd)
+    if exitValue!=0: exitt(-1)
 
 def buildPlainref(ref_file,output):
     #generate plaintext reference
@@ -333,7 +334,8 @@ def ter_eval(input_file,output_file):
     elif MT_Direction == "ki-zh-news":
         cmd = format2 % (ref+'.xml.split.plain', input_file + '.split.plain', output_file)
     print "  -->starting ter evaluation for " + input_file + "..."
-    os.system(cmd)
+    exitValue = os.system(cmd)
+    if(exitValue!=0): exit(-1)
 
 def mteval_sbp(input_file, output_file):
     'method for calling mteval_sbp.exe'
@@ -367,7 +369,9 @@ def mteval_sbp(input_file, output_file):
     elif MT_Direction == "ki-zh-news":
         cmd = format9 % (inputDataDir+ref+'.xml', inputDataDir+src+'.xml', input_file, output_file)
     print "  -->processing " + input_file + '...'
-    os.system(cmd)
+    exitValue = os.system(cmd)
+    if exitValue!=0: exit(-1)
+
 
 def extractTable_mteval_sbp(input_file, input_file1, input_file2, output_file):
     'read mteval_sbp_result file, and extract one line info for printing'
@@ -379,6 +383,9 @@ def extractTable_mteval_sbp(input_file, input_file1, input_file2, output_file):
 
     # read and extract
     for i in range(8): line = fin.readline()
+    # mteval_sbp failed
+    if line.find('NIST=') == -1: return
+
     #print line
     for item in line.split():
         if item.find('NIST=') != -1: NIST = item[5:]
