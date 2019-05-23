@@ -26,7 +26,7 @@
                 document.getElementById("userHome").classList.remove("hidden");
                 document.getElementById("addSys").classList.remove("hidden");
                 document.getElementById("submit").classList.remove("hidden");
-                document.getElementById("history").clasList.remove("hidden");
+                document.getElementById("history").classList.remove("hidden");
                 document.getElementById("downTest").classList.remove("hidden");
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
@@ -151,7 +151,7 @@
                     <p style="margin:0pt 0pt 0pt 45pt; orphans:0; text-indent:-21pt; widows:0"><span
                             style="font-family:Wingdings; font-size:12pt"></span><span
                             style="font:7.0pt 'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
-                            style="font-family:宋体; font-size:12pt">提供训练集数据下载</span></p>
+                            style="font-family:宋体; font-size:12pt">提供测试集数据下载</span></p>
                     <p style="margin:0pt 0pt 0pt 45pt; orphans:0; text-indent:-21pt; widows:0"><span
                             style="font-family:Wingdings; font-size:12pt"></span><span
                             style="font:7.0pt 'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
@@ -215,7 +215,7 @@
                             style="font-family:宋体; font-size:12pt">1）</span><span
                             style="font-family:宋体; font-size:12pt">用户的个人信息</span><span
                             style="font-family:宋体; font-size:12pt">仅主办</span><span
-                            style="font-family:宋体; font-size:12pt">方及用户本账户可见。</span></p>
+                            style="font-family:宋体; font-size:12pt">方及用户本账户可见。但用户的单位信息将展示在积分榜的提交结果中，若不填则默认为空，请务必填写。</span></p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">2）</span><span
                             style="font-family:宋体; font-size:12pt">用户所创建的系统，其详细信息可在积分榜中被所有人查看，包括系统信息、系统提交记录、提交人等。</span></p>
@@ -227,7 +227,7 @@
                             style="font-family:宋体; font-size:12pt">s</span><span
                             style="font-family:宋体; font-size:12pt">ysid</span><span
                             style="font-family:宋体; font-size:12pt">属性填写此i</span><span
-                            style="font-family:宋体; font-size:12pt">d</span><span style="font-family:宋体; font-size:12pt">即可。</span>
+                            style="font-family:宋体; font-size:12pt">d</span><span style="font-family:宋体; font-size:12pt">即可。<b>特别注意：sysid为必填，setid必须与src中的setid一致，否则会评测失败。</b></span>
                     </p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">4）</span><span
@@ -235,25 +235,18 @@
                     </p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">5）</span><span
-                            style="font-family:宋体; font-size:12pt">提交数据格式请务必按照评测要求，所提交翻译结果的根元素应为tstset,参考格式如下图：</span>
+                            style="font-family:宋体; font-size:12pt">提交数据格式请务必按照评测要求，文件格式为xml，所提交翻译结果的根元素应为tstset,参考格式如下图：</span>
                     </p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0">
                         <img src="${pageContext.request.contextPath}/statics/pics/demo.png" width="100%">
                     </p>
+                    <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
+                            style="font-family:宋体; font-size:12pt">6）</span><span
+                            style="font-family:宋体; font-size:12pt">若在使用平台中遇到其它问题，请联系xixinhu97@foxmail.com</span>
+                    </p>
+
                 </div>
-                <%--本站为第十五届全国机器翻译学术会议评测网站，提供数据下载，机器翻译系统评测等服务。
-                本站提供包括但不限于以下机器翻译评测指标：
-                <ul>
-                    <li>BLEU</li>
-                    <li>METEOR</li>
-                    <li>NIST</li>
-                    <li>mWER</li>
-                    <li>mPER</li>
-                    <li>ICT</li>
-                </ul>
-                若想提交评测，请登录。
-                若多次提交，只有最好成绩将显示在积分榜上，请各参赛队伍注意。
-                如在使用中遇到任何问题，请联系1029796949@qq.com。--%>
+
             </fieldset>
         </div>
         <div class="col-md-3 column"></div>

@@ -46,7 +46,8 @@ public class SubmissionDao {
                 "ICT," +
                 "submitter," +
                 "isConstraint," +
-                "state) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "state,"+
+                "affiliation) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         jdbcTemplate.update(sql,
                 submission.getSystemid(),
@@ -77,7 +78,8 @@ public class SubmissionDao {
                 submission.getICT(),
                 submission.getSubmitter(),
                 submission.getIsConstraint(),
-                submission.getState());
+                submission.getState(),
+                submission.getAffiliation());
 
     }
 
@@ -155,12 +157,6 @@ public class SubmissionDao {
     public List<Submission> queryByTrackSortMetric(String track, String metric) {
         List<Submission> submissionList = new ArrayList<>();
 
-       /* String sql = "select * from submissions where track = ? order by "+metric+" desc";
-        for (Map map : jdbcTemplate.queryForList(sql,track)) {
-            submissionList.add(Submission.mapToSubmission(map));
-        }*/
-
-
         //根据metric降序，每个systemid只根据该metric取最高分
 
 
@@ -174,7 +170,7 @@ public class SubmissionDao {
         }
 
         //取到每个id的最好成绩,加入到List中
-        sql = "select * from submissions where systemid = ? and track = ? and state= ? order by ifnull(cast(" + metric + " as decimal(10,2)),0) desc,time desc limit 1";
+        sql = "select * from submissions where systemid = ? and track = ? and state= ? order by ifnull(cast(" + metric + " as decimal(10,4)),0) desc,time desc limit 1";
         for (String systemid : systemidSet) {
             List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql, Integer.valueOf(systemid), track,"success");
             for (Map map : maps) {

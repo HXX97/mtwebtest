@@ -31,6 +31,9 @@ public class SubmissionService {
     @Autowired
     TrackDao trackDao;
 
+    @Autowired
+    UserDao userDao;
+
     public Submission handleSubmit(String setId, String sysId, String srcLang, String tgtLang, String notes, String filename, String track,String username,String path) {
         Submission submission = new Submission();
         MTSystem system = systemDao.queryById(sysId);
@@ -47,6 +50,9 @@ public class SubmissionService {
         submission.setNotes(notes);
         //用户上传的结果
         submission.setFile(filename);
+        String affiliation = userDao.getUserByName(username).getAffiliation();
+        if(affiliation==null||affiliation.equals("")) affiliation="";
+        submission.setAffiliation(affiliation);
         //System.setProperty("user.timezone","GMT +08");
 
         /*TimeZone timeZone =TimeZone.getTimeZone("GMT+8");
@@ -121,15 +127,5 @@ public class SubmissionService {
     public void updateBySubmission(Submission submission) {
         submissionDao.updateSubmissionBySub(submission);
     }
-
-/*    public static void main(String[] args){
-
-        System.out.println(new Date());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // CST(北京时间)在东8区
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        System.out.println(sdf.format(new Date()));
-
-    }*/
 
 }

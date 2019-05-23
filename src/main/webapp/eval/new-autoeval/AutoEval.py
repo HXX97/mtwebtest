@@ -285,7 +285,7 @@ def meteor_eval(input_file,output_file):
     print "  -->starting meteor evaluation for " + input_file + "..."
 
     exitValue = os.system(cmd)
-    if exitValue!=0: exitt(-1)
+    if exitValue!=0: exit(-1)
 
 def buildPlainref(ref_file,output):
     #generate plaintext reference
@@ -486,7 +486,7 @@ def sort_result(input_file, output_file):
 
     if MT_Direction == "zh-en-news":
         table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7,8,9, 10, 11, 0), reverse = True)
-        fout.write("participants	BLEU4-SBP	BLEU5   BLEU6   NIST6   NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")
+        fout.write("participants	BLEU4-SBP	BLEU4   BLEU6   NIST6   NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")
     elif MT_Direction == "en-zh-news":
         table.sort(key = operator.itemgetter(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0), reverse = True)
         fout.write("participants	BLEU5-SBP	BLEU5	BLEU6	NIST6	NIST7	GTM	mWER	mPER	ICT	METEOR	TER\n")

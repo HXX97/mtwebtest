@@ -36,6 +36,7 @@ public class Submission {
     private String ICT;
     private Boolean isConstraint;
     private String state; //上传状态
+    private String affiliation;
 
 
     public static Submission mapToSubmission(Map map) {
@@ -69,10 +70,19 @@ public class Submission {
         submission.setICT((String) map.get("ICT"));
         submission.setIsConstraint((Boolean)map.get("isConstraint"));
         submission.setState((String)map.get("state"));
+        submission.setAffiliation((String)map.get("affiliation"));
 
         return submission;
     }
 
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
+    }
 
     public String getState() {
         return state;
@@ -348,9 +358,9 @@ public class Submission {
                 ", mWER='" + mWER + '\'' +
                 ", mPER='" + mPER + '\'' +
                 ", ICT='" + ICT + '\'' +
-                ", isConstraint='" + isConstraint+'\'' +
-                ", state='" + state +
+                ", isConstraint=" + isConstraint +
+                ", state='" + state + '\'' +
+                ", affiliation='" + affiliation + '\'' +
                 '}';
     }
-
 }

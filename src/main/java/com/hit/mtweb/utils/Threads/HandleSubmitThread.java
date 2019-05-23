@@ -113,7 +113,7 @@ public class HandleSubmitThread extends Thread {
             FileUtils.deleteDirectory(workDir);
 
 
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             submission.setState("failure");//出现问题，更新本次状态为failure
             e.printStackTrace();
         }finally {

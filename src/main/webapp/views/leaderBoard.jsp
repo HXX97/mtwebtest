@@ -59,7 +59,7 @@
                             data += '<tr>' +
                                 '<td>' + (i + 1) + '</td>' +
                                 '<td><a href="${pageContext.request.contextPath}/system/detail/'+result[i].systemid+'">'+ result[i].systemName + '</td>' +
-                                '<td>' + result[i].testset + '</td>' +
+                                '<td>' + result[i].affiliation + '</td>' +
                                 '<td>' + result[i].notes + '</td>' +
                                 /*'<td>' + result[i].srclang + '</td>' +
                                 '<td>' + result[i].tgtlang + '</td>' +*/
@@ -190,7 +190,7 @@
             <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
                 <option value="BLEU_SBP">BLEU_SBP</option>
                 <option value="BLEU_NIST">BLEU_NIST</option>
-                <option value="TER">TER</option>
+                <%--<option value="TER">TER</option>--%>
                 <option value="METEOR">METEOR</option>
                 <option value="NIST">NIST</option>
                 <option value="GTM">GTM</option>
@@ -207,7 +207,7 @@
                 <tr>
                     <th>Rank</th>
                     <th>System</th>
-                    <th>TestSet</th>
+                    <th>Affiliation</th>
                     <th>Run Notes</th>
                     <%--<th>Source language</th>
                     <th>Target language</th>--%>

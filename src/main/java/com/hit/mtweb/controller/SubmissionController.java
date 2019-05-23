@@ -164,6 +164,7 @@ public class SubmissionController {
                 username,
                 request.getServletContext().getRealPath("/"));
 
+        //System.out.println(submission);
         submissionService.saveSubmission(submission);
 
         //newModel.addAttribute("submission",submission);

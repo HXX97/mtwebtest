@@ -29,10 +29,17 @@
         }
 
         function checkForm() {
-            if (document.getElementById("uploadFile").value == "")
+            uploadFile = document.getElementById("uploadFile").value
+            if (uploadFile == "") {
+                alert("请选择文件");
                 return false;
-            else
-                return true;
+            } else {
+                if (!/\.(xml)$/.test(uploadFile)) {
+                    alert("文件类型必须为xml");
+                    return false;
+                }
+            }
+            return true;
         }
 
         function init() {
@@ -156,7 +163,7 @@
             <fieldset>
                 <legend>上传文件</legend>
                 <form class="form-horizontal" action="${pageContext.request.contextPath}/submit/upload" role="form" method="post"
-                      enctype="multipart/form-data" onsubmit="checkForm()">
+                      enctype="multipart/form-data" onsubmit="return checkForm()">
                     <p>测试集: ${setName}</p>
                     <p>系统: ${sysName}</p>
                     <p>源语言: ${srcLangFull}</p>

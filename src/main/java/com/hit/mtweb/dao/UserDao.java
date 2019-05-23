@@ -70,10 +70,15 @@ public class UserDao {
                     newUserInfo.getWeb(),
                     newUserInfo.getAffiliation(),
                     newUserInfo.getUsername());
+
+            sql = "update submissions set affiliation = ? where submitter = ?";
+
+            jdbcTemplate.update(sql,newUserInfo.getAffiliation(),newUserInfo.getUsername());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+
         return true;
     }
 
