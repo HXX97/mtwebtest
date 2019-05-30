@@ -174,6 +174,10 @@
             <h4>积分榜</h4>
         </div>
         <div class="col-md-4">
+
+        </div>
+
+        <div class="col-md-4">
             <label for="track">选择任务:</label>
             <select class="selectpicker" id="track" onchange="getLeaderBoard()">
                 <option value="CE">CE</option>
@@ -185,7 +189,8 @@
 
             </select>
         </div>
-        <div class="col-md-4">
+
+        <div class="col-md-4 hidden">
             <label for="metric">排序指标：</label>
             <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
                 <option value="BLEU_SBP">BLEU_SBP</option>
@@ -199,6 +204,7 @@
                 <option value="ICT">ICT</option>
             </select>
         </div>
+
     </div>
     <div class="row clearfix">
         <div class="col-md-12 column">
