@@ -40,7 +40,7 @@
                             <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -77,6 +77,10 @@
 
                         <li>
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
+                        </li>
+
+                        <li id="upload">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
                         </li>
 
 
@@ -213,7 +217,7 @@
                         受限训练是指只可以使用评测组织方指定范围的数据进行训练。
                     </li>
                     <li>
-                        单个系统的多次提交，只会将最好成绩记入积分榜。
+                        单个系统的多次提交，只会将最好成绩记入排行榜。
                     </li>
                 </ul>
             </div>

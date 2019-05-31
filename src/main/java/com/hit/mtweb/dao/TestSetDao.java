@@ -17,7 +17,7 @@ public class TestSetDao {
 
     public List<TestSet> getAllTestSets() {
         List<TestSet> testSetList = new ArrayList<>();
-        String sql = "select * from testsets";
+        String sql = "select * from testsets  order by isPrimarySet DESC";
         for (Map map : jdbcTemplate.queryForList(sql)) {
             testSetList.add(TestSet.mapToTestSet(map));
         }
@@ -32,5 +32,26 @@ public class TestSetDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public TestSet queryByTrack(String track) {
+        String sql = "select * from testsets where track = ? and isPrimarySet = 1";
+        try{
+            return jdbcTemplate.queryForObject(sql,new TestSetRowMapper(),track);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
+    public List<TestSet> getNotPrimaryTestSets() {
+        String sql = "select * from testsets where isPrimarySet = 0";
+        List<TestSet> testSetList = new ArrayList<>();
+        for (Map map : jdbcTemplate.queryForList(sql)) {
+            testSetList.add(TestSet.mapToTestSet(map));
+        }
+        return testSetList;
     }
 }

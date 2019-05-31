@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Leader Board</title>
+    <title>Leaderboard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
@@ -31,6 +31,7 @@
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
                 document.getElementById("downTest").classList.remove("hidden");
+                document.getElementById("upload").classList.remove("hidden");
 
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
@@ -114,7 +115,7 @@
                             <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li class="active">
-                            <a href="#">积分榜</a>
+                            <a href="#">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -152,6 +153,10 @@
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
+                        <li class="hidden" id="upload">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        </li>
+
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
@@ -171,7 +176,7 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-4">
-            <h4>积分榜</h4>
+            <h4>排行榜</h4>
         </div>
         <div class="col-md-4">
 

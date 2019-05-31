@@ -55,7 +55,7 @@ public class HandleSubmitThread extends Thread {
                     destDirFile);
 
             //将src文件复制到InputData下，调用fileutils
-            FileUtils.copyFileToDirectory(new File(path+"testSets/srcs/"+testset.getSrcurl()),
+            FileUtils.copyFileToDirectory(new File(path+"testSets/srcs/"+testset.getRealsrcurl()),
                     destDirFile);
 
             //将用户上传文件复制到InputData下,调用fileutils

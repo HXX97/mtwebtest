@@ -28,6 +28,7 @@
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
                 document.getElementById("downTest").classList.remove("hidden");
+                document.getElementById("upload").classList.remove("hidden");
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
@@ -69,7 +70,7 @@
                             <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -106,6 +107,10 @@
 
                         <li id="downTest" class="hidden">
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
+                        </li>
+
+                        <li id="upload" class="hidden">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
                         </li>
 
 

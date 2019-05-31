@@ -28,6 +28,7 @@
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
                 document.getElementById("downTest").classList.remove("hidden");
+                document.getElementById("upload").classList.remove("hidden");
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
@@ -68,7 +69,7 @@
                             <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -107,6 +108,9 @@
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
+                        <li class="hidden" id="upload">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        </li>
 
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
@@ -167,7 +171,7 @@
                     <p style="margin:0pt 0pt 0pt 45pt; orphans:0; text-indent:-21pt; widows:0"><span
                             style="font-family:Wingdings; font-size:12pt"></span><span
                             style="font:7.0pt 'Times New Roman'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
-                            style="font-family:宋体; font-size:12pt">查看当前各个任务的排名情况及积分榜</span></p>
+                            style="font-family:宋体; font-size:12pt">查看当前各个任务的排名情况及排行榜</span></p>
                     <ol start="2" type="1" style="margin:0pt; padding-left:0pt">
                         <li style="font-family:黑体; font-size:15pt; margin:0pt 0pt 0pt 18pt; orphans:0; text-indent:0pt; widows:0">
                             <span style="font-family:黑体; font-size:15pt">使用步骤</span></li>
@@ -215,10 +219,10 @@
                             style="font-family:宋体; font-size:12pt">1）</span><span
                             style="font-family:宋体; font-size:12pt">用户的个人信息</span><span
                             style="font-family:宋体; font-size:12pt">仅主办</span><span
-                            style="font-family:宋体; font-size:12pt">方及用户本账户可见。但用户的单位信息将展示在积分榜的提交结果中，若不填则默认为空，请务必填写。</span></p>
+                            style="font-family:宋体; font-size:12pt">方及用户本账户可见。但用户的单位信息将展示在排行榜的提交结果中，若不填则默认为空，请务必填写。</span></p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">2）</span><span
-                            style="font-family:宋体; font-size:12pt">用户所创建的系统，其详细信息可在积分榜中被所有人查看，包括系统信息、系统提交记录、提交人等。</span></p>
+                            style="font-family:宋体; font-size:12pt">用户所创建的系统，其详细信息可在排行榜中被所有人查看，包括系统信息、系统提交记录、提交人等。</span></p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">3）</span><span
                             style="font-family:宋体; font-size:12pt">用户创建的系统会由系统分配系统i</span><span
@@ -231,7 +235,7 @@
                     </p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">4）</span><span
-                            style="font-family:宋体; font-size:12pt">单个用户可以创建多个系统，每个系统的提交次数、提交任务均不受限制，但对于某个任务，单个系统的多次提交，只取其最好成绩计入积分榜中。</span>
+                            style="font-family:宋体; font-size:12pt">单个用户可以创建多个系统，每个系统的提交次数、提交任务均不受限制，但对于某个任务，单个系统的多次提交，只取其最好成绩计入排行榜中。</span>
                     </p>
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
                             style="font-family:宋体; font-size:12pt">5）</span><span

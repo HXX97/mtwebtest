@@ -50,7 +50,7 @@
                             <a href="${pageContext.request.contextPath}/">主页</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -88,6 +88,11 @@
                         <li>
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
+
+                        <li id="upload">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        </li>
+
 
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">${username}<strong

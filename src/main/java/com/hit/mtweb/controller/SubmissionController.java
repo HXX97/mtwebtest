@@ -48,7 +48,8 @@ public class SubmissionController {
             return "redirect:/user/login";
         }
 
-        List<TestSet> testSetList = testSetService.getAllTestSets();
+        //List<TestSet> testSetList = testSetService.getAllTestSets();
+        List<TestSet> testSetList = testSetService.getNotPrimaryTestSets();
         model.addAttribute("testSetList", testSetList);
         List<MTSystem> systemList = systemService.queryByOwner(username);
         model.addAttribute("systemList", systemList);

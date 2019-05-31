@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 10297
-  Date: 2019/2/28
-  Time: 1:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Submit:Upload</title>
+    <title>Upload</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -34,8 +28,8 @@
                 alert("请选择文件");
                 return false;
             } else {
-                if (!/\.(xml)$/.test(uploadFile)) {
-                    alert("文件类型必须为xml");
+                if (!/\.(zip)$/.test(uploadFile)) {
+                    alert("文件类型必须为zip");
                     return false;
                 }
             }
@@ -43,18 +37,6 @@
         }
 
         function init() {
-            var message = "${msg}";
-
-            if (message != "" && message != "null") {
-                document.getElementById("msg").classList.remove("hidden");
-                var msgLevel = "${msgLevel}";
-                if (msgLevel == 1) {
-                    document.getElementById("msg").classList.add("alert-danger");
-                } else {
-                    document.getElementById("msg").classList.add("alert-success");
-                }
-            }
-
         }
 
         $(document).ready(function () {
@@ -111,8 +93,8 @@
                             <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
-                        <li id="submit" class="active">
-                            <a href="#">提交测试</a>
+                        <li id="submit">
+                            <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
                         <li id="history">
@@ -123,8 +105,8 @@
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
-                        <li id="upload">
-                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        <li class="active">
+                            <a href="#">CCMT2019提交入口</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
@@ -149,50 +131,75 @@
         </div>
     </div>
 
-    <div class="row clearfix">
-        <div class="col-md-12 column">
 
-            <div class="alert alert-dismissable alert-info hidden" id="msg">
-                <button type="button" class="close " data-dismiss="alert" aria-hidden="true">×</button>
-                <h4>Message</h4>${msg}
-            </div>
-
-        </div>
-    </div>
 
     <div class="row clearfix">
 
         <div class="col-md-3"></div>
         <div class="col-md-6 column">
             <fieldset>
-                <legend>上传文件</legend>
-                <form class="form-horizontal" action="${pageContext.request.contextPath}/submit/upload" role="form" method="post"
+                <legend>CCMT2019提交入口</legend>
+                <form class="form-horizontal" action="${pageContext.request.contextPath}/upload" role="form" method="post"
                       enctype="multipart/form-data" onsubmit="return checkForm()">
-                    <p>测试集: ${setName}</p>
-                    <p>系统: ${sysName}</p>
-                    <p>源语言: ${srcLangFull}</p>
-                    <p>目标语言: ${tgtLangFull}</p>
-                    <p>任务: ${track}</p>
+                    <label for="uploadHistory">已成功上传的文件：</label>
+                    <div id="uploadHistory">
+                        <table class="table table-hover table-striped" id="systemTable">
+                            <thead>
+                            <tr>
+                                <th>FileName</th>
+                                <th>track</th>
+                                <th>Upload Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${recordList}" var="record">
+                                <tr>
+                                    <td>${record.fileName}</td>
+                                    <td>${record.track}</td>
+                                    <td>${record.time}</td>
+                                </tr>
+                            </c:forEach>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <label for="instruction">上传说明:</label>
+                    <div id="instruction">
+                        1)对于所有的任务，请将要提交的文件打包成一个zip，只接受zip提交。<b>zip文件名格式:CCMT2019_XXX_**.zip。文件名不得包含中文</b>
+                        CCMT2019_XXX是用户的登录账号，**是所参加的任务代号。<br/>
+                        2)每个参赛账号在每个任务下<b>只能成功提交一次</b>，格式检查失败不计次数，请谨慎提交，确保提交文件内容、格式正确<br/>
+                        3)对于翻译任务，xml文件名格式为<b>项目代号-评测语料年份-参评单位代号-主/对比系统-参评系统代号</b>，
+                        如ce-2019-hit-primary-a.xml/ce-2019-hit-contrast-b.xml。<br/>
+                        文件名模式中主/对比系统-参评系统代号必须以英文字母顺序排序，顺序中包含主及对比系统，例如：主系统为a，则对比系统从b开始。<br/>
+                        4)翻译任务提交的文件需通过<b>格式检查</b>，格式检查不通过需要修改格式后重新提交。以下提交文件格式作为参考，具体请参照评测大纲要求。
+                        <img src="${pageContext.request.contextPath}/statics/pics/demo4Upload.png" width="100%"><br>
+                        5)对于QE任务，<b>文件名遵循下表要求</b>。(（其中：项目代号以ce-qe为例，参评单位代号以ict为例）)
+                        <img src="${pageContext.request.contextPath}/statics/pics/qeillustration.png" width="100%"/><br>
+                        6)QE任务未做格式检查，请确保格式正确。<br>
+
+                    </div>
+                    <label for="track">选择任务:</label>
+                    <select class="selectpicker" id="track" name="track">
+                        <%--<option value="CE">CE</option>
+                        <option value="EC">EC</option>
+                        <option value="MC">MC</option>
+                        <option value="TC">TC</option>
+                        <option value="UC">UC</option>--%>
+                        <option value="JE">JE</option>
+                        <option value="CE-QE">CE-QE</option>
+                        <option value="EC-QE">EC-QE</option>
+                    </select>
                     <p>
 
                         <label for="uploadFile">选择文件: </label>
                         <input type="file" class="file" name="uploadFile" id="uploadFile" required
-                               data-show-preview="false" accept="application/xml">
+                               data-show-preview="false" accept="application/zip">
 
                     </p>
-                    <p>
-                        <label for="notes">备注: </label>
-                        <textarea name="notes" id="notes" class="form-control" rows="5" style="resize: none"></textarea>
-                    </p>
-                    <input type="hidden" name="setId" value="${setId}">
-                    <input type="hidden" name="sysId" value="${sysId}">
-                    <input type="hidden" name="srcLang" value="${srcLang}">
-                    <input type="hidden" name="tgtLang" value="${tgtLang}">
-                    <input type="hidden" name="track" value="${track}">
 
                     <div align="right">
-
-                        <button class="btn btn-default" onclick="javascript:window.history.back()">返回上一步</button>
                         <button type="submit" class="btn btn-primary">上传</button>
                     </div>
                 </form>

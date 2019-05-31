@@ -28,6 +28,7 @@
                 document.getElementById("submit").classList.remove("hidden");
                 document.getElementById("history").classList.remove("hidden");
                 document.getElementById("downTest").classList.remove("hidden");
+                document.getElementById("upload").classList.remove("hidden");
 
                 userDrop.innerHTML = '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' + username + '<strong class="caret"></strong></a>\n' +
                     '                            <ul class="dropdown-menu">\n' +
@@ -68,7 +69,7 @@
                             <a href="#">主页</a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/board">积分榜</a>
+                            <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
                         <li class="dropdown">
@@ -107,6 +108,10 @@
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
+                        <li class="hidden" id="upload">
+                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        </li>
+
 
                         <li class="dropdown" id="userDrop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
@@ -128,7 +133,7 @@
                     欢迎来到CCMT2019机器翻译评测网站！
                 </h2>
                 <p>
-                    本站提供第十五届全国机器翻译学术会议(CCMT 2019)的评测服务，各参赛队伍需使用主办方提供的账户登录，并提交评测相关信息。所有任务的评测结果将在本站的积分榜展示，请各参赛队伍注意。
+                    本站提供第十五届全国机器翻译学术会议(CCMT 2019)的评测服务，各参赛队伍需使用主办方提供的账户登录，并提交评测相关信息。所有任务的评测结果将在本站的排行榜展示，请各参赛队伍注意。
                 </p>
                 <p>
                     <a class="btn btn-primary btn-large" href="http://ccmt2019.jxnu.edu.cn">了解更多</a>

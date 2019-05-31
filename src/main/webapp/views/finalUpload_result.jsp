@@ -1,14 +1,25 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 10297
+  Date: 2019/2/28
+  Time: 1:05
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Submit:Result</title>
+    <title>Submit:Upload</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-select.min.css">
-    <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/statics/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-select/1.13.8/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/css/fileinput.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-select/1.13.8/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/js/fileinput.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.5.0/js/locales/zh.min.js"></script>
+
 
     <script language="JavaScript">
         function logout() {
@@ -17,17 +28,30 @@
             }
         }
 
+        function checkForm() {
+            uploadFile = document.getElementById("uploadFile").value
+            if (uploadFile == "") {
+                alert("请选择文件");
+                return false;
+            } else {
+                if (!/\.(xml)$/.test(uploadFile)) {
+                    alert("文件类型必须为xml");
+                    return false;
+                }
+            }
+            return true;
+        }
+
         function init() {
-            var message = "${msg}";
-            if (message != "" && message != "null") {
-                document.getElementById("msg").classList.remove("hidden");
+
+                //document.getElementById("msg").classList.remove("hidden");
                 var msgLevel = "${msgLevel}";
                 if (msgLevel == 1) {
                     document.getElementById("msg").classList.add("alert-danger");
                 } else {
                     document.getElementById("msg").classList.add("alert-success");
                 }
-            }
+
         }
 
         $(document).ready(function () {
@@ -35,12 +59,13 @@
         })
 
     </script>
-</head>
 
+</head>
 <body>
 <div class="container-fluid">
+
     <div class="row clearfix">
-        <div class="col-md-12 column">
+        <div class="col-md-12">
             <nav class="navbar navbar-default navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -83,8 +108,8 @@
                             <a href="${pageContext.request.contextPath}/system/new">添加系统</a>
                         </li>
 
-                        <li id="submit" class="active">
-                            <a href="#">提交测试</a>
+                        <li id="submit" >
+                            <a href="${pageContext.request.contextPath}/submit/frame">提交测试</a>
                         </li>
 
                         <li id="history">
@@ -95,8 +120,8 @@
                             <a href="${pageContext.request.contextPath}/test_sets/list">数据下载</a>
                         </li>
 
-                        <li id="upload">
-                            <a href="${pageContext.request.contextPath}/upload">CCMT2019提交入口</a>
+                        <li class="active">
+                            <a href="#">CCMT2019提交入口</a>
                         </li>
 
                         <li class="dropdown" id="userDrop">
@@ -122,68 +147,29 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-md-12 column">
+        <div class="col-md-3 column"></div>
+        <div class="col-md-6 column">
 
-            <div class="alert alert-dismissable hidden" id="msg">
-                <button type="button" class="close " data-dismiss="alert" aria-hidden="true">×</button>
-                <h4>Message</h4>${msg}
+            <div class="alert alert-dismissable alert-info " id="msg">
+
+                <h4>上传结果</h4>${uploadResult}
             </div>
 
-        </div>
-    </div>
-
-    <div class="row clearfix">
-        <div class="col-md-12 column" style="margin:auto">
-            <fieldset>
-                <legend>评测结果</legend>
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>System</th>
-                        <th>TestSet</th>
-                        <th>Track</th>
-                        <th>Run Notes</th>
-                        <th>Uploaded File</th>
-                        <th>BLEU_SBP</th>
-                        <th>BLEU_NIST</th>
-                        <th>TER</th>
-                        <th>METEOR</th>
-                        <th>NIST</th>
-                        <th>GTM</th>
-                        <th>mWER</th>
-                        <th>mPER</th>
-                        <th>ICT</th>
-                        <th>Submit Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><a href="${pageContext.request.contextPath}/system/detail/${submission.systemid}">${submission.systemName}</a></td>
-                        <td>${submission.testset}</td>
-                        <td>${submission.track}</td>
-                        <td>${submission.notes}</td>
-                        <td><a href="${pageContext.request.contextPath}/download/uploads/${submission.file}">${submission.file}</a></td>
-                        <td>${submission.BLEU_SBP}</td>
-                        <td>${submission.BLEU_NIST}</td>
-                        <td>${submission.TER}</td>
-                        <td>${submission.METEOR}</td>
-                        <td>${submission.NIST}</td>
-                        <td>${submission.GTM}</td>
-                        <td>${submission.MWER}</td>
-                        <td>${submission.MPER}</td>
-                        <td>${submission.ICT}</td>
-                        <td>${submission.time}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>"
             <div align="right">
-                <button class="btn btn-default" onclick="window.location.href='${pageContext.request.contextPath}/user/status'">返回</button>
-            </div>
-        </div>
-    </div>
-</div>
+                <!-- 除了IE,所有浏览器button 的默认type="submit" -->
+                <button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/upload'">
+                    继续提交
+                </button>
+                <button class="btn btn-primary" type="button" onclick="window.location.href='${pageContext.request.contextPath}/user/status'">返回个人中心</button>
 
+        </div>
+        <div class="col-md-3 column"></div>
+
+    </div>
+
+
+
+</div>
 
 </body>
 </html>

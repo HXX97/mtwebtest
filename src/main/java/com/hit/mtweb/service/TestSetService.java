@@ -19,4 +19,8 @@ public class TestSetService {
     public TestSet querySetById(String setId) {
         return testSetDao.querySetById(setId);
     }
+
+    public List<TestSet> getNotPrimaryTestSets() {
+        return testSetDao.getNotPrimaryTestSets();
+    }
 }
