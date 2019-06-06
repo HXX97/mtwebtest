@@ -32,7 +32,8 @@ public class GlobalService {
                 UploadDir.mkdirs();
             }
             try {
-                FileUtils.copyFileToDirectory(newFile,UploadDir);
+                //FileUtils.copyFileToDirectory(newFile,UploadDir);
+                FileUtils.moveFileToDirectory(newFile,UploadDir,false);
             } catch (IOException e) {
                 e.printStackTrace();
             }

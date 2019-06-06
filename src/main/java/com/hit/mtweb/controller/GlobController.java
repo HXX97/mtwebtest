@@ -72,6 +72,11 @@ public class GlobController {
             path += File.separator + "srcs" + File.separator;
         }
         File file = new File(path + File.separator + filename);
+        if(!file.exists()){
+            filename="error.xml";
+            file = new File(request.getServletContext().getRealPath("/uploads/error.xml"));
+        }
+
         HttpHeaders httpHeaders = new HttpHeaders();
         //下载显示的文件名，防止中文乱码
         String downloadFileName = new String(filename.getBytes("UTF-8"), "iso-8859-1");

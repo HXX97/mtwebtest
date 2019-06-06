@@ -85,10 +85,5 @@ public class ZipUtilities {
         return true;
     }
 
-    public static void main(String[] args) {
-
-        unZip(new File("E:\\Download\\AMT.zip"), new File("D:\\ZipTemp"));
-
-    }
 
 }

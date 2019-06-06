@@ -158,7 +158,7 @@ def check(filename):
             flag = True
 
     line = fin.readline()
-    match = re.search(r'(<tstset setid=\")(.*)(\" srclang=\".*\" trglang=\".*\">)',
+    match = re.search(r'(<tstset setid=\")(.*)(\" srclang=\")(.*)(\" trglang=\")(.*)(\">)',
                       line)
     if not match:
         print 'Warning: Please check the second line of target file, standard format is:<tstset setid="***" srclang="***" trglang="***">'
@@ -168,18 +168,25 @@ def check(filename):
         flag = True
     else:
         setid = match.group(2)
+        srclang = match.group(4)
+        trglang = match.group(6)
         finsrc.seek(0)
         for srcline in finsrc:
-            matcher = re.search(r'(<srcset setid=\")(.*)(\" srclang=\".*\" trglang=\".*\">)',srcline)
-            if matcher and match.group(2)!=setid:
-                print 'Warning: Please check the second line of target file, the setid does not match srcfile'
-                fout.write('Warning: Please check the second line of target file, the setid does not match srcfile\n')
-        # print match.group(2)+'\n'
-        # pattern = re.compile(r'(setid=")(.*?)(")')
-        # matcher = re.search(pattern, line)
-        # if matcher:
-        #     setid = matcher.group(2)
-        
+            matcher = re.search(r'(<srcset setid=\")(.*)(\" srclang=\")(.*)(\" trglang=\")(.*)(\">)',srcline)
+            if matcher:
+                if matcher.group(2)!=setid:
+                    print 'Warning: Please check the second line of target file, the setid does not match srcfile'
+                    fout.write('Warning: Please check the second line of target file, the setid does not match srcfile\n')
+                    flag = True
+                if matcher.group(4)!=srclang:
+                    print 'Warning: Please check the second line of target file, the srclang does not match srcfile'
+                    fout.write('Warning: Please check the second line of target file, the srclang does not match srcfile\n')
+                    flag = True
+                if matcher.group(6)!=trglang:
+                    print 'Warning: Please check the second line of target file, the trglang does not match srcfile'
+                    fout.write('Warning: Please check the second line of target file, the trglang does not match srcfile\n')
+                    flag = True
+                break
 
     line = fin.readline()
     match = re.search(r'<system site=\".*\" sysid=\".*\">', line)

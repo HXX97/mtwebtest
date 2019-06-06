@@ -62,6 +62,7 @@
                                 '<td>' + (i + 1) + '</td>' +
                                 '<td><a href="${pageContext.request.contextPath}/system/detail/' + result[i].systemid + '">' + result[i].systemName + '</td>' +
                                 '<td>' + result[i].testset + '</td>' +
+                                '<td><a href="/download/uploads/'+result[i].file+'">download</a></td>'+
                                 '<td>' + result[i].notes + '</td>' +
                                 '<td>' + result[i].bleu_SBP + '</td>' +
                                 '<td>' + result[i].bleu_NIST + '</td>' +
@@ -201,9 +202,10 @@
             <table class="table table-hover table-striped" id="leaderBoard">
                 <thead>
                 <tr>
-                    <th>Rank</th>
+                    <th>No.</th>
                     <th>System</th>
                     <th>TestSet</th>
+                    <th>file</th>
                     <th>Run Notes</th>
                     <th>BLEU_SBP</th>
                     <th>BLEU_NIST</th>
