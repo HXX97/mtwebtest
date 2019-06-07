@@ -62,7 +62,7 @@
                                 '<td>' + (i + 1) + '</td>' +
                                 '<td><a href="${pageContext.request.contextPath}/system/detail/' + result[i].systemid + '">' + result[i].systemName + '</td>' +
                                 '<td>' + result[i].testset + '</td>' +
-                                '<td><a href="/download/uploads/'+result[i].file+'">download</a></td>'+
+                                '<td><a href="${pageContext.request.contextPath}/download/uploads/'+result[i].file+'">download</a></td>'+
                                 '<td>' + result[i].notes + '</td>' +
                                 '<td>' + result[i].bleu_SBP + '</td>' +
                                 '<td>' + result[i].bleu_NIST + '</td>' +

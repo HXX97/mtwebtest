@@ -182,11 +182,11 @@
                     </div>
                     <label for="track">选择任务:</label>
                     <select class="selectpicker" id="track" name="track">
-                        <option value="CE">CE</option>
+                       <%-- <option value="CE">CE</option>
                         <option value="EC">EC</option>
                         <option value="MC">MC</option>
                         <option value="TC">TC</option>
-                        <option value="UC">UC</option>
+                        <option value="UC">UC</option>--%>
                         <option value="JE">JE</option>
                         <option value="CE-QEW">CE-QEW</option>
                             <option value="CE-QES">CE-QES</option>

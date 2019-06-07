@@ -82,8 +82,8 @@ def check(filename):
             match = re.search(r'<seg id=\".*\">(.*)</seg>', line)
             if match:
                 strs = match.group(1)
-                # if '<' in strs or '>' in strs or '\"' in strs or '\'' in strs:
-                if '<' in strs or '>' in strs :
+                if '<' in strs or '>' in strs or '\"' in strs or '\'' in strs:
+                # if '<' in strs or '>' in strs :
                     print 'Warning: Please check line:', line.rstrip(
                         '\n').decode("utf-8").encode(
                             type
