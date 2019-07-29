@@ -64,11 +64,12 @@ public class UserDao {
 
 
     public boolean updateInfo(User newUserInfo) {
-        String sql = "update users set email=? , web = ? , affiliation = ? where username = ?";
+        String sql = "update users set email=? , web = ? , affiliation = ?,phone = ? where username = ?";
         try {
             jdbcTemplate.update(sql, newUserInfo.getEmail(),
                     newUserInfo.getWeb(),
                     newUserInfo.getAffiliation(),
+                    newUserInfo.getPhone(),
                     newUserInfo.getUsername());
 
             sql = "update submissions set affiliation = ? where submitter = ?";

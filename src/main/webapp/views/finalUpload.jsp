@@ -33,6 +33,11 @@
                     return false;
                 }
             }
+            trackselector = document.getElementById("track").value
+            if(trackselector=null||trackselector==""){
+                alert("请选择任务");
+                return false;
+            }
             return true;
         }
 
@@ -57,7 +62,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">通用机器翻译测评平台</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,18 +74,8 @@
                             <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/about">使用说明</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -175,23 +170,23 @@
                         文件名模式中主/对比系统-参评系统代号必须以英文字母顺序排序，顺序中包含主及对比系统，例如：主系统为a，则对比系统从b开始。<br/>
                         4)翻译任务提交的文件需通过<b>格式检查</b>，格式检查不通过需要修改格式后重新提交。以下提交文件格式作为参考，具体请参照评测大纲要求。
                         <img src="${pageContext.request.contextPath}/statics/pics/demo4Upload.png" width="100%"><br>
-                        5)对于QE任务，<b>文件名遵循下表要求</b>。(（其中：项目代号以ce-qe为例，参评单位代号以ict为例）)
+                        <%--5)对于QE任务，<b>文件名遵循下表要求</b>。(（其中：项目代号以ce-qe为例，参评单位代号以ict为例）)
                         <img src="${pageContext.request.contextPath}/statics/pics/qeillustration.png" width="100%"/><br>
-                        6)QE任务未做格式检查，请确保格式正确。<br>
+                        6)QE任务未做格式检查，请确保格式正确。<br>--%>
 
                     </div>
                     <label for="track">选择任务:</label>
                     <select class="selectpicker" id="track" name="track">
-                       <%-- <option value="CE">CE</option>
-                        <option value="EC">EC</option>
-                        <option value="MC">MC</option>
-                        <option value="TC">TC</option>
-                        <option value="UC">UC</option>--%>
-                        <option value="JE">JE</option>
+                        <%--<option value="CE">CE</option>--%>
+                        <%--<option value="EC">EC</option>--%>
+                        <%--<option value="MC">MC</option>--%>
+                        <%--<option value="TC">TC</option>--%>
+                        <%--<option value="UC">UC</option>--%>
+                        <%--<option value="JE">JE</option>
                         <option value="CE-QEW">CE-QEW</option>
                             <option value="CE-QES">CE-QES</option>
                         <option value="EC-QEW">EC-QEW</option>
-                            <option value="EC-QES">EC-QES</option>
+                            <option value="EC-QES">EC-QES</option>--%>
                     </select>
                     <p>
 

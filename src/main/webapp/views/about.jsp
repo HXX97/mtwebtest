@@ -60,7 +60,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">通用机器翻译测评平台</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -72,19 +72,11 @@
                             <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">关于本站</a>
-                                </li>
-                            </ul>
+                        <li class="active">
+                            <a href="${pageContext.request.contextPath}/about">使用说明</a>
                         </li>
+
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
@@ -119,7 +111,7 @@
                                     <a href="${pageContext.request.contextPath}/user/login">登录</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>
+                                    <a href="${pageContext.request.contextPath}/user/register">注册</a>
                                 </li>
                             </ul>
                         </li>
@@ -133,11 +125,11 @@
         <div class="col-md-3 column"></div>
         <div class="col-md-6 column">
             <fieldset>
-                <legend>关于本站</legend>
+                <legend>使用说明</legend>
                 <div>
                     <p style="margin:0pt; orphans:0; text-align:center; widows:0"><span
-                            style="font-family:黑体; font-size:16pt">C</span><span style="font-family:黑体; font-size:16pt">CMT
-                2019评测平台使用说明</span></p>
+                            style="font-family:黑体; font-size:16pt"></span><span style="font-family:黑体; font-size:16pt">
+                通用机器翻译技术测评平台使用说明</span></p>
                     <ol type="1" style="margin:0pt; padding-left:0pt">
                         <li style="font-family:黑体; font-size:15pt; margin:0pt 0pt 0pt 18pt; orphans:0; text-indent:0pt; widows:0">
                             <span style="font-family:黑体; font-size:15pt">关于本评测平台</span></li>
@@ -244,10 +236,10 @@
                     <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0">
                         <img src="${pageContext.request.contextPath}/statics/pics/demo.png" width="100%">
                     </p>
-                    <p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span
-                            style="font-family:宋体; font-size:12pt">6）</span><span
-                            style="font-family:宋体; font-size:12pt">若在使用平台中遇到其它问题，请联系xixinhu97@foxmail.com</span>
-                    </p>
+                    <%--<p style="margin:0pt 0pt 0pt 42pt; orphans:0; text-align:justify; text-indent:-18pt; widows:0"><span--%>
+                            <%--style="font-family:宋体; font-size:12pt">6）</span><span--%>
+                            <%--style="font-family:宋体; font-size:12pt">若在使用平台中遇到其它问题，请联系xixinhu97@foxmail.com</span>--%>
+                    <%--</p>--%>
 
                 </div>
 

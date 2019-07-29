@@ -60,7 +60,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">通用机器翻译测评平台</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -72,19 +72,10 @@
                             <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/about">使用说明</a>
                         </li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
@@ -120,7 +111,7 @@
                                     <a href="${pageContext.request.contextPath}/user/login">登录</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>
+                                    <a href="${pageContext.request.contextPath}/user/register">注册</a>
                                 </li>
                             </ul>
                         </li>
@@ -130,7 +121,7 @@
             </nav>
             <div class="jumbotron">
                 <h2>
-                    欢迎来到CCMT2019机器翻译评测网站！
+                    欢迎来到通用机器翻译技术测评网站！
                 </h2>
                 <p>
                     本站提供第十五届全国机器翻译学术会议(CCMT 2019)的评测服务，各参赛队伍需使用主办方提供的账户登录，并提交评测相关信息。所有任务的评测结果将在本站的排行榜展示，请各参赛队伍注意。

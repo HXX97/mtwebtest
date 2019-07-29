@@ -41,7 +41,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">通用机器翻译测评平台</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -53,19 +53,10 @@
                             <a href="${pageContext.request.contextPath}/board">排行榜</a>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/about">使用说明</a>
                         </li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 

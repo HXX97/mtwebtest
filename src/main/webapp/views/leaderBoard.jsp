@@ -61,7 +61,7 @@
                                 '<td>' + (i + 1) + '</td>' +
                                 '<td><a href="${pageContext.request.contextPath}/system/detail/'+result[i].systemid+'">'+ result[i].systemName + '</td>' +
                                 '<td>' + result[i].affiliation + '</td>' +
-                                '<td>' + result[i].notes + '</td>' +
+                                '<td>' + result[i].testset + '</td>' +
                                 /*'<td>' + result[i].srclang + '</td>' +
                                 '<td>' + result[i].tgtlang + '</td>' +*/
                                 '<td>' + result[i].bleu_SBP + '</td>' +
@@ -106,7 +106,7 @@
                             data-target="#bs-example-navbar-collapse-1"><span
                             class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">CCMT2019 Evalution</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">通用机器翻译测评平台</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -118,19 +118,10 @@
                             <a href="#">排行榜</a>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="http://ccmt2019.jxnu.edu.cn">CCMT 2019</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/about">关于本站</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/about">使用说明</a>
                         </li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden" id="userHome">
@@ -164,7 +155,7 @@
                                     <a href="${pageContext.request.contextPath}/user/login">登录</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:alert('抱歉，注册功能暂未开放!')">注册</a>
+                                    <a href="${pageContext.request.contextPath}/user/register">注册</a>
                                 </li>
                             </ul>
                         </li>
@@ -178,9 +169,9 @@
         <div class="col-md-4">
             <h4>排行榜</h4>
         </div>
-        <div class="col-md-4">
+        <%--<div class="col-md-4">--%>
 
-        </div>
+        <%--</div>--%>
 
         <div class="col-md-4">
             <label for="track">选择任务:</label>
@@ -195,7 +186,7 @@
             </select>
         </div>
 
-        <div class="col-md-4 hidden">
+        <div class="col-md-4">
             <label for="metric">排序指标：</label>
             <select class="selectpicker" id="metric" onchange="getLeaderBoard()">
                 <option value="BLEU_SBP">BLEU_SBP</option>
@@ -219,7 +210,7 @@
                     <th>Rank</th>
                     <th>System</th>
                     <th>Affiliation</th>
-                    <th>Run Notes</th>
+                    <th>Test Set</th>
                     <%--<th>Source language</th>
                     <th>Target language</th>--%>
                     <th>BLEU_SBP</th>
