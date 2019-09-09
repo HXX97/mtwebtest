@@ -11,6 +11,7 @@ For information of CCMT2019, please refer to [CCMT2019](http://ccmt2019.jxnu.edu
 * Server: Tomcat7.0
 * Java Version: 1.8
 * Python Version: 2.7
+* Perl Version: Strawberry Perl 5.30.0.1
 * Database:MySQL 5.7
 
 ## Structure
@@ -160,6 +161,9 @@ insert into tracks values('TC','Tibetan','Chinese',null,'ti-zh-gove');
 insert into tracks values('UC','Uyghur','Chinese',null,'uy-zh-news');
 ```
 
+* Demo Insertion
+```
 
+```
 
 
