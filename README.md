@@ -161,9 +161,4 @@ insert into tracks values('TC','Tibetan','Chinese',null,'ti-zh-gove');
 insert into tracks values('UC','Uyghur','Chinese',null,'uy-zh-news');
 ```
 
-* Demo Insertion
-```
-
-```
-
 
